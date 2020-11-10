@@ -3,7 +3,13 @@ version: "3.8"
 services:
   frontend:
     image: "daongocthanh/gr-frontend:${IMAGE_TAG}"
+    networks:
+      - "gr2_default"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend_dashboard.rule=Host(`gr2.just4demo.live`)"
       - "traefik.http.services.frontend_dashboard.loadbalancer.server.port=3000"
+
+networks:
+  gr2_default:
+    external: true
