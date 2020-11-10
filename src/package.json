@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build:style": "lessc --js styles/wieldy/wieldy.less styles/wieldy/wieldy.css",
+    "build:style-wieldy": "lessc --js styles/wieldy/wieldy.less styles/wieldy/wieldy.css",
+    "build:style": "postcss styles/tailwind.css -o public/vendors/main.css",
     "build": "next build",
     "dev": "next dev",
     "start": "next start"
@@ -25,6 +26,8 @@
   "devDependencies": {
     "autoprefixer": "^10.0.1",
     "less": "^3.12.2",
+    "postcss": "^8.1.6",
+    "postcss-cli": "^8.2.0",
     "postcss-import": "^13.0.0",
     "tailwindcss": "^1.9.6"
   }

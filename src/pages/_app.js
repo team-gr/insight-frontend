@@ -1,6 +1,3 @@
-import "styles/tailwind.css";
-import "nprogress/nprogress.css";
-
 import Router from "next/router";
 import NProgress from "nprogress";
 import { Provider } from "react-redux";

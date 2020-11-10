@@ -36,49 +36,6 @@ function SidebarContent() {
             className="gx-menu-group"
             title={<IntlMessages id="sidebar.main" />}
           >
-            <Menu.SubMenu
-              key="dashboard"
-              title={
-                <span>
-                  <i className="icon icon-dasbhoard" />
-                  <span>
-                    <IntlMessages id="sidebar.dashboard" />
-                  </span>
-                </span>
-              }
-            >
-              <Menu.Item key="main/dashboard/crypto">
-                <Link href="/main/dashboard/crypto">
-                  <a>
-                    <i className="icon icon-crypto" />
-                    <span>
-                      <IntlMessages id="sidebar.dashboard.crypto" />
-                    </span>
-                  </a>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="main/dashboard/crm">
-                <Link href="/main/dashboard/crm">
-                  <a>
-                    <i className="icon icon-crm" />
-                    <span>
-                      <IntlMessages id="sidebar.dashboard.crm" />
-                    </span>
-                  </a>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="main/dashboard/listing">
-                <Link href="/main/dashboard/listing">
-                  <a>
-                    <i className="icon icon-listing-dbrd" />
-                    <span>
-                      <IntlMessages id="sidebar.dashboard.listing" />
-                    </span>
-                  </a>
-                </Link>
-              </Menu.Item>
-            </Menu.SubMenu>
-
             <Menu.Item key="main/widgets">
               <Link href="/main/widgets">
                 <a>
