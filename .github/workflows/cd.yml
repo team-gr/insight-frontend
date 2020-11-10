@@ -3,7 +3,7 @@ name: cd
 on:
   push:
     branches:
-      - release
+      - staging
 
 jobs:
   push:
@@ -33,7 +33,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          source: "docker-compose.yml"
+          source: "frontend.compose.yml"
           target: "/home/thanhdn/gr2"
           overwrite: 1
 
@@ -45,4 +45,5 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             export IMAGE_TAG=${{ steps.current-time.outputs.formattedTime }}
-            docker stack deploy -c /home/thanhdn/gr2/ sociallistening
+            docker-compose --project-name=gr2 --file="/home/thanhdn/gr2/frontend.compose.yml" down
+            docker-compose --project-name=gr2 --file="/home/thanhdn/gr2/frontend.compose.yml" up -d
