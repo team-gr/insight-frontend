@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "build:style-wieldy": "lessc --js styles/wieldy/wieldy.less styles/wieldy/wieldy.css",
-    "build:style": "postcss styles/tailwind.css -o public/vendors/main.css",
-    "build": "next build",
-    "dev": "next dev",
+    "build:style": "postcss styles/tailwind.css -o public/vendors/main.css --env production",
+    "build": "postcss styles/tailwind.css -o public/vendors/main.css --env production && next build",
+    "dev": "postcss styles/tailwind.css -o public/vendors/main.css --env dev && next dev",
     "start": "next start"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.2.2",
     "antd": "^4.7.3",
     "next": "^10.0.0",
     "nprogress": "^0.2.0",

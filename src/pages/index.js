@@ -1,12 +1,8 @@
-import Layout from "layout";
-import asyncComponent from "hoc/async-component";
+export default function Index() {
+  return <div>Redirecting</div>;
+}
 
-const Home = asyncComponent(() => import("main/Home"));
-
-export default function HomePage() {
-  return (
-    <Layout>
-      <Home />
-    </Layout>
-  );
+export async function getServerSideProps(ctx) {
+  ctx.res.writeHead(302, { Location: "/main/search" });
+  ctx.res.end();
 }

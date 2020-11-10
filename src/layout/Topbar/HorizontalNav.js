@@ -25,8 +25,8 @@ function HorizontalNav() {
         key="main"
         title={<IntlMessages id="sidebar.main" />}
       >
-        <Menu.Item key="main/widgets">
-          <AppLink href="/main/widgets">
+        <Menu.Item key="main/search">
+          <AppLink href="/main/search">
             <i className="icon icon-widgets" />
             <IntlMessages id="sidebar.widgets" />
           </AppLink>

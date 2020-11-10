@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 
-import SidebarLogo from "layout/Sidebar/SidebarLogo";
 import IntlMessages from "components/IntlMessage";
 
 import { SettingActions } from "app-redux/settings";
@@ -20,10 +19,15 @@ function SidebarContent() {
 
   const selectedKeys = pathname.substr(1);
   const defaultOpenKeys = selectedKeys.split("/")[1];
-  console.log({ selectedKeys, defaultOpenKeys });
   return (
     <>
-      <SidebarLogo />
+      <div className="gx-layout-sider-header">
+        <Link href="/">
+          <a className="gx-site-logo">
+            <img alt="logo2" src="/images/logo.png" />
+          </a>
+        </Link>
+      </div>
       <div className="gx-sidebar-content">
         <Menu
           defaultOpenKeys={[defaultOpenKeys]}
@@ -36,8 +40,8 @@ function SidebarContent() {
             className="gx-menu-group"
             title={<IntlMessages id="sidebar.main" />}
           >
-            <Menu.Item key="main/widgets">
-              <Link href="/main/widgets">
+            <Menu.Item key="main/search">
+              <Link href="/main/search">
                 <a>
                   <i className="icon icon-widgets" />
                   <span>
