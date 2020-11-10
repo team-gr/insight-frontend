@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   frontend:
-    image: "daongocthanh/demo-next"
+    image: "daongocthanh/gr-frontend:${IMAGE_TAG}"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend_dashboard.rule=Host(`gr2.just4demo.live`)"
