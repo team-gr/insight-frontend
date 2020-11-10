@@ -34,7 +34,7 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
           source: "docker-compose.yml"
-          target: "gr2"
+          target: "/home/thanhdn/gr2"
           overwrite: 1
 
       - name: Deploy
@@ -45,4 +45,4 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             export IMAGE_TAG=${{ steps.current-time.outputs.formattedTime }}
-            docker stack deploy -c /root/sociallistening/backend-deployment.yaml sociallistening
+            docker stack deploy -c /home/thanhdn/gr2/ sociallistening
