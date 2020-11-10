@@ -2,17 +2,14 @@ import React, { PureComponent } from "react";
 import { Button, Checkbox, Drawer, Dropdown, Menu, message } from "antd";
 import CustomScrollbars from "components/CustomScrollbars";
 
-import mails from "main/search/data/mails";
-import folders from "main/search/data/folders";
-import filters from "main/search/data/filters";
-import labels from "main/search/data/labels";
-import options from "main/search/data/options";
-import MailList from "main/search/MailList";
 import SearchBar from "main/search/SearchBar";
+import Content from "main/search/Content";
 import IntlMessages from "components/IntlMessage";
-import CircularProgress from "components/CircularProgress";
+
+import { useState } from "react";
 
 export default function Search() {
+  const [open, setOpen] = useState(false);
   return (
     <div className="gx-main-content">
       <div className="gx-app-module">
@@ -21,7 +18,7 @@ export default function Search() {
             placement="left"
             closable={false}
             visible={false}
-            onClose={console.log}
+            onClose={() => setOpen(false)}
             children={<SideBar />}
           />
         </div>
@@ -37,7 +34,9 @@ export default function Search() {
             <SearchBar />
           </div>
 
-          <div className="gx-module-box-content"></div>
+          <div className="gx-module-box-content bg-gray-300">
+            <Content />
+          </div>
         </div>
       </div>
     </div>
@@ -61,11 +60,21 @@ function SideBar() {
               <IntlMessages id="sidebar.mail.filters" />
             </li>
             <li>
+              <div className="gx-link active">
+                <i className="icon icon-tab" />
+                <div>Shopee</div>
+              </div>
+            </li>
+            <li>
               <div className="gx-link">
-                <div className="flex items-center content-center">
-                  <img alt="shopee-icon" src="/shopee_icon.png" width={30} />
-                  <div>Shopee</div>
-                </div>
+                <i className="icon icon-star" />
+                <div>Tiki</div>
+              </div>
+            </li>
+            <li>
+              <div className="gx-link active">
+                <i className="icon icon-sent" />
+                <div>Lazada</div>
               </div>
             </li>
           </ul>

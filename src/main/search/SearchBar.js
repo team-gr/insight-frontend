@@ -11,8 +11,8 @@ export default function SearchBar() {
         dropdownMatchSelectWidth={false}
         options={options}
         placeholder="Search Keywords"
-        onChange={(update) => console.log(update)}
-        onSelect={(selected) => console.log(selected)}
+        onChange={(update) => console.log("[on change]", update)}
+        onSelect={(selected) => console.log("[on select]", selected)}
       >
         <Input suffix={<SearchOutlined />} />
       </AutoComplete>
