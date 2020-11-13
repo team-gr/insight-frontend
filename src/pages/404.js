@@ -8,7 +8,7 @@ function ErrorPage() {
         <div className="gx-error-code gx-mb-4">404</div>
         <h2 className="gx-text-center">Page not found!</h2>
         <p className="gx-text-center">
-          <Link href="/">
+          <Link href="/main/search">
             <a className="gx-btn gx-btn-primary">Go to Home</a>
           </Link>
         </p>

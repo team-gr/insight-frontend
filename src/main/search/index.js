@@ -10,6 +10,7 @@ import { useState } from "react";
 
 export default function Search() {
   const [open, setOpen] = useState(false);
+
   return (
     <div className="gx-main-content">
       <div className="gx-app-module">
@@ -17,7 +18,7 @@ export default function Search() {
           <Drawer
             placement="left"
             closable={false}
-            visible={false}
+            visible={open}
             onClose={() => setOpen(false)}
             children={<SideBar />}
           />
@@ -29,7 +30,11 @@ export default function Search() {
         <div className="gx-module-box">
           <div className="gx-module-box-header">
             <span className="gx-drawer-btn gx-d-flex gx-d-lg-none">
-              <i className="icon icon-menu gx-icon-btn" aria-label="Menu" />
+              <i
+                className="icon icon-menu gx-icon-btn"
+                aria-label="Menu"
+                onClick={() => setOpen(!open)}
+              />
             </span>
             <SearchBar />
           </div>
