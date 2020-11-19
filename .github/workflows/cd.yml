@@ -34,7 +34,7 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
           source: "frontend.compose.yml"
-          target: "/home/thanhdn/gr2"
+          target: "/root/gr2"
           overwrite: 1
 
       - name: Deploy
@@ -45,5 +45,5 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             export IMAGE_TAG=${{ steps.current-time.outputs.formattedTime }}
-            docker-compose --project-name=gr2 --file="/home/thanhdn/gr2/frontend.compose.yml" down
-            docker-compose --project-name=gr2 --file="/home/thanhdn/gr2/frontend.compose.yml" up -d
+            docker container ls | grep gr2_frontend_1 && docker-compose --project-name=gr2 --file="/root/gr2/frontend.compose.yml" down
+            docker-compose --project-name=gr2 --file="/root/gr2/frontend.compose.yml" up -d
