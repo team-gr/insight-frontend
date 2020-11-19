@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { AutoComplete, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 
 import { useDebounce } from "hooks";
 
 import { SearchService } from "services";
+import { Context } from "main/search";
 
 export default function SearchBar() {
+  const { dispatch } = useContext(Context);
   const [options, setOptions] = useState([]);
   const [keyword, setKeyword] = useState("");
   const debounced = useDebounce(keyword, 1000);
@@ -25,7 +27,11 @@ export default function SearchBar() {
   }, [debounced]);
 
   function onSearch(keyword) {
-    SearchService.items({ keyword }).then(console.log).catch(console.log);
+    dispatch({ type: "set_loading", payload: true });
+    SearchService.items({ keyword })
+      .then((items) => dispatch({ type: "set_items", payload: items }))
+      .catch(console.log)
+      .finally(() => dispatch({ type: "set_loading", payload: false }));
   }
 
   return (
