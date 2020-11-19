@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Button, Checkbox, Drawer, Dropdown, Menu, message } from "antd";
+import { Drawer } from "antd";
 import CustomScrollbars from "components/CustomScrollbars";
 
 import SearchBar from "main/search/SearchBar";
