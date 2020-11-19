@@ -33,15 +33,13 @@ function Product({
   Source = "",
   RatingStar = 0,
   ReviewCount = 0,
+  Image = "",
 }) {
   return (
     <CardBox styleName="gx-card-full -m-2">
       <a href={SourceUrl} target="_blank">
         <div className="gx-slider">
-          <img
-            alt="example"
-            src="https://cf.shopee.vn/file/4c9c05be289167e68918129445b2650b_tn"
-          />
+          <img alt="example" src={`https://cf.shopee.vn/file/${Image}`} />
           <div>
             <h4 className="mt-4 ml-4 p-1">{Name}</h4>
             <span className="mt-4 ml-4 text-small">
