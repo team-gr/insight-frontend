@@ -1,15 +1,10 @@
-import { Input } from "antd";
 import Layout from "layout";
+import SimilarShopsHome from "seller/similar-shops/Home";
 
-const { Search } = Input;
 export default function SimilarShops() {
   return (
     <Layout>
-      <Search placeholder="Shop URL" enterButton="Search" size="large" onSearch={getSimilarShops} />
+      <SimilarShopsHome></SimilarShopsHome>
     </Layout>
   );
-}
-
-const getSimilarShops = (value) => {
-  console.log(value)
 }
