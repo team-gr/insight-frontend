@@ -1,5 +1,5 @@
 import antdSA from "antd/lib/locale-provider/ca_ES";
-import saMessages from "../locales/es_ES.json";
+import saMessages from "lang/locales/es_ES.json";
 
 const saLang = {
   messages: {

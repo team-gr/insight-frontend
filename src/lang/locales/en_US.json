@@ -306,5 +306,9 @@
   "sidebar.map.weather": "Weather map",
   "sidebar.extensions.shuffle": "Shuffle",
   "sidebar.extensions.profile": "Profile",
-  "sidebar.social": "Social Apps"
+  "sidebar.social": "Social Apps",
+  "sidebar.search": "Search",
+  "sidebar.competitorIntelligence": "Competitor Intelligence",
+  "sidebar.shopeeCompetitorProducts": "Shopee Competitor Products",
+  "sidebar.shopeeCompetitorShops": "Shopee Competitor Shops"
 }

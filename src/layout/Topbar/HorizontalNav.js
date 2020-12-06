@@ -8,10 +8,6 @@ import AppLink from "components/AppLink";
 function HorizontalNav() {
   const pathname = useSelector((state) => state.settings.pathname);
 
-  function getNavStyleSubMenuClass() {
-    return "gx-menu-horizontal gx-submenu-popup-curve gx-inside-submenu-popup-curve";
-  }
-
   const selectedKeys = pathname.substr(1);
   const defaultOpenKeys = selectedKeys.split("/")[1];
   return (
@@ -21,28 +17,32 @@ function HorizontalNav() {
       mode="horizontal"
     >
       <Menu.SubMenu
-        popupClassName={getNavStyleSubMenuClass()}
+        popupClassName="gx-menu-horizontal gx-submenu-popup-curve gx-inside-submenu-popup-curve"
         key="main"
         title={<IntlMessages id="sidebar.main" />}
       >
         <Menu.Item key="main/search">
           <AppLink href="/main/search">
             <i className="icon icon-widgets" />
-            <IntlMessages id="sidebar.widgets" />
+            <IntlMessages id="sidebar.search" />
+          </AppLink>
+        </Menu.Item>
+      </Menu.SubMenu>
+
+      <Menu.SubMenu
+        popupClassName="gx-menu-horizontal gx-submenu-popup-curve gx-inside-submenu-popup-curve"
+        key="competitor-intelligence"
+        title={<IntlMessages id="sidebar.competitorIntelligence" />}
+      >
+        <Menu.Item key="competitor-intelligence/shopee-products">
+          <AppLink href="/competitor-intelligence/shopee-products">
+            <IntlMessages id="sidebar.shopeeCompetitorProducts" />
           </AppLink>
         </Menu.Item>
 
-        <Menu.Item key="main/metrics">
-          <AppLink href="/main/metrics">
-            <i className="icon icon-apps" />
-            <IntlMessages id="sidebar.metrics" />
-          </AppLink>
-        </Menu.Item>
-
-        <Menu.Item key="main/algolia">
-          <AppLink href="/main/algolia">
-            <i className="icon icon-shopping-cart " />
-            <IntlMessages id="sidebar.algolia" />
+        <Menu.Item key="competitor-intelligence/shopee-shops">
+          <AppLink href="/competitor-intelligence/shopee-shops">
+            <IntlMessages id="sidebar.shopeeCompetitorShops" />
           </AppLink>
         </Menu.Item>
       </Menu.SubMenu>
