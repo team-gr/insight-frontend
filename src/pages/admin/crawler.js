@@ -1,4 +1,4 @@
-import CrawlerHome from "admin/crawler/Home";
+import CrawlerHome from "main/admin/crawler/Home";
 import AppLayout from "layout";
 
 export default function Crawler() {
