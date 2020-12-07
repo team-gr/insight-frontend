@@ -1,15 +1,10 @@
-import { useEffect } from "react";
-import Router from "next/router";
-import CircularProgress from "components/CircularProgress";
+import Layout from "layout";
+import KeywordResearch from "main/keyword-research";
 
-export default function Index() {
-  useEffect(() => {
-    Router.push("/main/search");
-  }, []);
-
+export default function KeywordResearchPage() {
   return (
-    <div>
-      <CircularProgress />
-    </div>
+    <Layout>
+      <KeywordResearch />
+    </Layout>
   );
 }

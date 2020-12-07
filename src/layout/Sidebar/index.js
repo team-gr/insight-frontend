@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
 import { Drawer, Layout } from "antd";
 
 import SidebarContent from "layout/Sidebar/SidebarContent";
@@ -8,8 +9,11 @@ import { TAB_SIZE } from "constants/theme-settings";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
 
-  const { navCollapsed, width } = useSelector((state) => state.settings);
+  const navCollapsed = useSelector((state) => state.settings.navCollapsed);
+  const width = useSelector((state) => state.settings.width);
+  const pathname = useSelector((state) => state.settings.pathname);
 
   const onToggleCollapsedNav = () => {
     dispatch(SettingActions.toggleCollapsedSideNav(!navCollapsed));
@@ -24,6 +28,12 @@ const Sidebar = () => {
       window.removeEventListener("resize", onResize);
     };
   }, [dispatch]);
+
+  useEffect(() => {
+    if (router.pathname === pathname) {
+      dispatch(SettingActions.toggleCollapsedSideNav(false));
+    }
+  }, [pathname]);
 
   return (
     <Layout.Sider

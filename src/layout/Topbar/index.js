@@ -57,7 +57,7 @@ function TopBar() {
                 }}
               />
             </div>
-            <Link href="/main/search">
+            <Link href="/">
               <a>
                 <img
                   alt=""
@@ -66,7 +66,7 @@ function TopBar() {
                 />
               </a>
             </Link>
-            <Link href="/main/search">
+            <Link href="/">
               <a>
                 <img
                   alt=""

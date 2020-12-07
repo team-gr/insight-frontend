@@ -308,7 +308,8 @@
   "sidebar.extensions.profile": "Profile",
   "sidebar.social": "Social Apps",
   "sidebar.search": "Search",
+  "sidebar.keywordResearch": "Keyword Research",
   "sidebar.competitorIntelligence": "Competitor Intelligence",
-  "sidebar.shopeeCompetitorProducts": "Shopee Competitor Products",
-  "sidebar.shopeeCompetitorShops": "Shopee Competitor Shops"
+  "sidebar.competitorProducts": "Competitor Products",
+  "sidebar.competitorShops": "Competitor Shops"
 }

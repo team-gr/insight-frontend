@@ -7,8 +7,6 @@ import { Context } from "main/search";
 export default function Content() {
   const { state } = useContext(Context);
 
-  console.log({ state });
-
   if (state.loading) {
     return <Spinner />;
   }
