@@ -4,9 +4,7 @@ import CardBox from "components/CardBox"
 const ShopeeUrl = process.env.NEXT_PUBLIC_SHOPEE_URL
 const ShopeeMediaUrl = process.env.NEXT_PUBLIC_SHOPEE_MEDIA_URL
 
-export default function Content({shops}) {
-    console.log(ShopeeUrl)
-    console.log(ShopeeMediaUrl)
+export default function ListShops({shops}) {
     return (
         <div className="p-4">
             <Row>
@@ -21,27 +19,22 @@ export default function Content({shops}) {
 }
 
 function Shop({
-    DisplayName = "",
-    Place = "",
-    Image = "",
-    Description = "",
-    RatingStar = 0,
-    FollowerCount = 0,
-    ItemCount = 0,
-    ResponseRate = 0,
-    ResponseTime = 0,
-    IsShopeeVerified = false,
-    IsOfficialShop = false,
-    ShopName = 0,
+    shopid = 0,
+    name = "",
+    item_count = 0,
+    follower_count = 0,
+    place = "",
+    image = "",
+    shop_username = "",
 }) {
     return (
         <CardBox styleName="gx-card-full">
             <div className="gx-slider">
-                <a href={`${ShopeeUrl}/${ShopName}`} target="_blank">
-                    <img alt="shop-cover" src={`${ShopeeMediaUrl}/${Image}`}></img>
+                <a href={`${ShopeeUrl}/${shop_username}`} target="_blank">
+                    <img alt="shop-cover" src={`${ShopeeMediaUrl}/${image}`}></img>
                     <div>
-                        <h4 className="mt-4 ml-4 p-1">{DisplayName}</h4>
-                        <p className="mt-4 ml-4 p-1">{Place}</p>
+                        <h4 className="mt-4 ml-4 p-1">{name}</h4>
+                        <p className="mt-4 ml-4 p-1">{place}</p>
                     </div>
                 </a>
             </div>
