@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ShopApi from "services/shop";
-import ListShops from "../components/list_shops";
+import ListShops from "../components/ShopList";
 
 export default function ListShopHome() {
     const [shops, setShops] = useState([]);

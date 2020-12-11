@@ -8,8 +8,16 @@ function getShopDetail(shopId) {
     }).then(res => res.json()['data']);
 }
 
-function searchSimilarShops(shopUsername) {
+function searchSimilarShops(shopUrl) {
+    return fetch(`${DATA_API}/similar-shops?url=${shopUrl}`, {
+        method: "GET"
+    }).then(res => res.json());
+}
 
+function getSimilarShops(shopUsername) {
+    return fetch(`${DATA_API}/similar-shops?shop_username=${shopUsername}`, {
+        method: "GET",
+    }).then(res => res.json());
 }
 
 function listShops(limit=DEFAULT_LIMIT_ITEMS) {
@@ -18,6 +26,6 @@ function listShops(limit=DEFAULT_LIMIT_ITEMS) {
     }).then(res => res.json());
 }
 
-const ShopApi = Object.freeze({getShopDetail, listShops})
+const ShopApi = Object.freeze({getShopDetail, listShops, getSimilarShops, searchSimilarShops})
 
 export default ShopApi

@@ -1,6 +1,6 @@
 import { Input } from "antd";
 import { useReducer, useState } from "react";
-import ListShops from "../components/list_shops";
+import ListShops from "../components/ShopList";
 
 const { Search } = Input;
 
