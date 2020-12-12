@@ -28,7 +28,10 @@ function ShopInfo({
     rating_star,
     follower_count,
     avatar,
-    description
+    description,
+
+    match_num_cat_ratio,
+    match_cat_prod_ratio
 }) {
     cover = cover || "/images/shopee/shopee_logo.png";
     avatar = avatar || "/imags/shopee/avatar.jpg";
@@ -44,6 +47,11 @@ function ShopInfo({
                     <div className="my-auto">{rating_star} &#9733;</div>
                 </div>
             </div>
+            { match_num_cat_ratio ? (
+                <div>Shop category similar: {match_num_cat_ratio} %</div>
+            ): (
+                <div className="hidden"></div>
+            )}
         </a>
     )
 }
