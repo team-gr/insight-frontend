@@ -8,7 +8,7 @@ export default function ListShops({shops}) {
             <Row>
                 {shops.map((item, index) => (
                     <Col lg={8} sm={12} xs={24} key={index}>
-                        < ShopCard {...item}/>
+                        < ShopCard shop={item}/>
                     </Col>
                 ))}
             </Row>

@@ -11,24 +11,8 @@ export default function ListShopHome() {
         async function onFetch() {
             setLoading(true)
             try {
-                const res = await ShopApi.listShops()
+                const shops = await ShopApi.listShops()
                 if (mount) {
-                    console.log(res)
-                    let shops = res.map((item, index) => {
-                        let image = ""
-                        if (item.shop_covers && item.shop_covers.length > 0) {
-                            image = item.shop_covers[0].image_url
-                        }
-                        return {
-                            shopid: item.shopid,
-                            name: item.name,
-                            item_count: item.item_count,
-                            follower_count: item.follower_count,
-                            place: item.place,
-                            image: image,
-                            shop_username: item.account.username,
-                        }
-                    })
                     setShops(shops)
                 }
             } catch(err) {
