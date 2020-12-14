@@ -1,10 +1,10 @@
 import Layout from "layout";
-import KeywordResearch from "main/keyword-research";
+import Home from "main/home";
 
-export default function KeywordResearchPage() {
+export default function HomePage() {
   return (
     <Layout>
-      <KeywordResearch />
+      <Home />
     </Layout>
   );
 }

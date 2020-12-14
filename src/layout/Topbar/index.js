@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Layout, Menu, message, Popover } from "antd";
+import { Layout, Popover } from "antd";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,14 +11,6 @@ import HorizontalNav from "layout/Topbar/HorizontalNav";
 
 import { SettingActions } from "app-redux/settings";
 import languages from "layout/Topbar/languages";
-
-const menu = (
-  <Menu onClick={() => message.info("Click on menu item.")}>
-    <Menu.Item key="1">Products</Menu.Item>
-    <Menu.Item key="2">Apps</Menu.Item>
-    <Menu.Item key="3">Blogs</Menu.Item>
-  </Menu>
-);
 
 function TopBar() {
   const dispatch = useDispatch();

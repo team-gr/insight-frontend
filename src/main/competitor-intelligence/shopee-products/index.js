@@ -26,13 +26,6 @@ function ShopeeProducts() {
           columns={columns}
           dataSource={data}
           pagination={false}
-          onRow={(record) => {
-            return {
-              onClick: (e) => {
-                console.log(record);
-              },
-            };
-          }}
         />
       </Widget>
     </div>
@@ -49,7 +42,7 @@ const columns = [
       <AppLink href="/competitor-intelligence/shopee-products/1">
         <div className="lg:flex">
           <img alt="" className="lg:w-1/2 xl:w-1/3" src={record.imageUrl} />
-          <span>{text}</span>
+          <span className="ml-1">{text}</span>
         </div>
       </AppLink>
     ),
@@ -107,10 +100,9 @@ const columns = [
 const data = [
   {
     key: "1",
-    product:
-      "Áo Khoác Xịn Cao Câp-Áo Khoác Dù Chống Năng Tia UV-Chống Mưa ATT1",
-    imageUrl: "https://cf.shopee.vn/file/04bdd19ca37b201dda21e1aadfdc4fa3",
-    price: "₫129.000",
+    product: "Áo len nam cổ lọ màu mới nhất 2020",
+    imageUrl: "https://cf.shopee.vn/file/8eb06a09fff6af941b613e3ec8bf2a35",
+    price: "₫100.000",
     lastChanged: "3 days ago",
     lastChecked: "about an hour ago",
     platform: "Shopee",
