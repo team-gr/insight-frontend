@@ -1,12 +1,15 @@
 import React from "react";
 import { Avatar, Popover } from "antd";
+import { useDispatch } from "react-redux";
+import { AuthActions } from "app-redux/auth";
 
 function UserInfo() {
+  const dispatch = useDispatch();
+
   const userMenuOptions = (
     <ul className="gx-user-popover">
       <li>My Account</li>
-      <li>Connections</li>
-      <li>Logout</li>
+      <li onClick={() => dispatch(AuthActions.logout())}>Logout</li>
     </ul>
   );
 

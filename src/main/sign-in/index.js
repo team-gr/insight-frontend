@@ -1,20 +1,16 @@
 import React from "react";
 import Link from "next/link";
 import { Button, Form, Input } from "antd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { AuthActions } from "app-redux/auth";
 
 function SignIn() {
   const dispatch = useDispatch();
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+  const loading = useSelector((state) => state.auth.loading);
 
   function onFinish(values) {
-    dispatch(AuthActions.login());
-    console.log("finish", values);
+    dispatch(AuthActions.login(values));
   }
 
   return (
@@ -23,7 +19,7 @@ function SignIn() {
         <div className="gx-app-login-main-content">
           <div className="gx-app-logo-content">
             <div className="gx-app-logo-content-bg">
-              <img src={"/images/appModule/neature.jpg"} alt="Neature" />
+              <img src="/images/appModule/neature.jpg" alt="Neature" />
             </div>
             <div className="gx-app-logo-wid">
               <h1>Sign In</h1>
@@ -39,7 +35,6 @@ function SignIn() {
               initialValues={{ remember: true }}
               name="basic"
               onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
               className="gx-signin-form gx-form-row0"
             >
               <Form.Item
@@ -53,7 +48,7 @@ function SignIn() {
                 <Input placeholder="Email" />
               </Form.Item>
               <Form.Item
-                initialValue="demo#123"
+                initialValue="aaa123"
                 rules={[
                   { required: true, message: "Please input your Password!" },
                 ]}
@@ -63,6 +58,7 @@ function SignIn() {
               </Form.Item>
               <Form.Item>
                 <Button
+                  loading={loading}
                   type="primary"
                   className="gx-mb-0"
                   htmlType="submit"

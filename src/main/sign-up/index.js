@@ -1,17 +1,17 @@
 import React from "react";
-import { Button, Form, Input } from "antd";
-import LockOutlined from "@ant-design/icons/lib/icons/LockOutlined";
-
 import Link from "next/link";
+import { Button, Form, Input, Select } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+
+import { AuthActions } from "app-redux/auth";
 
 function SignUp() {
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.auth.loading);
 
-  const onFinish = (values) => {
-    console.log("finish", values);
-  };
+  function onFinish(values) {
+    dispatch(AuthActions.register(values));
+  }
 
   return (
     <div className="gx-app-login-wrap">
@@ -35,15 +35,14 @@ function SignUp() {
               initialValues={{ remember: true }}
               name="basic"
               onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
               className="gx-signin-form gx-form-row0"
             >
               <Form.Item
+                placeholder="Username"
                 rules={[{ required: true, message: "username is required!" }]}
                 name="username"
-              >
-                <Input placeholder="Username" />
-              </Form.Item>
+                children={<Input placeholder="Username" />}
+              />
               <Form.Item
                 initialValue="demo@example.com"
                 rules={[
@@ -51,18 +50,21 @@ function SignUp() {
                   { required: true, message: "Email is required!" },
                 ]}
                 name="email"
-              >
-                <Input placeholder="Email" />
+                children={<Input placeholder="Email" />}
+              />
+              <Form.Item name="role">
+                <Select placeholder="Role">
+                  <Select.Option value="user">User</Select.Option>
+                  <Select.Option value="admin">Admin</Select.Option>
+                </Select>
               </Form.Item>
               <Form.Item
                 rules={[
                   { required: true, message: "Please input your Password!" },
                 ]}
                 name="password"
-              >
-                <Input type="password" placeholder="Password" />
-              </Form.Item>
-
+                children={<Input type="password" placeholder="Password" />}
+              />
               <Form.Item
                 rules={[
                   {
@@ -71,11 +73,14 @@ function SignUp() {
                   },
                 ]}
                 name="confirmPassword"
-              >
-                <Input type="password" placeholder="Confirm Password" />
-              </Form.Item>
+                children={
+                  <Input type="password" placeholder="Confirm Password" />
+                }
+              />
+
               <Form.Item>
                 <Button
+                  loading={loading}
                   type="primary"
                   className="gx-mb-0"
                   htmlType="submit"

@@ -1,10 +1,4 @@
-import Layout from "layout";
+import securePage from "hoc/secure-page";
 import Home from "main/home";
 
-export default function HomePage() {
-  return (
-    <Layout>
-      <Home />
-    </Layout>
-  );
-}
+export default securePage(Home);
