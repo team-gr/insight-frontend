@@ -15,9 +15,16 @@ const AuthActions = {
   setLoading(loading) {
     return { type: AUTH_SET_LOADING, payload: loading };
   },
-  login({ username = "", password = "" } = {}) {
+  login({ username, password } = {}) {
     return (dispatch) => {
-      message.success("SignIn fail", 100);
+      UserService.login({ username, password })
+        .then((response) => {
+          message.success("login success");
+        })
+        .catch((error) => {
+          console.log(error);
+          message.success("SignIn fail", 100);
+        });
     };
   },
 };
