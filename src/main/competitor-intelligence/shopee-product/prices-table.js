@@ -18,20 +18,20 @@ const columns = [
   {
     title: "DATE",
     dataIndex: "date",
-    key: "date",
+    key: "key",
     sorter: (a, b) => a.ts - b.ts,
     sortOrder: "descend",
   },
   {
     title: "PRICE BEFORE DISCOUNT",
     dataIndex: "priceBeforeDiscount",
-    key: "priceBeforeDiscount",
+    key: "key",
     render: vndFormatter,
   },
   {
     title: "PRICE",
     dataIndex: "price",
-    key: "price",
+    key: "key",
     render: (value, record) => (
       <div>
         {vndFormatter(value)} <Tag color="green">-{record.discount} %</Tag>

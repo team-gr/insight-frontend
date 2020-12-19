@@ -13,7 +13,7 @@ function ShopeeProduct() {
   return (
     <div className="gx-main-content">
       <Row>
-        <Col lg={8} sm={24}>
+        <Col lg={6} sm={24}>
           <AppLink href="/competitor-intelligence/shopee-products">
             <div className="flex items-center cursor-pointer">
               <CaretLeftOutlined />
@@ -41,7 +41,7 @@ function ShopeeProduct() {
               </div>
               <div className="mb-0">
                 <span className="text-xs">REVENUE</span> <br />
-                <span className="text-lg font-medium">₫ 7.827.000.000</span>
+                <span className="text-lg font-medium">₫7.827.000.000</span>
               </div>
             </div>
             <div>
@@ -70,17 +70,17 @@ function ShopeeProduct() {
             </a>
           </Button>
         </Col>
-        <Col lg={16} sm={24}>
+        <Col lg={18} sm={24}>
           <Card className="gx-card">
             <Tabs defaultActiveKey="1">
               <Tabs.TabPane tab="PRICES" key="1">
                 <Prices />
               </Tabs.TabPane>
-              <Tabs.TabPane tab="IMAGES" key="2">
-                Content of Tab Pane 2
-              </Tabs.TabPane>
-              <Tabs.TabPane tab="REVIEWS" key="3">
+              <Tabs.TabPane tab="REVIEWS" key="2">
                 Content of Tab Pane 3
+              </Tabs.TabPane>
+              <Tabs.TabPane tab="SAME PRODUCTS" key="3">
+                Content of Tab Pane 2
               </Tabs.TabPane>
             </Tabs>
           </Card>

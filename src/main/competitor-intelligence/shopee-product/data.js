@@ -122,6 +122,7 @@ function norm(rawdata) {
     const date = new Date(rawdata.price_ts[i]);
     const discount = randInt(20, 40);
     ret.push({
+      key: `index-${i}`,
       ts: rawdata.price_ts[i],
       price: rawdata.price[i],
       discount,

@@ -1,16 +1,21 @@
 import React from "react";
-import { Button, Form, Input } from "antd";
-
 import Link from "next/link";
+import { Button, Form, Input } from "antd";
+import { useDispatch } from "react-redux";
+
+import { AuthActions } from "app-redux/auth";
 
 function SignIn() {
+  const dispatch = useDispatch();
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
 
-  const onFinish = (values) => {
+  function onFinish(values) {
+    dispatch(AuthActions.login());
     console.log("finish", values);
-  };
+  }
 
   return (
     <div className="gx-app-login-wrap">
@@ -61,7 +66,7 @@ function SignIn() {
                   type="primary"
                   className="gx-mb-0"
                   htmlType="submit"
-                  children="Sign Up"
+                  children="Sign In"
                 />
                 <span>or </span>
                 <Link href="/signup">

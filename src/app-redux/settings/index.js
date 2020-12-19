@@ -4,16 +4,18 @@ const SWITCH_LANGUAGE = "switch_language";
 const SET_PATH_NAME = "set_path_name";
 
 const SettingActions = {
-  updateWindowWidth: (width) => ({ type: SET_WINDOW_WIDTH, payload: width }),
-  toggleCollapsedSideNav: (navCollapsed) => ({
-    type: TOGGLE_COLLAPSED_NAV,
-    payload: navCollapsed,
-  }),
-  switchLanguage: (locale) => ({
-    type: SWITCH_LANGUAGE,
-    payload: locale,
-  }),
-  setPathname: (path) => ({ type: SET_PATH_NAME, payload: path }),
+  updateWindowWidth(width) {
+    return { type: SET_WINDOW_WIDTH, payload: width };
+  },
+  toggleCollapsedSideNav(navCollapsed) {
+    return { type: TOGGLE_COLLAPSED_NAV, payload: navCollapsed };
+  },
+  switchLanguage(locale) {
+    return { type: SWITCH_LANGUAGE, payload: locale };
+  },
+  setPathname(path) {
+    return { type: SET_PATH_NAME, payload: path };
+  },
 };
 
 const initialState = {

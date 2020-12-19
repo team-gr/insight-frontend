@@ -2,3 +2,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 @import "wieldy/wieldy.css";
+
+.ant-message-custom-content {
+    display: flex
+}
