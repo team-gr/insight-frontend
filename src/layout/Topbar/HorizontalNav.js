@@ -57,6 +57,13 @@ function HorizontalNav() {
             <IntlMessages id="sidebar.keywordResearch" />
           </AppLink>
         </Menu.Item>
+
+        <Menu.Item key="feature-compare">
+          <AppLink href="/feature-compare">
+            <i className="icon icon-product-list" />
+            <IntlMessages id="sidebar.featureCompare" />
+          </AppLink>
+        </Menu.Item>
       </Menu.SubMenu>
     </Menu>
   );

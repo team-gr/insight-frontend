@@ -557,6 +557,10 @@ video {
   background-color: rgba(209, 213, 219, var(--tw-bg-opacity));
 }
 
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -656,12 +660,20 @@ video {
   margin-bottom: 0px;
 }
 
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
 .ml-1 {
   margin-left: 0.25rem;
 }
 
 .mt-2 {
   margin-top: 0.5rem;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
 }
 
 .mt-4 {
@@ -703,6 +715,10 @@ video {
 
 .pt-1 {
   padding-top: 0.25rem;
+}
+
+.fixed {
+  position: fixed;
 }
 
 .resize {

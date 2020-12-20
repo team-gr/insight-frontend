@@ -1,10 +1,4 @@
-import Layout from "layout";
+import securePage from "hoc/secure-page";
 import KeywordResearch from "main/keyword-research";
 
-export default function SearchPage() {
-  return (
-    <Layout>
-      <KeywordResearch />
-    </Layout>
-  );
-}
+export default securePage(KeywordResearch);

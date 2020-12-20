@@ -1,16 +1,17 @@
 import React from "react";
 import Link from "next/link";
 import { Layout, Popover } from "antd";
-
 import { useDispatch, useSelector } from "react-redux";
 
 import CustomScrollbars from "components/CustomScrollbars";
-import UserInfo from "components/UserInfo";
-import AppNotification from "components/AppNotification";
+
+import AppNotification from "layout/Topbar/Notification";
+import AppFeatureCompare from "layout/Topbar/FeatureCompare";
 import HorizontalNav from "layout/Topbar/HorizontalNav";
+import UserInfo from "layout/Topbar/UserInfo";
+import languages from "layout/Topbar/languages";
 
 import { SettingActions } from "app-redux/settings";
-import languages from "layout/Topbar/languages";
 
 function TopBar() {
   const dispatch = useDispatch();
@@ -85,6 +86,7 @@ function TopBar() {
                   </span>
                 </Popover>
               </li>
+              <AppFeatureCompare />
               <li className="gx-language">
                 <Popover
                   overlayClassName="gx-popover-horizantal"
