@@ -26,6 +26,12 @@ function listShops(limit=DEFAULT_LIMIT_ITEMS) {
     }).then(res => res.json());
 }
 
-const ShopApi = Object.freeze({getShopDetail, listShops, getSimilarShops, searchSimilarShops})
+function listShopProducts(shopUrl) {
+    return fetch(`${DATA_API}/shop-products?url=${shopUrl}`, {
+        method: "GET"
+    }).then(res => res.json());
+}
+
+const ShopApi = Object.freeze({getShopDetail, listShops, getSimilarShops, searchSimilarShops, listShopProducts})
 
 export default ShopApi
