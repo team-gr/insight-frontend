@@ -1,9 +1,9 @@
-import { Input } from "antd";
+import { Button, Checkbox, Input } from "antd";
 import Layout from "layout";
 import ProductList from "main/shop-products/ProductList";
-import ShopApi from "services/shop";
 import Spinner from "components/SpinnerCustom";
 import { useState } from "react";
+import ShopApi from "services/shop";
 
 const { Search } = Input;
 
@@ -13,20 +13,19 @@ export default () => {
 
     return (
         <Layout>
-            <div>
-                <Search
-                    placeholder="Shop URL"
-                    enterButton="Enter"
-                    size="large"
-                    onKeyDown={(e) => e.key === "Enter" && search(e.target.value)}
-                    onSearch={(value) => search(value)}
-                />
-                {loading ? (
-                    <Spinner />
-                ) : (
-                        <ProductList products={products} />
-                    )}
-            </div>
+            <div className="pb-2 px-2 text-lg font-medium text-black">Enter shop URL to discover their products, you can add these products to your store</div>
+            <Search
+                placeholder="Shop URL"
+                enterButton="Enter"
+                size="large"
+                onKeyDown={(e) => e.key === "Enter" && search(e.target.value)}
+                onSearch={(value) => search(value)}
+            />
+            {loading ? (
+                <Spinner />
+            ) : (
+                    <ProductList products={products} hasSelect={true} />
+                )}
         </Layout>
     );
 
