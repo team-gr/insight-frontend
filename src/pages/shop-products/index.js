@@ -1,7 +1,7 @@
 import { Button, Checkbox, Input } from "antd";
 import Layout from "layout";
 import ProductList from "main/shop-products/ProductList";
-import Spinner from "components/SpinnerCustom";
+import Spinner from "components/CircularProgress";
 import { useState } from "react";
 import ShopApi from "services/shop";
 
@@ -13,6 +13,7 @@ export default function ShopProducts() {
 
   async function search(shopUrl) {
     try {
+      setLoading(true);
       const products = await ShopApi.listShopProducts(shopUrl);
       console.log(products);
       setProducts(products);

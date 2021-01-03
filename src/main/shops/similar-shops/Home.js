@@ -1,7 +1,7 @@
 import { Input } from "antd";
 import { useReducer, useState, React } from "react";
 import ShopApi from "services/shop";
-import Spinner from "components/SpinnerCustom";
+import Spinner from "components/CircularProgress";
 import ListShops from "../components/ShopList";
 
 const { Search } = Input;
@@ -31,6 +31,7 @@ export default function SimilarShopsHome() {
 
     async function search(shopUrl) {
         try {
+            setLoading(true);
             const res = await ShopApi.searchSimilarShops(shopUrl)
             let shops = res.matches.map((item, index) => {
                 return {
