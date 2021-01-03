@@ -73,19 +73,6 @@ function TopBar() {
               <HorizontalNav />
             </div>
             <ul className="gx-header-notifications gx-ml-auto">
-              <li className="gx-notify">
-                <Popover
-                  overlayClassName="gx-popover-horizantal"
-                  placement="bottomRight"
-                  content={<AppNotification />}
-                  trigger="click"
-                >
-                  <span className="gx-pointer gx-d-block gx-status-pos">
-                    <i className="icon icon-notification" />
-                    <span className="gx-status gx-status-rtl gx-small gx-orange" />
-                  </span>
-                </Popover>
-              </li>
               <AppFeatureCompare />
               <li className="gx-language">
                 <Popover
