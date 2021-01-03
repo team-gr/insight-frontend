@@ -1,38 +1,16 @@
 import { Input } from "antd";
 import { useReducer, useState, React } from "react";
 import ShopApi from "services/shop";
-import Spinner from "components/SpinnerCustom";
+import Spinner from "components/CircularProgress";
 import ListShops from "../components/ShopList";
 
 const { Search } = Input;
 
-// export const Context = React.createContext();
-
-// export const actions = {
-//     SET_LOADING: "set_loading",
-//     SET_SHOPS: "set_shops",
-// }
-
-// const initialState = { loading: false, shops: [] }
-
-// function reducer(state, action) {
-//     switch (action.type) {
-//         case actions.SET_LOADING:
-//             return { ...state, loading: action.payload }
-//         case actions.SET_SHOPS:
-//             return { ...state, shops: action.payload }
-//         default:
-//             return state
-//     }
-// }
-
 
 export default function SimilarShopsHome() {
-    // const [state, dispatch] = useReducer(reducer, initialState)
-    // const [open, setOpen] = useState(false)
-
     const [shops, setShops] = useState([])
     const [loading, setLoading] = useState(false);
+    const [sourceShop, setSourceShop] = useState({});
 
     return (
         <div>
@@ -53,15 +31,17 @@ export default function SimilarShopsHome() {
 
     async function search(shopUrl) {
         try {
-            const similarShops = await ShopApi.searchSimilarShops(shopUrl)
-            let shops = similarShops.map((item, index) => {
+            setLoading(true);
+            const res = await ShopApi.searchSimilarShops(shopUrl)
+            let shops = res.matches.map((item, index) => {
                 return {
                     ...item.target_shop,
                     match_num_cat_ratio: item.match_num_cat_ratio,
                     match_cat_prod_ratio: item.match_cat_prod_ratio
                 }
             })
-            setShops(shops)
+            setSourceShop(res.source_shop);
+            setShops(shops);
         } catch (err) {
             console.log(err)
         } finally {
