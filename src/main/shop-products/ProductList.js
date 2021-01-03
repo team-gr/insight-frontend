@@ -1,6 +1,6 @@
 import { Button, Checkbox, Col, Row } from "antd";
 import { useState } from "react";
-import { ProductCard } from "./ProductCard";
+import { ProductCard } from "main/shop-products/ProductCard";
 
 export default function ProductList({ products = [] } = {}) {
   const [checkedList, setCheckedList] = useState([]);
