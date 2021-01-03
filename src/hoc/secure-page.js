@@ -1,16 +1,23 @@
+import { useSelector } from "react-redux";
 import Layout from "layout";
 import UnauthorizedPage from "components/UnauthorizedPage";
 
-export default function securePage(PageContentComponent) {
+import isEmpty from "lodash/isEmpty";
+
+const securePage = (PageContentComponent) => {
   return function SecuredPage() {
-    if (typeof window !== "undefined" && localStorage.getItem("token")) {
-      return (
-        <Layout>
-          <PageContentComponent />
-        </Layout>
-      );
+    const user = useSelector((state) => state.auth.user);
+
+    if (isEmpty(user)) {
+      return <UnauthorizedPage />;
     }
 
-    return <UnauthorizedPage />;
+    return (
+      <Layout>
+        <PageContentComponent />
+      </Layout>
+    );
   };
-}
+};
+
+export default securePage;

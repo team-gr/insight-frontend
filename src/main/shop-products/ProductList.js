@@ -1,62 +1,50 @@
-import { Button, Checkbox, Col, Row, Tag } from "antd"
+import { Button, Checkbox, Col, Row } from "antd";
 import { useState } from "react";
-import { ProductCard } from "./ProductCard"
+import { ProductCard } from "./ProductCard";
 
-export default function ProductList({ products, hasSelect }) {
-    const [checkedList, setCheckedList] = useState([]);
-    const [checkAll, setCheckAll] = useState(false);
+export default function ProductList({ products = [] } = {}) {
+  const [checkedList, setCheckedList] = useState([]);
 
-    let productIds = products.map(product => product.id);
-
-    const onChange = e => {
-        let value = e.target.value;
-        console.log(value, e.target.checked);
-        let index = checkedList.indexOf(value);
-        let selected = checkedList;
-        if (e.target.checked) {
-            index == -1 && selected.push(value);
-        } else {
-            if (checkAll) {
-                setCheckeAll(false);
-            }
-            index != -1 && selected.splice(index, 1);
-        }
-        console.log(selected);
-        setCheckedList(selected);
-    };
-
-    const onCheckAllChange = e => {
-        setCheckedList(e.target.checked ? productIds : []);
-        setCheckAll(e.target.checked);
+  function onToggleCheck(productId) {
+    if (checkedList.includes(productId)) {
+      setCheckedList(checkedList.filter((pid) => pid !== productId));
+      return;
     }
 
-    return (
-        <div className="p-4">
-            {
-                hasSelect ? (
-                    <div class="flex justify-between">
-                        <Checkbox onChange={onCheckAllChange} checked={checkAll}>Select all</Checkbox>
-                        <Button>Save</Button>
-                    </div>
-                ) : (
-                        <div></div>
-                    )
-            }
-            <Row>
-                {products.map((item, index) => (
-                    <Col lg={6} sm={12} xs={24} key={index}>
-                        < ProductCard product={item} heading={
-                            hasSelect ? (
-                                <div className="pb-1">
-                                    <Checkbox value={item.id} onChange={onChange}></Checkbox>
-                                </div>
-                            ) : (
-                                    <div></div>
-                                )
-                        } />
-                    </Col>
-                ))}
-            </Row>
-        </div>
-    )
+    setCheckedList([...checkedList, productId]);
+  }
+
+  function onToggleCheckAll() {
+    if (checkedList.length === products.length) {
+      setCheckedList([]);
+      return;
+    }
+    setCheckedList(products.map((p) => p.id));
+  }
+
+  return (
+    <div className="p-4">
+      <div className="flex justify-between">
+        <Checkbox onChange={onToggleCheckAll}>Select all</Checkbox>
+        <Button>Save</Button>
+      </div>
+      <Row>
+        {products.map((item, index) => (
+          <Col lg={6} sm={12} xs={24} key={index}>
+            <ProductCard
+              product={item}
+              heading={
+                <div className="pb-1">
+                  <Checkbox
+                    checked={checkedList.includes(item.id)}
+                    onChange={() => onToggleCheck(item.id)}
+                  />
+                </div>
+              }
+            />
+          </Col>
+        ))}
+      </Row>
+    </div>
+  );
 }

@@ -50,15 +50,7 @@ const AuthActions = {
   logout() {
     return (dispatch) => {
       localStorage.removeItem("token");
-      dispatch(
-        AuthActions.setUser({
-          id: "",
-          username: "",
-          email: "",
-          role: "",
-          avatar: "",
-        })
-      );
+      dispatch(AuthActions.setUser({}));
       Router.push("/signin");
     };
   },

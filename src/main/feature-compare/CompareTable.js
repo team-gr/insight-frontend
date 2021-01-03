@@ -3,23 +3,6 @@ import { useSelector } from "react-redux";
 
 import { vndFormatter } from "helpers";
 
-function CompareTable() {
-  const items = useSelector((state) => state.featurecompare.items);
-
-  return (
-    <Table
-      title={() => `PRODUCT COMPARE (${items.length})`}
-      className="mb-4 rounded-lg"
-      columns={columns}
-      dataSource={items}
-      pagination={false}
-      bordered
-      scroll={{ x: 1900 }}
-      rowKey="itemid"
-    />
-  );
-}
-
 const columns = [
   {
     title: "NAME",
@@ -103,5 +86,22 @@ const columns = [
     width: 80,
   },
 ];
+
+function CompareTable() {
+  const items = useSelector((state) => state.featurecompare.items);
+
+  return (
+    <Table
+      title={() => `PRODUCT COMPARE (${items.length})`}
+      className="mb-4 rounded-lg"
+      columns={columns}
+      dataSource={items}
+      pagination={false}
+      bordered
+      scroll={{ x: 1900 }}
+      rowKey="itemid"
+    />
+  );
+}
 
 export default CompareTable;
