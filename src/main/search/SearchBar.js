@@ -4,7 +4,7 @@ import { SearchOutlined } from "@ant-design/icons";
 
 import { useDebounce } from "hooks";
 
-import { SearchService } from "services";
+import { ItemServices } from "services";
 import { Context } from "main/search";
 
 export default function SearchBar() {
@@ -14,12 +14,12 @@ export default function SearchBar() {
   const debounced = useDebounce(keyword, 1000);
 
   useEffect(() => {
-    SearchService.hints({ keyword: debounced })
+    ItemServices.hints({ keyword: debounced, shopee: true })
       .then((hints) => {
-        console.log(hints);
+        console.log({ hints });
         const opts = hints.map((hint) => ({
-          label: renderTitle(hint.Source),
-          options: hint.Keywords.map(renderItem),
+          label: renderTitle(hint.source),
+          options: hint.keywords.map(renderItem),
         }));
         setOptions(opts);
       })
@@ -28,7 +28,7 @@ export default function SearchBar() {
 
   function onSearch(keyword) {
     dispatch({ type: "set_loading", payload: true });
-    SearchService.items({ keyword })
+    ItemServices.items({ keyword })
       .then((items) => dispatch({ type: "set_items", payload: items }))
       .catch(console.log)
       .finally(() => dispatch({ type: "set_loading", payload: false }));
@@ -45,9 +45,8 @@ export default function SearchBar() {
         onChange={setKeyword}
         onSelect={onSearch}
         onKeyDown={(e) => e.key === "Enter" && onSearch(e.target.value)}
-      >
-        <Input suffix={<SearchOutlined />} />
-      </AutoComplete>
+        children={<Input suffix={<SearchOutlined />} />}
+      />
     </div>
   );
 }

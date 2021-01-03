@@ -1,8 +1,12 @@
 import { useContext } from "react";
-import { Col, Row, Tag } from "antd";
+import { Col, Row, Tag, Button } from "antd";
+import { useDispatch } from "react-redux";
+
 import CardBox from "components/CardBox";
 import Spinner from "components/CircularProgress";
+
 import { Context } from "main/search";
+import { FeatureCompareActions } from "app-redux/featurecompare";
 
 export default function Content() {
   const { state } = useContext(Context);
@@ -23,37 +27,68 @@ export default function Content() {
   );
 }
 
-function Product({
-  Name = "",
-  Price = 0,
-  PriceBeforeDiscount = 0,
-  SourceUrl = "",
-  Source = "",
-  RatingStar = 0,
-  ReviewCount = 0,
-  Image = "",
-}) {
+function Product(item = {}) {
+  const dispatch = useDispatch();
+
+  const {
+    itemid,
+    shopid,
+    name,
+    image,
+    brand,
+    source,
+    source_url,
+    price,
+    price_before_discount,
+    discount,
+    rating_star,
+    review_count,
+  } = item;
+
   return (
     <CardBox styleName="gx-card-full -m-2">
-      <a href={SourceUrl} target="_blank">
-        <div className="gx-slider">
-          <img alt="example" src={`https://cf.shopee.vn/file/${Image}`} />
-          <div>
-            <h4 className="mt-4 ml-4 p-1">{Name}</h4>
-            <span className="mt-4 ml-4 text-small">
-              <span className="text-gray-500 line-through">
-                {PriceBeforeDiscount} {"  "}
-              </span>
-              <span className="text-red-400">{Price}</span>
+      <div className="gx-slider">
+        <a href={source_url} target="_blank">
+          <img alt="example" src={`https://cf.shopee.vn/file/${image}`} />
+        </a>
+        <div>
+          <h4 className="mt-4 ml-4 p-1">{name}</h4>
+          <span className="mt-4 ml-4 text-small">
+            <span className="text-gray-500 line-through">
+              {price_before_discount}
             </span>
-          </div>
-          <div className="my-2 ml-4">
-            <Tag color="red">{Source}</Tag>
-            <Tag color="blue">{RatingStar} Stars</Tag>
-            <Tag color="orange">{ReviewCount} reviews</Tag>
-          </div>
+            <span className="text-red-400">{price}</span>
+          </span>
         </div>
-      </a>
+        <div className="flex justify-center mt-2">
+          <Button
+            size="small"
+            type="primary"
+            onClick={() =>
+              dispatch(
+                FeatureCompareActions.appendItem({
+                  brand,
+                  itemid,
+                  name,
+                  sourceUrl: source_url,
+                  price,
+                  priceBeforeDiscount: price_before_discount,
+                  discount,
+                  rating: rating_star,
+                  review: review_count,
+                  image,
+                })
+              )
+            }
+            children="Add to Compare"
+          />
+        </div>
+        <div className="my-2 ml-4">
+          <Tag color="red">{source}</Tag>
+          <Tag color="blue">{rating_star} Stars</Tag>
+          <Tag color="orange">{review_count} reviews</Tag>
+        </div>
+      </div>
     </CardBox>
   );
 }

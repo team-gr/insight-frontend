@@ -3,12 +3,7 @@ export async function call({ url, method, body }) {
     throw "Url empty!";
   }
 
-  if (
-    method !== "GET" &&
-    method !== "POST" &&
-    method !== "PUT" &&
-    method !== "DELETE"
-  ) {
+  if (!validMethod(method)) {
     throw "method invalid!";
   }
 
@@ -37,4 +32,13 @@ export async function call({ url, method, body }) {
 
     return json.data;
   }
+}
+
+function validMethod(method) {
+  return (
+    method === "GET" ||
+    method === "POST" ||
+    method === "PUT" ||
+    method === "DELETE"
+  );
 }

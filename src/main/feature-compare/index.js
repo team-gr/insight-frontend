@@ -1,4 +1,4 @@
-import { Input, Button, Table, Tag, message } from "antd";
+import { Input, Button, Table, Tag } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import Widget from "components/Widget";
 
@@ -9,7 +9,6 @@ function FeatureCompare() {
   const items = useSelector((state) => state.featurecompare.items);
 
   function onRandomItem() {
-    message.success("A new item added to compare !", 2);
     dispatch(Actions.randomItem());
     dispatch(Actions.setNotifying(true));
   }
@@ -36,6 +35,7 @@ function FeatureCompare() {
         pagination={false}
         bordered
         scroll={{ x: 1500 }}
+        rowKey="itemid"
       />
     </div>
   );
@@ -45,13 +45,13 @@ const columns = [
   {
     title: "NAME",
     dataIndex: "name",
-    width: 150,
+    width: 100,
     fixed: true,
   },
   {
     title: "IMAGE",
     dataIndex: "image",
-    width: 100,
+    width: 60,
     render: (text, record) => (
       <a href={record.sourceUrl} target="_blank">
         <img

@@ -1,3 +1,4 @@
+import { notification } from "antd";
 import sample from "lodash/sample";
 import { items } from "app-redux/featurecompare/data";
 
@@ -18,13 +19,23 @@ const FeatureCompareActions = {
     return { type: FEATURE_COMPARE_SET_LOADING, payload: loading };
   },
   appendItem(item) {
-    return { type: FEATURE_COMPARE_APPEND_ITEM, payload: item };
+    return (dispatch) => {
+      notification["success"]({
+        message: "Success add item to compare!",
+        description: item.name,
+      });
+      dispatch(FeatureCompareActions.setNotifying(true));
+      dispatch({ type: FEATURE_COMPARE_APPEND_ITEM, payload: item });
+    };
   },
   removeItem(itemId) {
     return { type: FEATURE_COMPARE_REMOVE_ITEM, payload: itemId };
   },
   randomItem() {
-    return FeatureCompareActions.appendItem(sample(items));
+    return (dispatch) => {
+      const item = sample(items);
+      dispatch(FeatureCompareActions.appendItem(item));
+    };
   },
 };
 

@@ -1,5 +1,5 @@
 import Router from "next/router";
-import { message } from "antd";
+import { notification } from "antd";
 import { UserService } from "services";
 
 const AUTH_SET_USER = "auth_set_user";
@@ -20,7 +20,10 @@ const AuthActions = {
         message.success("SignIn Success!");
         Router.push("/signin");
       } catch (error) {
-        message.error(error);
+        notification["error"]({
+          message: "Register error!",
+          description: error.message,
+        });
       } finally {
         dispatch(AuthActions.setLoading(false));
       }
@@ -35,7 +38,10 @@ const AuthActions = {
         dispatch(AuthActions.setUser(data.user));
         Router.push("/");
       } catch (error) {
-        message.error(error);
+        notification["error"]({
+          message: "Login error!",
+          description: error.message,
+        });
       } finally {
         dispatch(AuthActions.setLoading(false));
       }
