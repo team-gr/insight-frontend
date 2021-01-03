@@ -8,19 +8,19 @@ function ShopeeProducts() {
   return (
     <div>
       <Widget>
-        <h2>Track New Competitor Product</h2>
+        <h2>Analyze New Competitor Product</h2>
         <div className="w-full justify-between flex">
           <div className="flex-grow mr-4">
             <Input placeholder="Add Product URL" />
           </div>
           <Button type="primary" className="gx-mb-0">
-            Start Track
+            Start
           </Button>
         </div>
       </Widget>
 
       <Widget>
-        <h2>Competitor Products Being Tracked</h2>
+        <h2>Competitor Products Being Analyzed</h2>
         <Table
           className="gx-table-responsive mt-4"
           columns={columns}

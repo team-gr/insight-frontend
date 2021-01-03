@@ -57,13 +57,7 @@ const AuthActions = {
 };
 
 const initialState = {
-  user: {
-    id: "",
-    username: "",
-    email: "",
-    role: "",
-    avatar: "",
-  },
+  user: {},
   loading: false,
 };
 
