@@ -64,22 +64,7 @@ function Product(item = {}) {
           <Button
             size="small"
             type="primary"
-            onClick={() =>
-              dispatch(
-                FeatureCompareActions.appendItem({
-                  brand,
-                  itemid,
-                  name,
-                  sourceUrl: source_url,
-                  price,
-                  priceBeforeDiscount: price_before_discount,
-                  discount,
-                  rating: rating_star,
-                  review: review_count,
-                  image,
-                })
-              )
-            }
+            onClick={() => dispatch(FeatureCompareActions.appendItem(item))}
             children="Add to Compare"
           />
         </div>
