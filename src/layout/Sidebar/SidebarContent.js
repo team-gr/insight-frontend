@@ -13,6 +13,7 @@ function SidebarContent() {
   const dispatch = useDispatch();
   const router = useRouter();
   const pathname = useSelector((state) => state.settings.pathname);
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     dispatch(SettingActions.setPathname(router.pathname));
@@ -42,14 +43,12 @@ function SidebarContent() {
             title={<IntlMessages id="sidebar.apps" />}
           >
             <Menu.Item key="search">
-              <Link href="/search">
-                <a>
-                  <i className="icon icon-search" />
-                  <span>
-                    <IntlMessages id="sidebar.search" />
-                  </span>
-                </a>
-              </Link>
+              <AppLink href="/search">
+                <i className="icon icon-search" />
+                <span>
+                  <IntlMessages id="sidebar.search" />
+                </span>
+              </AppLink>
             </Menu.Item>
 
             <Menu.SubMenu
@@ -89,6 +88,23 @@ function SidebarContent() {
               </AppLink>
             </Menu.Item>
           </Menu.ItemGroup>
+
+          {user.role === "admin" && (
+            <Menu.ItemGroup
+              key="admin"
+              className="gx-menu-group"
+              title={<IntlMessages id="sidebar.admin" />}
+            >
+              <Menu.Item key="users">
+                <AppLink href="/users">
+                  <i className="icon icon-user" />
+                  <span>
+                    <IntlMessages id="sidebar.users" />
+                  </span>
+                </AppLink>
+              </Menu.Item>
+            </Menu.ItemGroup>
+          )}
         </Menu>
       </div>
     </>

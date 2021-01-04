@@ -1,6 +1,6 @@
 import Router from "next/router";
 import { notification } from "antd";
-import { UserService } from "services";
+import { UserServices } from "services";
 
 const AUTH_SET_USER = "auth_set_user";
 const AUTH_SET_LOADING = "auth_set_loading";
@@ -16,7 +16,7 @@ const AuthActions = {
     return async (dispatch) => {
       dispatch(AuthActions.setLoading(true));
       try {
-        await UserService.register({ username, role, email, password });
+        await UserServices.register({ username, role, email, password });
         message.success("SignIn Success!");
         Router.push("/signin");
       } catch (error) {
@@ -33,7 +33,7 @@ const AuthActions = {
     return async (dispatch) => {
       dispatch(AuthActions.setLoading(true));
       try {
-        const data = await UserService.login({ email, password });
+        const data = await UserServices.login({ email, password });
         localStorage.setItem("token", data.token);
         dispatch(AuthActions.setUser(data.user));
         Router.push("/");
@@ -44,6 +44,25 @@ const AuthActions = {
         });
       } finally {
         dispatch(AuthActions.setLoading(false));
+      }
+    };
+  },
+  loginWithToken() {
+    return async (dispatch) => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        try {
+          dispatch(AuthActions.setLoading(true));
+          const user = await UserServices.getProfile();
+          dispatch(AuthActions.setUser(user));
+        } catch (error) {
+          notification["error"]({
+            message: "Login with token error!",
+            description: error,
+          });
+        } finally {
+          dispatch(AuthActions.setLoading(false));
+        }
       }
     };
   },
