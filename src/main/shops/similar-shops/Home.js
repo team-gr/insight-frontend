@@ -40,13 +40,13 @@ export default function SimilarShopsHome() {
                         </Col>
                         <Col sm={12} xs={24}>
                             <div className="text-lg text-gray-700 font-medium">Categories</div>
-                            <div>
+                            {/* <div>
                                 {
                                     sourceShop.shop_categories.map((index, item) => {
                                         (<Tag>{item.catname}</Tag>)
                                     })
                                 }
-                            </div>
+                            </div> */}
                         </Col>
                     </Row>
 
