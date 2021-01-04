@@ -12,3 +12,7 @@ export function randInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+export function formatDecimal(number, decimalDigit=2){
+  return Number(number).toFixed(decimalDigit);
+}

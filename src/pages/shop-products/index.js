@@ -37,7 +37,7 @@ export default function ShopProducts() {
         onKeyDown={(e) => e.key === "Enter" && search(e.target.value)}
         onSearch={(value) => search(value)}
       />
-      {loading ? <Spinner /> : <ProductList products={products} />}
+      {loading ? <Spinner /> : <ProductList products={products}/>}
     </Layout>
   );
 }
