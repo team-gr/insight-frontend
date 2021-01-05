@@ -3,7 +3,7 @@ import { useReducer, useState, React } from "react";
 import ShopApi from "services/shop";
 import Spinner from "components/CircularProgress";
 import {useSelector} from "react-redux"
-import ListShops from "../components/ShopList";
+import ListShops from "./components/ShopList";
 import { formatDecimal } from "helpers";
 
 const { Search } = Input;
@@ -14,10 +14,6 @@ export default function SimilarShopsHome() {
     const [loading, setLoading] = useState(false);
     const [sourceShop, setSourceShop] = useState({});
     const user = useSelector(state => state.auth.user)
-    function renderForLoop() {
-        let userId = state
-        return null
-    }
 
     console.log({user})
 
