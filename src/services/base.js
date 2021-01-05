@@ -12,10 +12,12 @@ export async function call({ url, method, body }) {
     const opts =
       method === "GET"
         ? {
-            Authorization: `token ${token}`,
+            headers: {
+              Authorization: `token ${token}`,
+            },
           }
         : {
-            method: "POST",
+            method,
             headers: {
               "Content-Type": "application/json",
               Authorization: `token ${token}`,

@@ -18,4 +18,31 @@ function register({ username, role, email, password } = {}) {
   });
 }
 
-export default Object.freeze({ login, register });
+function getProfile() {
+  return call({
+    url: `${USER_API_ENDPOINT}/profile`,
+    method: "GET",
+  });
+}
+
+function getUsers() {
+  return call({
+    url: `${USER_API_ENDPOINT}/users`,
+    method: "GET",
+  });
+}
+
+function deleteUser(uid) {
+  return call({
+    url: `${USER_API_ENDPOINT}/users/${uid}`,
+    method: "DELETE",
+  });
+}
+
+export default Object.freeze({
+  login,
+  register,
+  getProfile,
+  getUsers,
+  deleteUser,
+});

@@ -312,5 +312,7 @@
   "sidebar.competitorIntelligence": "Competitor Intelligence",
   "sidebar.competitorProducts": "Competitor Products",
   "sidebar.competitorShops": "Competitor Shops",
-  "sidebar.featureCompare": "Feature Compare"
+  "sidebar.featureCompare": "Feature Compare",
+  "sidebar.admin": "Admin",
+  "sidebar.users": "Users"
 }
