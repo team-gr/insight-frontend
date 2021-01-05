@@ -2,7 +2,8 @@ import { Col, Divider, Input, Row, Tag } from "antd";
 import { useReducer, useState, React } from "react";
 import ShopApi from "services/shop";
 import Spinner from "components/CircularProgress";
-import ListShops from "../components/ShopList";
+import {useSelector} from "react-redux"
+import ListShops from "./components/ShopList";
 import { formatDecimal } from "helpers";
 
 const { Search } = Input;
@@ -12,6 +13,9 @@ export default function SimilarShopsHome() {
     const [shops, setShops] = useState([])
     const [loading, setLoading] = useState(false);
     const [sourceShop, setSourceShop] = useState({});
+    const user = useSelector(state => state.auth.user)
+
+    console.log({user})
 
     return (
         <div>
@@ -40,13 +44,14 @@ export default function SimilarShopsHome() {
                         </Col>
                         <Col sm={12} xs={24}>
                             <div className="text-lg text-gray-700 font-medium">Categories</div>
-                            {/* <div>
+                            <div>
                                 {
-                                    sourceShop.shop_categories.map((index, item) => {
-                                        (<Tag>{item.catname}</Tag>)
-                                    })
+                                    // sourceShop.shop_categories.map((index, item) => 
+                                    //     (<Tag>{item.catname}</Tag>)
+                                    // )   
                                 }
-                            </div> */}
+                                {user.id}
+                            </div>
                         </Col>
                     </Row>
 
