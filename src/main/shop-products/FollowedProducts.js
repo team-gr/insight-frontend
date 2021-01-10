@@ -2,7 +2,9 @@ import Spinner from "components/CircularProgress";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ProductApi from "services/product";
+import ExportProducts from "./ExportProducts";
 import ProductList from "./ProductList";
+
 
 export default function FollowedProducts(){
     const [products, setProducts] = useState([]);
@@ -31,7 +33,14 @@ export default function FollowedProducts(){
     }, [])
 
     async function exportExcelFile(checkedList){
-        
+        try {
+            setLoading(true);
+            let res = await ProductApi.ExportProducts(user.id, checkedList);
+        } catch(err){
+            console.log(err);
+        } finally {
+            setLoading(false);
+        }
     }
 
     return (
@@ -39,7 +48,10 @@ export default function FollowedProducts(){
           <div className="pb-2 px-2 text-lg font-medium text-black">
             Followed products
           </div>
-          {loading ? <Spinner /> : <ProductList products={products} onSubmit={(checkedList) => exportExcelFile(checkedList)} buttonText="Export to excel file"/>}
+          {loading ? <Spinner /> : 
+            <div>
+              <ExportProducts products={products} user={user}/>
+            </div>}
         </div>
       );
 }
