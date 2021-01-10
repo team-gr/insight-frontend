@@ -2,7 +2,7 @@ import { Button, Checkbox, Col, Row } from "antd";
 import { useState } from "react";
 import { ProductCard } from "main/shop-products/ProductCard";
 
-export default function ProductList({products = [], onSubmit, buttonText = "Submit"}) {
+export default function   ProductList({products = [], onSubmit, buttonText = "Submit"}) {
   const [checkedList, setCheckedList] = useState([]);
 
   function onToggleCheck(productId) {
