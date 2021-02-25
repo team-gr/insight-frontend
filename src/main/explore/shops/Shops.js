@@ -1,5 +1,5 @@
 import { Input } from "antd";
-import ProductList from "main/shop-products/ProductList";
+import ProductList from "main/common/products/ProductList";
 import Spinner from "components/CircularProgress";
 import { useState } from "react";
 import ShopApi from "services/shop";
