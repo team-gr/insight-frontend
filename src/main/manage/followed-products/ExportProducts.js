@@ -1,6 +1,6 @@
 import { Button, Checkbox, Col, Row } from "antd";
 import { useState } from "react";
-import { ProductCard } from "main/shop-products/ProductCard";
+import { ProductCard } from "main/common/products/ProductCard";
 
 const EXPORT_API = process.env.NEXT_PUBLIC_EXPORT_API;
 
