@@ -3,7 +3,7 @@ import { useReducer, useState, React } from "react";
 import ShopApi from "services/shop";
 import Spinner from "components/CircularProgress";
 import {useSelector} from "react-redux"
-import ListShops from "./components/ShopList";
+import ListShops from "../../common/shops/ShopList"
 import { formatDecimal } from "helpers";
 
 const { Search } = Input;

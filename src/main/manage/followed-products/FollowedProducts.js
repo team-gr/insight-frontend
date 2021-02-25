@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ProductApi from "services/product";
 import ExportProducts from "./ExportProducts";
-import ProductList from "./ProductList";
-
 
 export default function FollowedProducts(){
     const [products, setProducts] = useState([]);

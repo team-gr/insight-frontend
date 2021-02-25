@@ -313,6 +313,11 @@
   "sidebar.competitorProducts": "Competitor Products",
   "sidebar.competitorShops": "Competitor Shops",
   "sidebar.featureCompare": "Feature Compare",
+  "sidebar.explore": "Explore",
+  "sidebar.explore.shops": "Shops",
+  "sidebar.explore.similarShops": "Similar Shops",
+  "sidebar.manage": "Manage",
+  "sidebar.manage.followedProducts": "Followed Products",
   "sidebar.admin": "Admin",
   "sidebar.users": "Users"
 }

@@ -1,5 +1,4 @@
-import { Col, Row, Tag } from "antd"
-import CardBox from "components/CardBox"
+import { Col, Row } from "antd"
 import ShopCard from "./ShopCard"
 
 export default function ListShops({shops}) {
