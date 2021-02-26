@@ -56,7 +56,7 @@ function SidebarContent() {
               key="competitor-intelligence"
               title={
                 <span>
-                  <i className="icon icon-dasbhoard" />
+                  <i className="icon icon-dashboard" />
                   <IntlMessages id="sidebar.competitorIntelligence" />
                 </span>
               }

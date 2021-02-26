@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+import Head from "next/head";
+
 import Layout from "layout";
 import UnauthorizedPage from "main/unauthorized";
 import PermissionDeniedPage from "main/permission-denied";
@@ -9,7 +11,9 @@ import isEmpty from "lodash/isEmpty";
 
 import { AuthActions } from "app-redux/auth";
 
-const securePage = ({ roles = [] } = {}) => (PageContentComponent) => {
+const securePage = ({ roles = [], title = "" } = {}) => (
+  PageContentComponent
+) => {
   return function SecuredPage() {
     const dispatch = useDispatch();
     const { user, loading } = useSelector((state) => state.auth);
@@ -34,6 +38,11 @@ const securePage = ({ roles = [] } = {}) => (PageContentComponent) => {
 
     return (
       <Layout>
+        {title && (
+          <Head>
+            <title>{title}</title>
+          </Head>
+        )}
         <PageContentComponent />
       </Layout>
     );
