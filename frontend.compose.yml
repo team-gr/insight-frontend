@@ -3,13 +3,15 @@ version: "3.8"
 services:
   frontend:
     image: "daongocthanh/gr-frontend:${IMAGE_TAG}"
-    networks:
-      - "gr2_default"
+    environment: 
+      - "NEXT_PUBLIC_ITEM_API_ENDPOINT=http://core.gr.just4demo.live"
+      - "NEXT_PUBLIC_USER_API_ENDPOINT=http://user.gr.just4demo.live"
+      - "NEXT_PUBLIC_SHOPEE_URL=https://shopee.vn"
+      - "NEXT_PUBLIC_SHOPEE_MEDIA_URL=https://cf.shopee.vn/file"
+      - "NEXT_PUBLIC_SHOPEE_GET_SHOP_URL=https://shopee.vn/api/v4/shop/get_shop_detail"
+      - "NEXT_PUBLIC_DATA_API=http://157.230.241.244:7000/api"
+      - "NEXT_PUBLIC_EXPORT_API=http://157.230.241.244:5000"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend_dashboard.rule=Host(`gr2.just4demo.live`)"
+      - "traefik.http.routers.frontend_dashboard.rule=Host(`gr.just4demo.live`)"
       - "traefik.http.services.frontend_dashboard.loadbalancer.server.port=3000"
-
-networks:
-  gr2_default:
-    external: true
