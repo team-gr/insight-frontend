@@ -21,6 +21,7 @@ export default function Shops() {
   const [shop, setShop] = useState({})
   const [products, setProducts] = useState([])
   const [similarShops, setSimilarShops] = useState([])
+  const [hasData, setHasData] = useState(false)
   const user = useSelector(state => state.auth.user)
 
   async function handleSearch(shopUrl) {
@@ -40,6 +41,7 @@ export default function Shops() {
         }
       })
       setSimilarShops(similarShops);
+      setHasData(true)
     } catch (err) {
       console.log(err);
     } finally {
@@ -57,26 +59,6 @@ export default function Shops() {
       setTabLoading(false);
     }
   }
-
-  // async function searchSimilarShops(shopUrl) {
-  //   try {
-  //     setTabLoading(true);
-  //     const res = await ShopApi.searchSimilarShops(shopUrl)
-  //     let shops = res.matches.map((item, index) => {
-  //       return {
-  //         ...item.target_shop,
-  //         match_num_cat_ratio: item.match_num_cat_ratio,
-  //         match_cat_prod_ratio: item.match_cat_prod_ratio
-  //       }
-  //     })
-  //     // setSourceShop(res.source_shop);
-  //     setSimilarShops(shops);
-  //   } catch (err) {
-  //     console.log(err)
-  //   } finally {
-  //     setTabLoading(false)
-  //   }
-  // }
 
   function changeTab(key) {
     console.log(key)
@@ -98,7 +80,7 @@ export default function Shops() {
 
       {loading ?
         <Spinner /> :
-        <div className={shop == {} ? "" : "hidden"}>
+        <div className={hasData ? "" : "hidden"}>
           <GeneralShopInfo {...shop}/>
 
           <Tabs defaultActiveKey="1" onChange={changeTab}>
