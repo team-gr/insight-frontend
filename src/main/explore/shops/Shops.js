@@ -1,56 +1,107 @@
-import { Input } from "antd";
+import React from "react";
+import { Input, Tabs } from "antd";
 import ProductList from "main/common/products/ProductList";
 import Spinner from "components/CircularProgress";
 import { useState } from "react";
 import ShopApi from "services/shop";
 import ProductApi from "services/product";
 import { useSelector } from "react-redux";
+import GeneralShopInfo from "main/common/shops/GeneralShopInfo";
+import SimilarShops from "./SimilarShops";
+import shops from "pages/explore/shops";
+import ShopProducts from "./ShopProducts";
 
-const { Search } = Input;
+const { Search } = Input
+const { TabPane } = Tabs
 
-export default function ShopProducts() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const user = useSelector(state => state.auth.user);
+export const Context = React.createContext()
 
-  async function search(shopUrl) {
+export default function Shops() {
+  const [products, setProducts] = useState([])
+  const [pageLoading, setPageLoading] = useState(false)
+  const [tabLoading, setTabLoading] = useState(false)
+  const [similarShops, setSimilarShops] = useState([])
+  const [shopUrl, setShopUrl] = useState("")
+  const user = useSelector(state => state.auth.user)
+
+  async function searchShop(shopUrl) {
     try {
-      setLoading(true);
+      setPageLoading(true);
       const products = await ShopApi.listShopProducts(shopUrl);
-      console.log(products);
       setProducts(products);
     } catch (err) {
       console.log(err);
     } finally {
-      setLoading(false);
+      setPageLoading(false);
     }
   }
 
   async function submitFollowProducts(checkedList) {
     try {
-      setLoading(true);
+      setTabLoading(true);
       await ProductApi.FollowProducts(user.id, checkedList);
     } catch (err) {
       console.log(err);
     } finally {
-      setLoading(false);
+      setTabLoading(false);
+    }
+  }
+
+  async function searchSimilarShops(shopUrl) {
+    try {
+      setTabLoading(true);
+      const res = await ShopApi.searchSimilarShops(shopUrl)
+      let shops = res.matches.map((item, index) => {
+        return {
+          ...item.target_shop,
+          match_num_cat_ratio: item.match_num_cat_ratio,
+          match_cat_prod_ratio: item.match_cat_prod_ratio
+        }
+      })
+      // setSourceShop(res.source_shop);
+      setSimilarShops(shops);
+    } catch (err) {
+      console.log(err)
+    } finally {
+      setTabLoading(false)
+    }
+  }
+
+  function changeTab(key) {
+    if(key == "2"){
+      searchSimilarShops(shopUrl)
     }
   }
 
   return (
-    <div>
+    <Context.Provider value={pageLoading, setPageLoading, submitFollowProducts}>
       <div className="pb-2 px-2 text-lg font-medium text-black">
-        Enter shop URL to discover their products, you can add these products to
-        your store
+        Enter shop URL to discover their products, you can add these products to your store
       </div>
+
       <Search
         placeholder="Shop URL"
         enterButton="Enter"
         size="large"
-        onKeyDown={(e) => e.key === "Enter" && search(e.target.value)}
-        onSearch={(value) => search(value)}
+        value="https://shopee.vn/tuananh24"
+        onKeyDown={(e) => e.key === "Enter" && (setShopUrl(e.target.value) || searchShop(e.target.value))}
+        onSearch={(value) => setShopUrl(value) || searchShop(value)}
       />
-      {loading ? <Spinner /> : <ProductList products={products} onSubmit={(checkedList) => submitFollowProducts(checkedList)} buttonText="Save"/>}
-    </div>
+
+      {pageLoading ?
+        <Spinner /> :
+        <div>
+          <GeneralShopInfo />
+
+          <Tabs defaultActiveKey="1" onChange={changeTab}>
+            <TabPane tab="Products" key="1">
+              {tabLoading ? <Spinner /> : <ShopProducts products={products}/>}
+            </TabPane>
+            <TabPane tab="Similar Shops" key="2">
+              {tabLoading ? <Spinner /> : <SimilarShops shops={similarShops} />}
+            </TabPane>
+          </Tabs>
+        </div>}
+    </Context.Provider>
   );
 }

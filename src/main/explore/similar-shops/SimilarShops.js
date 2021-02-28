@@ -62,23 +62,5 @@ export default function SimilarShopsHome() {
         </div>
     )
 
-    async function search(shopUrl) {
-        try {
-            setLoading(true);
-            const res = await ShopApi.searchSimilarShops(shopUrl)
-            let shops = res.matches.map((item, index) => {
-                return {
-                    ...item.target_shop,
-                    match_num_cat_ratio: item.match_num_cat_ratio,
-                    match_cat_prod_ratio: item.match_cat_prod_ratio
-                }
-            })
-            setSourceShop(res.source_shop);
-            setShops(shops);
-        } catch (err) {
-            console.log(err)
-        } finally {
-            setLoading(false)
-        }
-    }
+    
 }
