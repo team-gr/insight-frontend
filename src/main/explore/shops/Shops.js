@@ -1,14 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import { Input, Tabs } from "antd";
-import ProductList from "main/common/products/ProductList";
 import Spinner from "components/CircularProgress";
-import { useState } from "react";
 import ShopApi from "services/shop";
-import ProductApi from "services/product";
-import { useSelector } from "react-redux";
 import GeneralShopInfo from "main/common/shops/GeneralShopInfo";
 import SimilarShops from "./SimilarShops";
-import shops from "pages/explore/shops";
 import ShopProducts from "./ShopProducts";
 
 const { Search } = Input
@@ -22,7 +17,6 @@ export default function Shops() {
   const [products, setProducts] = useState([])
   const [similarShops, setSimilarShops] = useState([])
   const [hasData, setHasData] = useState(false)
-  const user = useSelector(state => state.auth.user)
 
   async function handleSearch(shopUrl) {
     try {
@@ -49,23 +43,12 @@ export default function Shops() {
     }
   }
 
-  async function submitFollowProducts(checkedList) {
-    try {
-      setTabLoading(true);
-      await ProductApi.FollowProducts(user.id, checkedList);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setTabLoading(false);
-    }
-  }
-
   function changeTab(key) {
     console.log(key)
   }
 
   return (
-    <Context.Provider value={loading, setLoading, submitFollowProducts}>
+    <Context.Provider value={loading, setLoading}>
       <div className="pb-2 px-2 text-lg font-medium text-black">
         Enter shop URL to discover their products, you can add these products to your store
       </div>

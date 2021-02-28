@@ -2,7 +2,7 @@ import { Button, Checkbox, Col, Row } from "antd";
 import { useState } from "react";
 import { ProductCard } from "main/common/products/ProductCard";
 
-export default function ProductList({products = [], onSubmit, buttonText = "Submit"}) {
+export default function ProductList({products = [], onSelect}) {
   const [checkedList, setCheckedList] = useState([]);
 
   function onToggleCheck(productId) {
@@ -24,24 +24,14 @@ export default function ProductList({products = [], onSubmit, buttonText = "Subm
 
   return (
     <div className="p-4">
-      <div className="flex justify-between">
+      {/* <div className="flex justify-between">
         <Checkbox onChange={onToggleCheckAll} className="my-auto" checked={products.length > 0 && checkedList.length === products.length}>Select all</Checkbox>
         <Button onClick={() => onSubmit(checkedList)} className="my-auto">{buttonText}</Button>
-      </div>
+      </div> */}
       <Row>
-        {products.map((item, index) => (
-          <Col lg={6} sm={12} xs={24} key={index}>
-            <ProductCard
-              product={item}
-              heading={
-                <div className="pb-1">
-                  <Checkbox
-                    checked={checkedList.includes(item.id)}
-                    onChange={() => onToggleCheck(item.id)}
-                  />
-                </div>
-              }
-            />
+        {products.map((product, index) => (
+          <Col lg={4} sm={8} xs={24}>
+            <ProductCard key={product.id} product={product}/>
           </Col>
         ))}
       </Row>
