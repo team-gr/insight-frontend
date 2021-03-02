@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Input, Tabs } from "antd";
+import { Input, notification, Tabs } from "antd";
 import Spinner from "components/CircularProgress";
 import ShopApi from "services/shop";
 import GeneralShopInfo from "main/common/shops/GeneralShopInfo";
@@ -37,7 +37,10 @@ export default function Shops() {
       setSimilarShops(similarShops);
       setHasData(true)
     } catch (err) {
-      console.log(err);
+      notification["error"]({
+        message: "Error",
+        description: err.message
+      })
     } finally {
       setLoading(false);
     }

@@ -2,6 +2,7 @@ import ProductList from "main/common/products/ProductList";
 import ProductApi from "services/product";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { Button } from "antd";
 
 export default function ShopProducts({ products }) {
     const user = useSelector(state => state.auth.user)
@@ -19,6 +20,8 @@ export default function ShopProducts({ products }) {
     }
 
     return (
-        <ProductList products={products} onSubmit={(checkedList) => submitFollowProducts(checkedList)} />
+        <>
+            <ProductList products={products} onSubmit={(checkedList) => submitFollowProducts(checkedList)} />
+        </>
     )
 }

@@ -319,5 +319,7 @@
   "sidebar.manage": "Manage",
   "sidebar.manage.followedProducts": "Followed Products",
   "sidebar.admin": "Admin",
-  "sidebar.users": "Users"
+  "sidebar.users": "Users",
+  "button.addToList": "Add to your list",
+  "button.added": "Added"
 }
