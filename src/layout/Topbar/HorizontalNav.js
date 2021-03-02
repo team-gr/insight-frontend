@@ -82,12 +82,6 @@ function HorizontalNav() {
               <IntlMessages id="sidebar.explore.shops" />
             </AppLink>
           </Menu.Item>
-
-          <Menu.Item key="explore/similar-shops">
-            <AppLink href="/explore/similar-shops">
-              <IntlMessages id="sidebar.explore.similarShops" />
-            </AppLink>
-          </Menu.Item>
         </Menu.SubMenu>
 
         {/* manage */}
