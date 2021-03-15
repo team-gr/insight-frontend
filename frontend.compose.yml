@@ -5,5 +5,5 @@ services:
     image: "daongocthanh/gr-frontend:${IMAGE_TAG}"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend_dashboard.rule=Host(`gr.just4demo.live`)"
+      - "traefik.http.routers.frontend_dashboard.rule=Host(`insight.smartecommerce.tech`)"
       - "traefik.http.services.frontend_dashboard.loadbalancer.server.port=3000"
