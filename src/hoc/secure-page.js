@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Head from "next/head";
 
 import Layout from "layout";
-import UnauthorizedPage from "main/unauthorized";
+import SigninPage from "main/sign-in";
 import PermissionDeniedPage from "main/permission-denied";
 import LoadingPage from "main/loading";
 import isEmpty from "lodash/isEmpty";
@@ -29,7 +29,7 @@ const securePage = ({ roles = [], title = "" } = {}) => (
     }
 
     if (isEmpty(user)) {
-      return <UnauthorizedPage />;
+      return <SigninPage />;
     }
 
     if (roles.length > 0 && !roles.includes(user.role)) {

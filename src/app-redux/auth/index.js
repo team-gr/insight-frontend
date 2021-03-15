@@ -58,7 +58,7 @@ const AuthActions = {
         } catch (error) {
           notification["error"]({
             message: "Login with token error!",
-            description: error,
+            description: error.message,
           });
         } finally {
           dispatch(AuthActions.setLoading(false));

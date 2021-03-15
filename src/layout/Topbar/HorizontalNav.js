@@ -65,42 +65,6 @@ function HorizontalNav() {
             <IntlMessages id="sidebar.featureCompare" />
           </AppLink>
         </Menu.Item>
-        
-        {/* explore */}
-        <Menu.SubMenu
-          popupClassName="gx-menu-horizontal"
-          key="explore"
-          title={
-            <span>
-              <i className="icon icon-spin" />
-              <IntlMessages id="sidebar.explore" />
-            </span>
-          }
-        >
-          <Menu.Item key="explore/shops">
-            <AppLink href="/explore/shops">
-              <IntlMessages id="sidebar.explore.shops" />
-            </AppLink>
-          </Menu.Item>
-        </Menu.SubMenu>
-
-        {/* manage */}
-        <Menu.SubMenu
-          popupClassName="gx-menu-horizontal"
-          key="manage"
-          title={
-            <span>
-              <i className="icon icon-wysiwyg" />
-              <IntlMessages id="sidebar.manage" />
-            </span>
-          }
-        >
-          <Menu.Item key="manage/shops">
-            <AppLink href="/manage/followed-products">
-              <IntlMessages id="sidebar.manage.followedProducts" />
-            </AppLink>
-          </Menu.Item>
-        </Menu.SubMenu>
       </Menu.SubMenu>
 
       {user.role === "admin" && (

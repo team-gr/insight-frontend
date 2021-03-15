@@ -1,6 +1,7 @@
 {
   "name": "next-demo",
   "version": "0.1.0",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "build:style-wieldy": "lessc --js styles/wieldy/wieldy.less styles/wieldy/wieldy.css",
