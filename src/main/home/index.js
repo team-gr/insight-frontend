@@ -1,11 +1,5 @@
 import { Row, Col } from "antd";
 import IconWithTextCard from "components/IconWithTextCard";
-import {
-  MailOutlined,
-  MessageOutlined,
-  BellOutlined,
-  UnorderedListOutlined,
-} from "@ant-design/icons";
 
 function Home() {
   return (

@@ -5,6 +5,8 @@ import { AuthActions } from "app-redux/auth";
 
 import AppLink from "components/AppLink";
 
+import { AVATAR_ROOT_URL } from "app-constants";
+
 function UserInfo() {
   const dispatch = useDispatch();
   const avatar = useSelector((state) => state.auth.user.avatar);
@@ -19,14 +21,20 @@ function UserInfo() {
   );
 
   return (
-    <Popover
-      overlayClassName="gx-popover-horizantal"
-      placement="bottomRight"
-      content={userMenuOptions}
-      trigger="click"
-    >
-      <Avatar src={avatar} className="gx-avatar gx-pointer" alt="" />
-    </Popover>
+    <li className="gx-user-nav">
+      <Popover
+        overlayClassName="gx-popover-horizantal"
+        placement="bottomRight"
+        content={userMenuOptions}
+        trigger="click"
+      >
+        <Avatar
+          src={AVATAR_ROOT_URL + avatar}
+          className="gx-avatar gx-pointer"
+          alt=""
+        />
+      </Popover>
+    </li>
   );
 }
 

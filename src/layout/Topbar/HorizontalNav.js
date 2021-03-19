@@ -22,47 +22,17 @@ function HorizontalNav() {
         key="apps"
         title={<IntlMessages id="sidebar.apps" />}
       >
-        <Menu.Item key="search">
-          <AppLink href="/search">
-            <i className="icon icon-search" />
-            <IntlMessages id="sidebar.search" />
+        <Menu.Item key="competitor-products">
+          <AppLink href="/competitor-products">
+            <i className="icon icon-orders" />
+            <span>Competitor Products</span>
           </AppLink>
         </Menu.Item>
 
-        <Menu.SubMenu
-          popupClassName="gx-menu-horizontal"
-          key="competitor-intelligence"
-          title={
-            <span>
-              <i className="icon icon-dashboard" />
-              <IntlMessages id="sidebar.competitorIntelligence" />
-            </span>
-          }
-        >
-          <Menu.Item key="competitor-intelligence/shopee-products">
-            <AppLink href="/competitor-intelligence/shopee-products">
-              <IntlMessages id="sidebar.competitorProducts" />
-            </AppLink>
-          </Menu.Item>
-
-          <Menu.Item key="competitor-intelligence/shopee-shops">
-            <AppLink href="/competitor-intelligence/shopee-shops">
-              <IntlMessages id="sidebar.competitorShops" />
-            </AppLink>
-          </Menu.Item>
-        </Menu.SubMenu>
-
-        <Menu.Item key="keyword-research">
-          <AppLink href="/keyword-research">
-            <i className="icon icon-popover" />
-            <IntlMessages id="sidebar.keywordResearch" />
-          </AppLink>
-        </Menu.Item>
-
-        <Menu.Item key="feature-compare">
-          <AppLink href="/feature-compare">
-            <i className="icon icon-product-list" />
-            <IntlMessages id="sidebar.featureCompare" />
+        <Menu.Item key="competitor-stores">
+          <AppLink href="/competitor-stores">
+            <i className="icon icon-geo-location" />
+            <span>Competitor Stores</span>
           </AppLink>
         </Menu.Item>
       </Menu.SubMenu>

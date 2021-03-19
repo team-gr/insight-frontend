@@ -21,7 +21,7 @@ function AppLayout({ children }) {
               <div className="gx-main-content-wrapper">{children}</div>
               <Layout.Footer>
                 <div className="gx-layout-footer-content">
-                  Copyright Company Name © 2020
+                  Insight Smart Ecommerce - GR - 2021
                 </div>
               </Layout.Footer>
             </Layout.Content>

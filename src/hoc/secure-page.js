@@ -11,9 +11,7 @@ import isEmpty from "lodash/isEmpty";
 
 import { AuthActions } from "app-redux/auth";
 
-const securePage = ({ roles = [], title = "" } = {}) => (
-  PageContentComponent
-) => {
+const securePage = ({ roles = [], title = "" } = {}) => (PageContent) => {
   return function SecuredPage() {
     const dispatch = useDispatch();
     const { user, loading } = useSelector((state) => state.auth);
@@ -43,7 +41,7 @@ const securePage = ({ roles = [], title = "" } = {}) => (
             <title>{title}</title>
           </Head>
         )}
-        <PageContentComponent />
+        <PageContent />
       </Layout>
     );
   };

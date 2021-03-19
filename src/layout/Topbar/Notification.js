@@ -1,9 +1,28 @@
 import React from "react";
-import { Avatar } from "antd";
+import { Avatar, Popover } from "antd";
 
 import CustomScrollbars from "components/CustomScrollbars";
 
-const AppNotification = () => {
+function AppNotification() {
+  return (
+    <li className="pt-2">
+      <Popover
+        overlayClassName="gx-popover-horizantal"
+        placement="bottomRight"
+        content={<AppNotificationContent />}
+        trigger="click"
+        children={
+          <span className="gx-pointer gx-d-block gx-status-pos">
+            <i className="icon icon-product-list" />
+            <span className="gx-status gx-status-rtl gx-small gx-orange" />
+          </span>
+        }
+      />
+    </li>
+  );
+}
+
+function AppNotificationContent() {
   const notifications = [
     {
       image: "https://via.placeholder.com/150x150",
@@ -51,7 +70,7 @@ const AppNotification = () => {
       </CustomScrollbars>
     </>
   );
-};
+}
 
 const NotificationItem = ({ notification }) => {
   const { icon, image, title, time } = notification;

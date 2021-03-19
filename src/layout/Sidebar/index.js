@@ -5,7 +5,7 @@ import { Drawer, Layout } from "antd";
 
 import SidebarContent from "layout/Sidebar/SidebarContent";
 import { SettingActions } from "app-redux/settings";
-import { TAB_SIZE } from "constants/theme-settings";
+import { TAB_SIZE } from "app-constants/theme-settings";
 
 const Sidebar = () => {
   const dispatch = useDispatch();

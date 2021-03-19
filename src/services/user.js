@@ -39,10 +39,27 @@ function deleteUser(uid) {
   });
 }
 
+function getUserById(uid) {
+  return call({
+    url: `${USER_API_ENDPOINT}/users/${uid}`,
+    method: "GET",
+  });
+}
+
+function updateUser(update = {}) {
+  return call({
+    url: `${USER_API_ENDPOINT}/users/${update.id}`,
+    method: "PUT",
+    body: update,
+  });
+}
+
 export default Object.freeze({
   login,
   register,
   getProfile,
   getUsers,
+  getUserById,
   deleteUser,
+  updateUser,
 });

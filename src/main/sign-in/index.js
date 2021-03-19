@@ -38,7 +38,7 @@ function SignIn() {
               className="gx-signin-form gx-form-row0"
             >
               <Form.Item
-                initialValue="demo@example.com"
+                initialValue="demo1@gmail.com"
                 rules={[
                   { type: "email", message: "The input is not valid E-mail!" },
                   { required: true, message: "The input is not valid E-mail!" },
