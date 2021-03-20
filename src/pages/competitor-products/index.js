@@ -1,4 +1,4 @@
 import securePage from "hoc/secure-page";
-import ShopeeProducts from "main/apps/shopee-products";
+import CompetitorProducts from "main/apps/products";
 
-export default securePage({ roles: [], title: "Products" })(ShopeeProducts);
+export default securePage({ roles: [], title: "Products" })(CompetitorProducts);

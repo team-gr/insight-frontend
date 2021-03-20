@@ -7,12 +7,17 @@ export function vndFormatter(raw) {
   return currencyFormatter.format(raw);
 }
 
+export function timestampFormatter(ts) {
+  const date = new Date(ts);
+  return `${date.getDate()} / ${date.getMonth() + 1} / ${date.getFullYear()}`;
+}
+
 export function randInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export function formatDecimal(number, decimalDigit=2){
+export function formatDecimal(number, decimalDigit = 2) {
   return Number(number).toFixed(decimalDigit);
 }
