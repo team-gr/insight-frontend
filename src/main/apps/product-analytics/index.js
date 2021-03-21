@@ -1,6 +1,10 @@
 import { Row, Col } from "antd";
 
-import OverallSentiment from "main/apps/product-analytics/OverallSentiment";
+import OverallSentimentAnalysis from "main/apps/product-analytics/OverallSentimentAnalysis";
+import OverallRatingsStar from "main/apps/product-analytics/OverallRatings";
+
+import TagList from "main/apps/product-analytics/TagList";
+import RatingList from "main/apps/product-analytics/RatingList";
 
 function ProductAnalytics() {
   return (
@@ -24,10 +28,14 @@ function ProductAnalytics() {
             </li>
           </ul>
         </div>
+        <TagList />
       </Col>
-      <Col xl={12} lg={8} md={16} sm={14} xs={24}></Col>
+      <Col xl={12} lg={8} md={16} sm={14} xs={24}>
+        <RatingList />
+      </Col>
       <Col xl={6} lg={8} md={6} sm={24} xs={24}>
-        <OverallSentiment />
+        <OverallSentimentAnalysis />
+        <OverallRatingsStar />
       </Col>
     </Row>
   );

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "skipLibCheck": true,   
     "baseUrl": "."
   },
   "exclude": ["node_modules", ".next", "public", "styles"]

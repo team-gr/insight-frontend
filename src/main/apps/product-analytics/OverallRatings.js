@@ -2,31 +2,36 @@ import { Card } from "antd";
 import { PieChart, Pie, Tooltip, Cell, Legend } from "recharts";
 
 const data = [
-  { name: "negative", value: 20 },
-  { name: "positive", value: 40 },
-  { name: "neutral", value: 40 },
+  { name: "5", value: 1300 },
+  { name: "4", value: 77 },
+  { name: "3", value: 30 },
+  { name: "2", value: 7 },
+  { name: "1", value: 6 },
 ];
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 const RADIAN = Math.PI / 180;
 
-function OverallSentiment() {
+function OverallRatingsStar() {
   return (
-    <Card title="Overall Sentiment" className="p-auto">
+    <Card title="Overall Ratings Start" className="p-auto">
       <PieChart width={230} height={230}>
+        <text x="50%" y="50%" className="h1" textAnchor="middle">
+          1420
+        </text>
         <Pie
           data={data}
           cx="50%"
           cy="50%"
-          labelLine={false}
-          label={renderCustomizedLabel}
+          innerRadius={60}
           outerRadius={80}
           fill="#8884d8"
           dataKey="value"
         >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
+          <Cell key="cell-1" fill="#34A853" />
+          <Cell key="cell-2" fill="#4285F4" />
+          <Cell key="cell-3" fill="#FBBC04" />
+          <Cell key="cell-3" fill="#FFBB28" />
+          <Cell key="cell-3" fill="#EA4335" />
         </Pie>
         <Tooltip />
         <Legend layout="horizontal" align="center" />
@@ -43,21 +48,19 @@ const renderCustomizedLabel = ({
   outerRadius,
   percent,
 }) => {
+  if (percent < 0.05) {
+    return null;
+  }
+
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
   return (
-    <text
-      x={x}
-      y={y}
-      fill="white"
-      textAnchor={x > cx ? "start" : "end"}
-      dominantBaseline="central"
-    >
+    <text x={x} y={y} fill="white" dominantBaseline="central">
       {`${(percent * 100).toFixed(0)}%`}
     </text>
   );
 };
 
-export default OverallSentiment;
+export default OverallRatingsStar;
