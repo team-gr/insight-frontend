@@ -1,41 +1,32 @@
 import { Row, Col } from "antd";
 
-import OverallSentimentAnalysis from "main/apps/product-analytics/OverallSentimentAnalysis";
-import OverallRatingsStar from "main/apps/product-analytics/OverallRatings";
-
-import TagList from "main/apps/product-analytics/TagList";
-import RatingList from "main/apps/product-analytics/RatingList";
+import Profile from "main/apps/product-analytics/Profile";
+import Tags from "main/apps/product-analytics/Tags";
+import Ratings from "main/apps/product-analytics/Ratings";
+import Sentiment from "main/apps/product-analytics/Sentiment";
+import Qualifiers from "main/apps/product-analytics/Qualifiers";
+import Categories from "main/apps/product-analytics/Categories";
 
 function ProductAnalytics() {
   return (
     <Row>
-      <Col xl={6} lg={8} md={8} sm={10} xs={24}>
-        <div className="gx-profileon-thumb gx-profileon-thumb-htctrcrop rounded-lg mb-3">
-          <img
-            src="https://cf.shopee.vn/file/2345924aef4b8c27cf5c2b13fcc5bb47"
-            alt=""
-          />
-        </div>
-        <div className="gx-follower gx-text-center">
-          <ul className="gx-follower-list">
-            <li>
-              <span className="gx-follower-title">₫ 100.000</span>
-              <span>retail price</span>
-            </li>
-            <li>
-              <span className="gx-follower-title">₫ 80.000</span>
-              <span>sales price</span>
-            </li>
-          </ul>
-        </div>
-        <TagList />
+      <Col xl={6} lg={12} md={12} sm={12} xs={24}>
+        <Profile />
       </Col>
-      <Col xl={12} lg={8} md={16} sm={14} xs={24}>
-        <RatingList />
+      <Col xl={6} lg={12} md={12} sm={12} xs={24}>
+        <Sentiment />
       </Col>
-      <Col xl={6} lg={8} md={6} sm={24} xs={24}>
-        <OverallSentimentAnalysis />
-        <OverallRatingsStar />
+      <Col xl={12} lg={24} md={24}>
+        <Ratings />
+      </Col>
+      <Col xl={6} lg={12} md={12} sm={12} xs={24}>
+        <Tags />
+      </Col>
+      <Col xl={6} lg={12} md={12} sm={12} xs={24}>
+        <Qualifiers />
+      </Col>
+      <Col xl={12} lg={24} md={24} sm={24} xs={24}>
+        <Categories />
       </Col>
     </Row>
   );

@@ -9,9 +9,10 @@ const data = [
 
 const RADIAN = Math.PI / 180;
 
-function OverallSentimentAnalysis() {
+function Sentiment() {
   return (
-    <Card title="Overall Sentiment | Comment" className="p-auto">
+    <Card className="p-auto">
+      <h2 className="text-center w-full">Sentiment</h2>
       <PieChart width={230} height={230}>
         <Pie
           data={data}
@@ -59,4 +60,4 @@ const renderCustomizedLabel = ({
   );
 };
 
-export default OverallSentimentAnalysis;
+export default Sentiment;
