@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Menu } from "antd";
 
-import IntlMessages from "components/IntlMessage";
 import AppLink from "components/AppLink";
 
 function HorizontalNav() {
@@ -20,7 +19,7 @@ function HorizontalNav() {
       <Menu.SubMenu
         popupClassName="gx-menu-horizontal gx-submenu-popup-curve gx-inside-submenu-popup-curve"
         key="apps"
-        title={<IntlMessages id="sidebar.apps" />}
+        title="Apps"
       >
         <Menu.Item key="competitor-products">
           <AppLink href="/competitor-products">
@@ -41,12 +40,12 @@ function HorizontalNav() {
         <Menu.SubMenu
           popupClassName="gx-menu-horizontal gx-submenu-popup-curve gx-inside-submenu-popup-curve"
           key="admin"
-          title={<IntlMessages id="sidebar.admin" />}
+          title="Admin"
         >
           <Menu.Item key="users">
             <AppLink href="/users">
               <i className="icon icon-user" />
-              <IntlMessages id="sidebar.users" />
+              Users
             </AppLink>
           </Menu.Item>
         </Menu.SubMenu>

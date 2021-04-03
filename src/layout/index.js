@@ -1,34 +1,28 @@
-import { ConfigProvider, Layout } from "antd";
-import { IntlProvider } from "react-intl";
-import { useSelector } from "react-redux";
+import { Layout } from "antd";
 
 import Sidebar from "layout/Sidebar";
 import Topbar from "layout/Topbar";
 
-import AppLocale from "lang";
+import { useNotifications } from "hooks";
 
 function AppLayout({ children }) {
-  const locale = useSelector((state) => state.settings.locale);
-  const localConfig = AppLocale[locale.locale];
+  useNotifications();
+
   return (
-    <ConfigProvider locale={localConfig.antd}>
-      <IntlProvider locale={localConfig.locale} messages={localConfig.messages}>
-        <Layout className="gx-app-layout">
-          <Sidebar />
-          <Layout>
-            <Topbar />
-            <Layout.Content className="gx-layout-content gx-container-wrap">
-              <div className="gx-main-content-wrapper">{children}</div>
-              <Layout.Footer>
-                <div className="gx-layout-footer-content">
-                  Insight Smart Ecommerce - GR - 2021
-                </div>
-              </Layout.Footer>
-            </Layout.Content>
-          </Layout>
-        </Layout>
-      </IntlProvider>
-    </ConfigProvider>
+    <Layout className="gx-app-layout">
+      <Sidebar />
+      <Layout>
+        <Topbar />
+        <Layout.Content className="gx-layout-content gx-container-wrap">
+          <div className="gx-main-content-wrapper">{children}</div>
+          <Layout.Footer>
+            <div className="gx-layout-footer-content">
+              Insight Smart Ecommerce - GR - 2021
+            </div>
+          </Layout.Footer>
+        </Layout.Content>
+      </Layout>
+    </Layout>
   );
 }
 

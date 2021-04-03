@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 
-import IntlMessages from "components/IntlMessage";
 import AppLink from "components/AppLink";
 
 import { SettingActions } from "app-redux/settings";
@@ -37,11 +36,7 @@ function SidebarContent() {
           theme="dark"
           mode="inline"
         >
-          <Menu.ItemGroup
-            key="apps"
-            className="gx-menu-group"
-            title={<IntlMessages id="sidebar.apps" />}
-          >
+          <Menu.ItemGroup key="apps" className="gx-menu-group" title="Apps">
             <Menu.Item key="competitor-products">
               <AppLink href="/competitor-products">
                 <i className="icon icon-orders" />
@@ -58,17 +53,11 @@ function SidebarContent() {
           </Menu.ItemGroup>
 
           {user.role === "admin" && (
-            <Menu.ItemGroup
-              key="admin"
-              className="gx-menu-group"
-              title={<IntlMessages id="sidebar.admin" />}
-            >
+            <Menu.ItemGroup key="admin" className="gx-menu-group" title="Admin">
               <Menu.Item key="users">
                 <AppLink href="/users">
                   <i className="icon icon-user" />
-                  <span>
-                    <IntlMessages id="sidebar.users" />
-                  </span>
+                  <span>Users</span>
                 </AppLink>
               </Menu.Item>
             </Menu.ItemGroup>
