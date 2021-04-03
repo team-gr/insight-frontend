@@ -3,11 +3,7 @@ import { Layout } from "antd";
 import Sidebar from "layout/Sidebar";
 import Topbar from "layout/Topbar";
 
-import { useNotifications } from "hooks";
-
 function AppLayout({ children }) {
-  useNotifications();
-
   return (
     <Layout className="gx-app-layout">
       <Sidebar />

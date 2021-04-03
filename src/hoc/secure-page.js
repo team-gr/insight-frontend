@@ -9,12 +9,16 @@ import PermissionDeniedPage from "main/permission-denied";
 import LoadingPage from "main/loading";
 import isEmpty from "lodash/isEmpty";
 
+import { useNotifications } from "hooks";
+
 import { AuthActions } from "app-redux/auth";
 
 const securePage = ({ roles = [], title = "" } = {}) => (PageContent) => {
   return function SecuredPage() {
     const dispatch = useDispatch();
     const { user, loading } = useSelector((state) => state.auth);
+
+    useNotifications({ userid: user.id });
 
     useEffect(() => {
       if (isEmpty(user)) {

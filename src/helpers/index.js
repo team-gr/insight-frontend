@@ -9,7 +9,7 @@ export function vndFormatter(raw) {
 
 export function timestampFormatter(ts) {
   const date = new Date(ts);
-  return `${date.getDate()} / ${date.getMonth() + 1} / ${date.getFullYear()}`;
+  return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 }
 
 export function randInt(min, max) {
