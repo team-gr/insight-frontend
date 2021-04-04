@@ -1,19 +1,16 @@
-import { useState } from "react";
-import { Row, Col, Button, Divider, Card, Tabs, Radio, Tag } from "antd";
+import { useRouter } from "next/router";
+import { Row, Col, Button, Divider, Card, Tabs, Tag } from "antd";
 import { CaretLeftOutlined } from "@ant-design/icons";
 
 import AppLink from "components/AppLink";
 
-import PricesChart from "main/apps/product-tracking/prices-chart";
-import PricesTable from "main/apps/product-tracking/prices-table";
 import TitlesTable from "main/apps/product-tracking/titles-table";
-import ImagesTable from "main/apps/product-tracking/images-table";
 import RatingsChart from "main/apps/product-tracking/ratings-chart";
-import ProductNotificationSettings from "main/apps/product-tracking/settings";
-
-import { data } from "main/apps/product-tracking/data";
+import Prices from "main/apps/product-tracking/prices";
 
 function ShopeeProduct() {
+  const { query } = useRouter();
+
   return (
     <div className="gx-main-content">
       <Row>
@@ -62,41 +59,18 @@ function ShopeeProduct() {
           <Card className="gx-card">
             <Tabs defaultActiveKey="1">
               <Tabs.TabPane tab="PRICES" key="1">
-                <Prices />
+                <Prices itemid={query.id} />
               </Tabs.TabPane>
               <Tabs.TabPane tab="TITLES" key="2">
-                <TitlesTable />
+                <TitlesTable itemid={query.id} />
               </Tabs.TabPane>
               <Tabs.TabPane tab="RATINGS" key="3">
-                <RatingsChart />
-              </Tabs.TabPane>
-              <Tabs.TabPane tab="IMAGES" key="4">
-                <ImagesTable />
+                <RatingsChart itemid={query.id} />
               </Tabs.TabPane>
             </Tabs>
           </Card>
         </Col>
       </Row>
-    </div>
-  );
-}
-
-function Prices() {
-  const [viewStyle, setViewStyle] = useState("table");
-
-  function onViewStyleChange(e) {
-    setViewStyle(e.target.value);
-  }
-
-  return (
-    <div>
-      <Radio.Group onChange={onViewStyleChange} defaultValue={viewStyle}>
-        <Radio.Button value="chart">Chart view</Radio.Button>
-        <Radio.Button value="table">Table view</Radio.Button>
-      </Radio.Group>
-
-      {viewStyle === "chart" && <PricesChart data={data} />}
-      {viewStyle === "table" && <PricesTable data={data} />}
     </div>
   );
 }

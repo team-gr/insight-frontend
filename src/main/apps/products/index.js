@@ -171,16 +171,14 @@ const columns = [
     dataIndex: "product",
     width: "30%",
     render: (_, record) => (
-      <AppLink href="/competitor-products/tracking/1">
-        <div className="w-full flex">
-          <img
-            alt=""
-            className="w-1/2 xl:w-1/3 rounded-lg mr-2"
-            src={`https://cf.shopee.vn/file/${record.image}`}
-          />
-          <span className="lg ml-1">{record.name}</span>
-        </div>
-      </AppLink>
+      <div className="w-full flex">
+        <img
+          alt=""
+          className="w-1/2 xl:w-1/3 rounded-lg mr-2"
+          src={`https://cf.shopee.vn/file/${record.image}`}
+        />
+        <span className="lg ml-1">{record.name}</span>
+      </div>
     ),
   },
   {
@@ -209,8 +207,8 @@ const columns = [
   {
     title: "ACTIONS",
     width: "5%",
-    render: () => (
-      <Dropdown overlay={menu}>
+    render: (_, record) => (
+      <Dropdown overlay={<ActionMenu itemid={record.id} />}>
         <Button
           type="primary"
           icon={
@@ -225,10 +223,14 @@ const columns = [
   },
 ];
 
-const menu = (
+const ActionMenu = ({ itemid }) => (
   <Menu>
     <Menu.Item icon={<FullscreenOutlined />}>Product Detail</Menu.Item>
-    <Menu.Item icon={<HistoryOutlined />}>Product Tracking</Menu.Item>
+    <Menu.Item icon={<HistoryOutlined />}>
+      <AppLink href={`/competitor-products/tracking/${itemid}`}>
+        Product Tracking
+      </AppLink>
+    </Menu.Item>
     <Menu.Item icon={<LineChartOutlined />}>
       <AppLink href="/competitor-products/analytics/1">
         Product Analytics

@@ -1,6 +1,6 @@
 import { Table, Tag } from "antd";
 
-import { vndFormatter } from "helpers";
+import { vndFormatter, timestampFormatter } from "helpers";
 
 function PricesTable({ data }) {
   return (
@@ -9,6 +9,7 @@ function PricesTable({ data }) {
         className="gx-table-responsive"
         columns={columns}
         dataSource={data}
+        rowKey="key"
       />
     </div>
   );
@@ -17,10 +18,9 @@ function PricesTable({ data }) {
 const columns = [
   {
     title: "DATE",
-    dataIndex: "date",
-    key: "key",
+    dataIndex: "ts",
+    render: timestampFormatter,
     sorter: (a, b) => a.ts - b.ts,
-    sortOrder: "descend",
   },
   {
     title: "PRICE BEFORE DISCOUNT",

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Tag, Avatar, Popover } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -8,7 +9,12 @@ import { NotificatioActions } from "app-redux/notification";
 
 function AppNotification() {
   const dispatch = useDispatch();
+  const userid = useSelector((state) => state.auth.user.id);
   const notifications = useSelector((state) => state.notification.items);
+
+  useEffect(() => {
+    dispatch(NotificatioActions.refresh(userid));
+  }, []);
 
   return (
     <li className="pt-2">
