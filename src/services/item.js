@@ -1,28 +1,45 @@
 import { call } from "services/base";
 
-const ITEM_API_ENDPOINT = process.env.NEXT_PUBLIC_ITEM_API_ENDPOINT;
+const CORE_API_ENDPOINT = process.env.NEXT_PUBLIC_CORE_API_ENDPOINT;
 
-function hints({ keyword, shopee, tiki, lazada } = {}) {
+function trackNewItemByUrl({ userid, itemUrl } = {}) {
   return call({
-    url: `${ITEM_API_ENDPOINT}/hints`,
+    url: `${CORE_API_ENDPOINT}/user-subscribe-to-item`,
     method: "POST",
-    body: { keyword, shopee, tiki, lazada },
+    body: {
+      user_id: userid,
+      item_url: itemUrl,
+    },
   });
 }
 
-function items({ keyword } = {}) {
+function trackNewItemsByFile({ userid, file } = {}) {
+  console.log({ userid, file });
   return call({
-    url: `${ITEM_API_ENDPOINT}/items`,
+    url: `${CORE_API_ENDPOINT}/user-subscibe-to-items-by-file`,
     method: "POST",
-    body: { keyword },
+    form: { user_id: userid, file },
   });
 }
 
-function item({ itemid, shopid } = {}) {
+function getUserTrackingItems(userid) {
   return call({
-    url: `${ITEM_API_ENDPOINT}/item?itemid=${itemid}&shopid=${shopid}`,
+    url: `${CORE_API_ENDPOINT}/items/user-subscribed?user_id=${userid}`,
     method: "GET",
   });
 }
 
-export default Object.freeze({ hints, items, item });
+function removeItemFromTrackList({ userid, itemIds = [] } = {}) {
+  return call({
+    url: `${CORE_API_ENDPOINT}/user-unsubcribe-to-items`,
+    method: "POST",
+    body: { user_id: userid, item_ids: itemIds },
+  });
+}
+
+export default Object.freeze({
+  trackNewItemByUrl,
+  trackNewItemsByFile,
+  getUserTrackingItems,
+  removeItemFromTrackList,
+});
