@@ -196,12 +196,12 @@ const columns = [
     title: "LAST CHANGED",
     dataIndex: "updated_at",
     width: "20%",
-    render: timestampFormatter,
+    render: (ts) => timestampFormatter(ts * 1000),
   },
   {
     title: "LAST CHECKED",
     dataIndex: "last_check_at",
-    render: timestampFormatter,
+    render: (ts) => timestampFormatter(ts * 1000),
     width: "20%",
   },
   {
@@ -225,7 +225,6 @@ const columns = [
 
 const ActionMenu = ({ itemid }) => (
   <Menu>
-    <Menu.Item icon={<FullscreenOutlined />}>Product Detail</Menu.Item>
     <Menu.Item icon={<HistoryOutlined />}>
       <AppLink href={`/competitor-products/tracking/${itemid}`}>
         Product Tracking

@@ -9,7 +9,12 @@ function TitlesTable({ itemid = "" }) {
   const [histories, setHistories] = useState([]);
 
   useEffect(() => {
+    console.log(histories);
+  });
+
+  useEffect(() => {
     HistoryServices.getItemNameHistory(itemid)
+      .then((items) => items.map(mapper))
       .then(setHistories)
       .catch(console.log);
   }, []);
@@ -25,17 +30,20 @@ function TitlesTable({ itemid = "" }) {
   );
 }
 
+function mapper({ name, timestamp }) {
+  return { name, timestamp };
+}
+
 const columns = [
   {
     title: "DATE",
-    dataIndex: "ts",
+    dataIndex: "timestamp",
     sorter: (a, b) => a.ts - b.ts,
-    sortOrder: "descend",
     render: timestampFormatter,
   },
   {
     title: "TITLE",
-    dataIndex: "histories",
+    dataIndex: "name",
   },
 ];
 
