@@ -134,9 +134,11 @@ function CompetitorProducts() {
         <h2 className="flex">
           <span>Competitor Products Being Tracked</span>
           <div className="flex-grow" />
-          <Button onClick={onLoadItems} type="default">
-            RELOAD
-          </Button>
+          <Button
+            onClick={onLoadItems}
+            type="default"
+            icon={<SyncOutlined />}
+          />
           {pids.length > 0 && (
             <Popconfirm title="Are you sure to delete!" onConfirm={onDelete}>
               <Button
