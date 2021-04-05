@@ -37,7 +37,16 @@ function removeItemFromTrackList({ userid, itemIds = [] } = {}) {
   });
 }
 
+function update({ itemid, shopid } = {}) {
+  return call({
+    url: `${CORE_API_ENDPOINT}/item/update`,
+    method: "POST",
+    body: { item_id: itemid, shop_id: shopid },
+  });
+}
+
 export default Object.freeze({
+  update,
   trackNewItemByUrl,
   trackNewItemsByFile,
   getUserTrackingItems,

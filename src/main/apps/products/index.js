@@ -13,7 +13,6 @@ import {
 
 import {
   DeleteOutlined,
-  FullscreenOutlined,
   HistoryOutlined,
   LineChartOutlined,
   SyncOutlined,
@@ -133,9 +132,11 @@ function CompetitorProducts() {
 
       <Widget>
         <h2 className="flex">
-          <span>Competitor Products Being Analyzed</span>
+          <span>Competitor Products Being Tracked</span>
           <div className="flex-grow" />
-
+          <Button onClick={onLoadItems} type="default">
+            RELOAD
+          </Button>
           {pids.length > 0 && (
             <Popconfirm title="Are you sure to delete!" onConfirm={onDelete}>
               <Button
@@ -208,7 +209,9 @@ const columns = [
     title: "ACTIONS",
     width: "5%",
     render: (_, record) => (
-      <Dropdown overlay={<ActionMenu itemid={record.id} />}>
+      <Dropdown
+        overlay={<ActionMenu shopid={record.shopid} itemid={record.id} />}
+      >
         <Button
           type="primary"
           icon={
@@ -223,20 +226,36 @@ const columns = [
   },
 ];
 
-const ActionMenu = ({ itemid }) => (
-  <Menu>
-    <Menu.Item icon={<HistoryOutlined />}>
-      <AppLink href={`/competitor-products/tracking/${itemid}`}>
-        Product Tracking
-      </AppLink>
-    </Menu.Item>
-    <Menu.Item icon={<LineChartOutlined />}>
-      <AppLink href="/competitor-products/analytics/1">
-        Product Analytics
-      </AppLink>
-    </Menu.Item>
-    <Menu.Item icon={<SyncOutlined />}>Update</Menu.Item>
-  </Menu>
-);
+const ActionMenu = ({ itemid, shopid }) => {
+  async function onUpdate() {
+    try {
+      await ItemServices.update({ itemid, shopid });
+      notification["success"]({
+        message: "Update product done!",
+        description: `Updated product id: ${itemid} | shopid: ${shopid}`,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  return (
+    <Menu>
+      <Menu.Item icon={<HistoryOutlined />}>
+        <AppLink href={`/competitor-products/tracking/${itemid}`}>
+          Product Tracking
+        </AppLink>
+      </Menu.Item>
+      <Menu.Item icon={<LineChartOutlined />}>
+        <AppLink href="/competitor-products/analytics/1">
+          Product Analytics
+        </AppLink>
+      </Menu.Item>
+      <Menu.Item onClick={onUpdate} icon={<SyncOutlined />}>
+        Update
+      </Menu.Item>
+    </Menu>
+  );
+};
 
 export default CompetitorProducts;
