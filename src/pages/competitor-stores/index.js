@@ -1,10 +1,7 @@
-import Layout from "layout";
-import ShopeeStores from "main/apps/stores";
+import securePage from "hoc/secure-page";
+import StoreTracking from "main/apps/stores";
 
-export default function ShopeeStoresPage() {
-  return (
-    <Layout>
-      <ShopeeStores />
-    </Layout>
-  );
-}
+export default securePage({
+  roles: ["user", "admin"],
+  title: "Store | Tracking",
+})(StoreTracking);

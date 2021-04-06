@@ -45,8 +45,16 @@ function update({ itemid, shopid } = {}) {
   });
 }
 
+function getItemById(itemid = "") {
+  return call({
+    url: `${CORE_API_ENDPOINT}/item?itemid=${itemid}`,
+    method: "GET",
+  });
+}
+
 export default Object.freeze({
   update,
+  getItemById,
   trackNewItemByUrl,
   trackNewItemsByFile,
   getUserTrackingItems,

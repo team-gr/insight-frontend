@@ -1,5 +1,14 @@
-import { useState } from "react";
-import { Button, Input, Upload, Table, Dropdown, Menu, Popconfirm } from "antd";
+import { useState, useEffect } from "react";
+import {
+  Button,
+  Input,
+  Upload,
+  Table,
+  Dropdown,
+  Menu,
+  Popconfirm,
+  message,
+} from "antd";
 import {
   UploadOutlined,
   ReloadOutlined,
@@ -8,12 +17,34 @@ import {
   SyncOutlined,
   MoreOutlined,
 } from "@ant-design/icons";
+import { useSelector } from "react-redux";
 
 import AppLink from "components/AppLink";
 import Widget from "components/Widget";
 
+import { StoreServices } from "services";
+
+import { timestampFormatter } from "helpers";
+
 function CompetitorStores() {
+  const userid = useSelector((state) => state.auth.user.id);
+  const [shopLoading, setShopLoading] = useState(false);
   const [sids, setSids] = useState([]);
+  const [shops, setShops] = useState([]);
+
+  useEffect(onLoadShops, []);
+
+  useEffect(() => {
+    console.log(shops);
+  });
+
+  function onLoadShops() {
+    setShopLoading(true);
+    StoreServices.getUserTrackingStores(userid)
+      .then(setShops)
+      .catch(console.log)
+      .finally(() => setShopLoading(false));
+  }
 
   return (
     <>
@@ -38,7 +69,11 @@ function CompetitorStores() {
         <h2 className="flex">
           <span>Competitor Stores Being Tracked</span>
           <div className="flex-grow" />
-          <Button type="default" icon={<ReloadOutlined />}></Button>
+          <Button
+            type="default"
+            icon={<ReloadOutlined />}
+            onClick={onLoadShops}
+          />
           {sids.length > 0 && (
             <Popconfirm title="Are you sure to delete!">
               <Button type="danger">DELETE</Button>
@@ -46,9 +81,10 @@ function CompetitorStores() {
           )}
         </h2>
         <Table
+          loading={shopLoading}
           columns={columns}
-          dataSource={data}
-          rowKey="shopid"
+          dataSource={shops}
+          rowKey="id"
           pagination={{ pageSize: 10 }}
           rowSelection={{
             onChange: (selectedRowKeys, selectedRows) => {
@@ -71,20 +107,31 @@ const columns = [
         <img
           alt=""
           className="w-1/3 rounded-lg mr-2 border border-dashed border-black"
-          src={record.avatar}
+          src={`https://cf.shopee.vn/file/${record.avatar}`}
         />
         <span className="w-2/3 lg text-sm lg:text-xl">{text}</span>
       </div>
     ),
   },
-  { title: "PRODUCTS", dataIndex: "products" },
-  { title: "ACTIVE VOUCHERS", dataIndex: "active_vouchers" },
-  { title: "LAST CHECKED", dataIndex: "last_checked" },
-  { title: "LAST CHANGED", dataIndex: "last_changed" },
+  { title: "PRODUCTS", dataIndex: "item_count" },
+  {
+    title: "ACTIVE VOUCHERS",
+    render: (_, record) => record.active_vouchers.length,
+  },
+  {
+    title: "LAST CHECKED",
+    dataIndex: "last_checked_at",
+    render: timestampFormatter,
+  },
+  {
+    title: "LAST CHANGED",
+    dataIndex: "updated_at",
+    render: timestampFormatter,
+  },
   {
     title: "ACTIONS",
     render: (_, record) => (
-      <Dropdown overlay={<ActionMenu shopid={record.shopid} />}>
+      <Dropdown overlay={<ActionMenu shopid={record.id} />}>
         <Button type="primary" icon={<MoreOutlined />} size="medium" />
       </Dropdown>
     ),
@@ -92,6 +139,18 @@ const columns = [
 ];
 
 const ActionMenu = ({ shopid }) => {
+  async function onUpdate() {
+    const done = message.loading("updating store data...", 0);
+
+    try {
+      await StoreServices.updateStore(shopid);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      done();
+      message.success("update store data done!", 1);
+    }
+  }
   return (
     <Menu>
       <Menu.Item icon={<HistoryOutlined />}>
@@ -104,7 +163,9 @@ const ActionMenu = ({ shopid }) => {
           Store Analytics
         </AppLink>
       </Menu.Item>
-      <Menu.Item icon={<SyncOutlined />}>Update</Menu.Item>
+      <Menu.Item icon={<SyncOutlined />} onClick={onUpdate}>
+        Update
+      </Menu.Item>
     </Menu>
   );
 };
