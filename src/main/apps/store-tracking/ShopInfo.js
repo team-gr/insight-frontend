@@ -1,11 +1,25 @@
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { Button, Divider, Tag } from "antd";
+import { Button, Divider } from "antd";
 import { CaretLeftOutlined } from "@ant-design/icons";
 
 import AppLink from "components/AppLink";
 
+import { StoreServices } from "services";
+
+import { numberFormatter } from "helpers";
+
 function ShopStatistics() {
   const { query } = useRouter();
+  const [shop, setShop] = useState({});
+
+  useEffect(() => {
+    console.log(shop);
+  });
+
+  useEffect(() => {
+    StoreServices.getShopByID(query.id).then(setShop).catch(console.log);
+  }, []);
 
   return (
     <>
@@ -16,20 +30,17 @@ function ShopStatistics() {
         </div>
       </AppLink>
 
-      <h4 className="mt-6 text-xl">Coolmate</h4>
+      <h4 className="mt-6 text-xl">{shop.name}</h4>
 
       <img
         className="max-h-48 rounded-lg mt-2"
         alt=""
-        src="https://cf.shopee.vn/file/22a19ce0cc7f2ef9e2aea85eb2e86cc1_tn"
+        src={`https://cf.shopee.vn/file/${shop.avatar}`}
       />
       <Divider className="mt-0" />
 
       <Button type="dashed" size="large" className="w-full">
-        <a
-          href="https://shopee.vn/Ao-len-nam-co-lo-mau-moi-nhat-2020-i.38003654.1589295236?utm_campaign=-&utm_medium=affiliates&utm_source=an_17104620000&utm_content=Vs3Kgbdbosk5MgUjpWl0R4oODE4WOxLMGDPcj3tFid7IEyo0-119271-322--"
-          target="_blank"
-        >
+        <a href={`https://shopee.vn/${shop.username}`} target="_blank">
           Visit in Shopee
         </a>
       </Button>
@@ -37,27 +48,27 @@ function ShopStatistics() {
       <div className="mt-6 mx-1">
         <div className="flex justify-between items-center text-lg">
           <span>Active Vouchers:</span>
-          <span>7</span>
+          <span>{shop.active_vouchers ? shop.active_vouchers.length : 0}</span>
         </div>
         <div className="flex justify-between items-center text-lg">
           <span>Followers:</span>
-          <span>3.374</span>
+          <span>{numberFormatter(shop.follower_count)}</span>
         </div>
         <div className="flex justify-between items-center text-lg">
           <span>Seller Rating:</span>
-          <span>95%</span>
+          <span>{shop.seller_rating ? shop.seller_rating.rating_star : 0}</span>
         </div>
         <div className="flex justify-between items-center text-lg">
           <span>Products Quantity:</span>
-          <span>326</span>
+          <span>{shop.item_count}</span>
         </div>
         <div className="flex justify-between items-center text-lg">
           <span>Chat Response Rate:</span>
-          <span>100%</span>
+          <span>{shop.response_rate}%</span>
         </div>
         <div className="flex justify-between items-center text-lg">
-          <span>Shipped On Time Rate:</span>
-          <span>100%</span>
+          <span>Response Time:</span>
+          <span>{shop.response_time} (s)</span>
         </div>
       </div>
     </>

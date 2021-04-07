@@ -100,7 +100,7 @@ function CompetitorStores() {
 const columns = [
   {
     title: "SELLER NAME",
-    dataIndex: "seller_name",
+    dataIndex: "name",
     width: "30%",
     render: (text, record) => (
       <div className="w-full flex items-center">

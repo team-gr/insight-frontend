@@ -1,14 +1,17 @@
+import { useRouter } from "next/router";
 import { Card, Tabs } from "antd";
 
 import ActiveVouchers from "main/apps/store-tracking/ActiveVouchers";
 
 function Tracking() {
+  const { query } = useRouter();
+
   return (
     <>
       <Card className="gx-card">
         <Tabs defaultActiveKey="1">
           <Tabs.TabPane tab="ACTIVE VOUCHERS" key="1">
-            <ActiveVouchers />
+            <ActiveVouchers shopid={query.id} />
           </Tabs.TabPane>
           <Tabs.TabPane tab="FOLLOWERS" key="2"></Tabs.TabPane>
           <Tabs.TabPane tab="SELLER RATINGS" key="3"></Tabs.TabPane>

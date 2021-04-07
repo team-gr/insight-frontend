@@ -21,3 +21,11 @@ export function randInt(min, max) {
 export function formatDecimal(number, decimalDigit = 2) {
   return Number(number).toFixed(decimalDigit);
 }
+
+export function numberFormatter(number) {
+  if (number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  return 0;
+}

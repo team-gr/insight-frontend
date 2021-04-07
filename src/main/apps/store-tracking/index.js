@@ -1,6 +1,6 @@
 import { Row, Col } from "antd";
 
-import ShopStatistics from "main/apps/store-tracking/ShopStatistics";
+import ShopInfo from "main/apps/store-tracking/ShopInfo";
 import Tracking from "main/apps/store-tracking/Tracking";
 
 function StoreTracking() {
@@ -8,7 +8,7 @@ function StoreTracking() {
     <div className="gx-main-content">
       <Row>
         <Col lg={6} sm={24}>
-          <ShopStatistics />
+          <ShopInfo />
         </Col>
         <Col lg={18} sm={24}>
           <Tracking />

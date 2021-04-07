@@ -1,47 +1,63 @@
+import { useState, useEffect } from "react";
 import { Table } from "antd";
+
+import { StoreServices } from "services";
 
 import { timestampFormatter } from "helpers";
 
-function ActiveVouchers() {
+function ActiveVouchers({ shopid }) {
+  const [shop, setShop] = useState({});
+
+  useEffect(() => {
+    console.log(shop);
+  });
+
+  useEffect(() => {
+    StoreServices.getShopByID(shopid).then(setShop).catch(console.log);
+  }, []);
+
   return (
-    <Table columns={columns} dataSource={data} pagination={{ pageSize: 6 }} />
+    <Table
+      columns={columns}
+      dataSource={shop.active_vouchers ? shop.active_vouchers : []}
+      pagination={{ pageSize: 6 }}
+      rowKey="code"
+    />
   );
 }
 
 const columns = [
-  { title: "VOUCHER NAME", dataIndex: "name" },
-  { title: "START DATE", dataIndex: "start", render: timestampFormatter },
-  { title: "END DATE", dataIndex: "end", render: timestampFormatter },
-  { title: "VOUCHER CODE", dataIndex: "code" },
   {
-    title: "ACTIVE",
-    dataIndex: "active",
-    render: (active) => (active ? "ACTIVE" : "DISABLE"),
+    title: "VOUCHER NAME",
+    render: (_, v) => makeVoucherName(v),
   },
+  {
+    title: "START DATE",
+    dataIndex: "start_time",
+    render: (t) => timestampFormatter(t * 1000),
+  },
+  {
+    title: "END DATE",
+    dataIndex: "end_time",
+    render: (t) => timestampFormatter(t * 1000),
+  },
+  { title: "VOUCHER CODE", dataIndex: "code" },
 ];
 
-const data = [
-  {
-    name: "Hoàn 15% xu Đơn Tối Thiểu 99K Tối Đa 50k xu",
-    start: 1617609728000,
-    end: 1619801948000,
-    code: "FEAERMA4",
-    active: true,
-  },
-  {
-    name: "Giảm 50k Đơn Tối Thiểu 800k",
-    start: 1617210004000,
-    end: 1619801944000,
-    code: "FEAERMA11",
-    active: true,
-  },
-  {
-    name: "Giẩm 300k Đơn Tối Thiểu 2tr",
-    start: 1617210050000,
-    end: 1619801990000,
-    code: "FEAERMA4",
-    active: true,
-  },
-];
+function makeVoucherName(voucher) {
+  if (voucher.reward_type === 1) {
+    return `Hoàn ${voucher.coin_percentage}% xu Đơn Tối Thiểu ${
+      voucher.min_spend / 100000000
+    }K Tối Đa ${voucher.coin_cap / 1000}K xu`;
+  }
+
+  if (voucher.discount_value == 0) {
+    return `Giảm 50% Đơn Tối Thiểu 10K Giảm Tối Đa 5K`;
+  }
+
+  return `Giảm ${voucher.discount_value / 10000000}K Đơn Tối Thiểu ${
+    voucher.min_spend / 100000000
+  }K`;
+}
 
 export default ActiveVouchers;

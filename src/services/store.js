@@ -17,7 +17,15 @@ function updateStore(shopid) {
   });
 }
 
+function getShopByID(shopid) {
+  return call({
+    url: `${CORE_API_ENDPOINT}/shop?shopid=${shopid}`,
+    method: "GET",
+  });
+}
+
 export default Object.freeze({
   getUserTrackingStores,
+  getShopByID,
   updateStore,
 });
