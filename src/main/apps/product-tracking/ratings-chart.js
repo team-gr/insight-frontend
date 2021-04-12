@@ -38,11 +38,11 @@ function RatingsChart({ itemid }) {
   );
 }
 
-function mapper({ timestamp, rating_star, rating_count }) {
+function mapper({ ctime, rating_star, rating_count }) {
   const positives = rating_count[5];
   const negatives =
     rating_count[1] + rating_count[2] + rating_count[3] + rating_count[4];
-  return { timestamp, rating_star, negatives, positives };
+  return { timestamp: Date.parse(ctime), rating_star, negatives, positives };
 }
 
 export default RatingsChart;

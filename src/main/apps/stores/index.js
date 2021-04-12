@@ -36,7 +36,7 @@ function CompetitorStores() {
 
   useEffect(() => {
     console.log(shops);
-  });
+  }, [shops]);
 
   function onLoadShops() {
     setShopLoading(true);
@@ -100,8 +100,8 @@ function CompetitorStores() {
 const columns = [
   {
     title: "SELLER NAME",
-    dataIndex: "name",
-    width: "30%",
+    dataIndex: "username",
+    width: "25%",
     render: (text, record) => (
       <div className="w-full flex items-center">
         <img
@@ -113,19 +113,19 @@ const columns = [
       </div>
     ),
   },
-  { title: "PRODUCTS", dataIndex: "item_count" },
+  { title: "PRODUCTS", dataIndex: "product_quantity" },
   {
-    title: "ACTIVE VOUCHERS",
+    title: "VOUCHERS",
     render: (_, record) => record.active_vouchers.length,
   },
   {
     title: "LAST CHECKED",
-    dataIndex: "last_checked_at",
+    dataIndex: "last_checked",
     render: timestampFormatter,
   },
   {
     title: "LAST CHANGED",
-    dataIndex: "updated_at",
+    dataIndex: "mtime",
     render: timestampFormatter,
   },
   {
@@ -169,17 +169,5 @@ const ActionMenu = ({ shopid }) => {
     </Menu>
   );
 };
-
-const data = [
-  {
-    shopid: "2667411154",
-    seller_name: "Coolmate",
-    avatar: "https://cf.shopee.vn/file/22a19ce0cc7f2ef9e2aea85eb2e86cc1_tn",
-    products: 62,
-    active_vouchers: 32,
-    last_checked: "4 minutes ago",
-    last_changed: "5 days ago",
-  },
-];
 
 export default CompetitorStores;

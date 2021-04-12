@@ -31,7 +31,7 @@ function getUserTrackingItems(userid) {
 
 function removeItemFromTrackList({ userid, itemIds = [] } = {}) {
   return call({
-    url: `${CORE_API_ENDPOINT}/user-unsubcribe-to-items`,
+    url: `${CORE_API_ENDPOINT}/user-unsubcribe-items`,
     method: "POST",
     body: { user_id: userid, item_ids: itemIds },
   });
@@ -52,6 +52,13 @@ function getItemById(itemid = "") {
   });
 }
 
+function getItemsByCategory({ catid, page = 1 }) {
+  return call({
+    url: `${CORE_API_ENDPOINT}/items/category?catid=${catid}&page=${page}&limit=20`,
+    method: "GET",
+  });
+}
+
 export default Object.freeze({
   update,
   getItemById,
@@ -59,4 +66,5 @@ export default Object.freeze({
   trackNewItemsByFile,
   getUserTrackingItems,
   removeItemFromTrackList,
+  getItemsByCategory,
 });

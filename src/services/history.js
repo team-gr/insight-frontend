@@ -23,8 +23,32 @@ function getItemRatingsHistory(itemid) {
   });
 }
 
+function getShopFollowerCountHistory(shopid) {
+  return call({
+    url: `${CORE_API_ENDPOINT}/history/shop-follower-count?shopid=${shopid}`,
+    method: "GET",
+  });
+}
+
+function getShopProductQuantityHistory(shopid) {
+  return call({
+    url: `${CORE_API_ENDPOINT}/history/shop-product-quantity?shopid=${shopid}`,
+    method: "GET",
+  });
+}
+
+function getShopRatingsHistory(shopid) {
+  return call({
+    url: `${CORE_API_ENDPOINT}/history/shop-ratings?shopid=${shopid}`,
+    method: "GET",
+  });
+}
+
 export default Object.freeze({
   getItemPriceHistory,
   getItemNameHistory,
   getItemRatingsHistory,
+  getShopFollowerCountHistory,
+  getShopProductQuantityHistory,
+  getShopRatingsHistory,
 });

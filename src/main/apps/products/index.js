@@ -155,7 +155,7 @@ function CompetitorProducts() {
           className="gx-table-responsive mt-4 rounded-lg"
           columns={columns}
           dataSource={items}
-          pagination={{ pageSize: 10 }}
+          pagination={{ pageSize: 6 }}
           rowKey="id"
           rowSelection={{
             onChange: (selectedRowKeys, selectedRows) => {
@@ -197,14 +197,14 @@ const columns = [
   },
   {
     title: "LAST CHANGED",
-    dataIndex: "updated_at",
+    dataIndex: "mtime",
     width: "20%",
-    render: (ts) => timestampFormatter(ts * 1000),
+    render: (ts) => timestampFormatter(ts),
   },
   {
     title: "LAST CHECKED",
-    dataIndex: "last_check_at",
-    render: (ts) => timestampFormatter(ts * 1000),
+    dataIndex: "last_checked",
+    render: (ts) => timestampFormatter(ts),
     width: "20%",
   },
   {

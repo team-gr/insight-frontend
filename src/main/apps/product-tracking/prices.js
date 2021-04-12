@@ -35,10 +35,10 @@ function Prices({ itemid = "" }) {
   );
 }
 
-function itemPriceHistoryMapper({ discount, price, timestamp } = {}, index) {
+function itemPriceHistoryMapper({ discount, price, ctime } = {}, index) {
   return {
     key: `item-price-${index}`,
-    ts: timestamp * 1000,
+    ts: Date.parse(ctime),
     price: price / 100000,
     discount,
     priceBeforeDiscount: (price * (100 + discount)) / 10000000,

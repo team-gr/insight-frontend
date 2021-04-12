@@ -56,11 +56,11 @@ function ShopStatistics() {
         </div>
         <div className="flex justify-between items-center text-lg">
           <span>Seller Rating:</span>
-          <span>{shop.seller_rating ? shop.seller_rating.rating_star : 0}</span>
+          <span>{shop.rating_star}</span>
         </div>
         <div className="flex justify-between items-center text-lg">
           <span>Products Quantity:</span>
-          <span>{shop.item_count}</span>
+          <span>{shop.product_quantity}</span>
         </div>
         <div className="flex justify-between items-center text-lg">
           <span>Chat Response Rate:</span>
@@ -68,7 +68,7 @@ function ShopStatistics() {
         </div>
         <div className="flex justify-between items-center text-lg">
           <span>Response Time:</span>
-          <span>{shop.response_time} (s)</span>
+          <span>{shop.response_time}</span>
         </div>
       </div>
     </>

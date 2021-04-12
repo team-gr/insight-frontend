@@ -21,6 +21,12 @@ function HorizontalNav() {
         key="apps"
         title="Apps"
       >
+        <Menu.Item key="explore">
+          <AppLink href="/explore">
+            <i className="icon icon-search-new" />
+            <span>Explore</span>
+          </AppLink>
+        </Menu.Item>
         <Menu.Item key="competitor-products">
           <AppLink href="/competitor-products">
             <i className="icon icon-orders" />

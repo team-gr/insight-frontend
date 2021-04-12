@@ -30,15 +30,15 @@ function TitlesTable({ itemid = "" }) {
   );
 }
 
-function mapper({ name, timestamp }) {
-  return { name, timestamp };
+function mapper({ name, ctime }) {
+  return { name, timestamp: Date.parse(ctime) };
 }
 
 const columns = [
   {
     title: "DATE",
     dataIndex: "timestamp",
-    sorter: (a, b) => a.ts - b.ts,
+    sorter: (a, b) => a.timestamp - b.timestamp,
     render: timestampFormatter,
   },
   {

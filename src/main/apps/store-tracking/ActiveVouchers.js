@@ -10,7 +10,7 @@ function ActiveVouchers({ shopid }) {
 
   useEffect(() => {
     console.log(shop);
-  });
+  }, [shop]);
 
   useEffect(() => {
     StoreServices.getShopByID(shopid).then(setShop).catch(console.log);
@@ -32,14 +32,14 @@ const columns = [
     render: (_, v) => makeVoucherName(v),
   },
   {
-    title: "START DATE",
+    title: "START",
     dataIndex: "start_time",
-    render: (t) => timestampFormatter(t * 1000),
+    render: (t) => timestampFormatter(t),
   },
   {
-    title: "END DATE",
+    title: "END",
     dataIndex: "end_time",
-    render: (t) => timestampFormatter(t * 1000),
+    render: (t) => timestampFormatter(t),
   },
   { title: "VOUCHER CODE", dataIndex: "code" },
 ];
