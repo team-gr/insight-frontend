@@ -38,7 +38,7 @@ function Explore() {
 
     const target = extractCatid(url);
     if (target) {
-      ItemServices.getItemsByCategory({ catid: targwet, page })
+      ItemServices.getItemsByCategory({ catid: target, page })
         .then(({ items, total_count }) => {
           setProducts(items);
           setTotalCount(total_count);

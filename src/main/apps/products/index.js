@@ -9,6 +9,7 @@ import {
   Upload,
   Popconfirm,
   notification,
+  message,
 } from "antd";
 
 import {
@@ -25,6 +26,7 @@ import AppLink from "components/AppLink";
 import { vndFormatter, timestampFormatter } from "helpers";
 
 import { ItemServices } from "services";
+import { done } from "nprogress";
 
 function CompetitorProducts() {
   const userid = useSelector((state) => state.auth.user.id);
@@ -235,6 +237,7 @@ const columns = [
 
 const ActionMenu = ({ itemid, shopid }) => {
   async function onUpdate() {
+    const done = message.loading("updating product...");
     try {
       await ItemServices.update({ itemid, shopid });
       notification["success"]({
@@ -243,6 +246,9 @@ const ActionMenu = ({ itemid, shopid }) => {
       });
     } catch (error) {
       console.log(error);
+      message.error("proxy error, please try again");
+    } finally {
+      done();
     }
   }
 

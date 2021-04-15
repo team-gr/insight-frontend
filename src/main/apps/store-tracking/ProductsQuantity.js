@@ -9,9 +9,17 @@ import {
   YAxis,
 } from "recharts";
 
+import useSWR from "swr";
+
+import { HistoryServices } from "services";
 import { timestampFormatter } from "helpers";
 
-function ProductQuantity() {
+function ProductQuantity({ shopid = "" }) {
+  const { data } = useSWR(
+    [shopid, "product_quantity"],
+    HistoryServices.getShopProductQuantityHistory
+  );
+
   return (
     <div>
       <ResponsiveContainer width="100%" height={380}>
@@ -32,18 +40,5 @@ function ProductQuantity() {
     </div>
   );
 }
-
-const data = [
-  { product_quantity: 67, ctime: "2021-04-12 09:23:09.779853 +0700 +07" },
-  { product_quantity: 69, ctime: "2021-04-11 09:23:09.779996 +0700 +07" },
-  { product_quantity: 72, ctime: "2021-04-10 09:23:09.78 +0700 +07" },
-  { product_quantity: 53, ctime: "2021-04-09 09:23:09.780002 +0700 +07" },
-  { product_quantity: 65, ctime: "2021-04-08 09:23:09.780005 +0700 +07" },
-  { product_quantity: 42, ctime: "2021-04-07 09:23:09.779853 +0700 +07" },
-  { product_quantity: 81, ctime: "2021-04-06 09:23:09.779853 +0700 +07" },
-  { product_quantity: 89, ctime: "2021-04-05 09:23:09.779853 +0700 +07" },
-  { product_quantity: 102, ctime: "2021-04-04 09:23:09.779853 +0700 +07" },
-  { product_quantity: 106, ctime: "2021-04-03 09:23:09.779853 +0700 +07" },
-];
 
 export default ProductQuantity;
