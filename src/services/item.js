@@ -59,6 +59,27 @@ function getItemsByCategory({ catid, page = 1 }) {
   });
 }
 
+function getItemRatingTagCount(itemid = "") {
+  return call({
+    url: `${CORE_API_ENDPOINT}/item/rating/tag-count?item_id=${itemid}`,
+    method: "GET",
+  });
+}
+
+function getItemRatings(itemid = "") {
+  return call({
+    url: `${CORE_API_ENDPOINT}/item/rating?item_id=${itemid}`,
+    method: "GET",
+  });
+}
+
+function getItemSimilars(itemid = "") {
+  return call({
+    url: `${CORE_API_ENDPOINT}/items/similar?itemid=${itemid}`,
+    method: "GET",
+  });
+}
+
 export default Object.freeze({
   update,
   getItemById,
@@ -67,4 +88,7 @@ export default Object.freeze({
   getUserTrackingItems,
   removeItemFromTrackList,
   getItemsByCategory,
+  getItemRatingTagCount,
+  getItemRatings,
+  getItemSimilars,
 });

@@ -71,7 +71,7 @@ function shape({ x, y, width, height, fill, payload }) {
       x={x}
       y={y}
       radius="0"
-      class="recharts-rectangle"
+      classname="recharts-rectangle"
       d={`M ${x},${y} h ${width} v ${height} h -${width} Z`}
     ></path>
   );

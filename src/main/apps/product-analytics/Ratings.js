@@ -1,9 +1,13 @@
+import { useState, useEffect } from "react";
 import { Table } from "antd";
+import { ItemServices } from "services";
 
 const columns = [
   {
     title: "Comment",
     dataIndex: "comment",
+    width: "80%",
+    render: (comment) => <div className="break-all">{comment}</div>,
   },
   {
     title: "Category",
@@ -31,27 +35,60 @@ const columns = [
   },
 ];
 
-const tags = [
-  { comment: "Love your api", category: "General", sentiment: "Positive" },
-  { comment: "Love your api", category: "General", sentiment: "Positive" },
-  { comment: "Love your api", category: "General", sentiment: "Positive" },
-  { comment: "Love your api", category: "General", sentiment: "Positive" },
-  { comment: "Love your api", category: "General", sentiment: "Positive" },
-  { comment: "Love your api", category: "General", sentiment: "Positive" },
-  { comment: "Love your api", category: "General", sentiment: "Positive" },
-];
+function RatingList({ itemid = "" }) {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState([]);
 
-function RatingList() {
+  useEffect(() => {
+    console.log(data);
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+    setLoading(true);
+    ItemServices.getItemRatings(itemid)
+      .then((ratings) => ratings.map(mapper))
+      .then((ratings) => mounted && setData(ratings))
+      .catch(console.log)
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
     <div>
       <Table
+        loading={loading}
         className="mb-3"
         columns={columns}
-        dataSource={tags}
+        dataSource={data}
         pagination={{ pageSize: 5 }}
       />
     </div>
   );
+}
+
+function mapper({ category, comment, sentiment }) {
+  return {
+    category: makeCategory(category),
+    comment,
+    sentiment: sentiment === 1 ? "positive" : "negative",
+  };
+}
+
+function makeCategory(category) {
+  switch (category) {
+    case 0:
+      return "Reliability";
+    case 1:
+      return "Usability";
+    case 2:
+      return "Functionality";
+    case 3:
+      return "Pricing";
+    case 4:
+      return "Pricing";
+    default:
+      return "General";
+  }
 }
 
 export default RatingList;

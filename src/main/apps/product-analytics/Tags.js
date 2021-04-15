@@ -1,5 +1,6 @@
+import { useState, useEffect } from "react";
 import { Table } from "antd";
-
+import { ItemServices } from "services";
 const columns = [
   {
     title: "Tags",
@@ -11,20 +12,28 @@ const columns = [
   },
 ];
 
-const tags = [
-  { tag: "Shop phục vụ rất tốt", count: 64 },
-  { tag: "Chất lượng sản phẩm tốt", count: 18 },
-  { tag: "Rất đáng tiền", count: 27 },
-  { tag: "Thời gian giao hàng nhanh", count: 36 },
-  { tag: "Chất lượng sản phẩm kém", count: 25 },
-];
+function TagList({ itemid = "" }) {
+  const [data, setData] = useState([]);
 
-function TagList() {
+  useEffect(() => {
+    let mounted = true;
+
+    ItemServices.getItemRatingTagCount(itemid)
+      .then((result) => Object.entries(result))
+      .then((entries) => entries.map((e) => ({ tag: e[0], count: e[1] })))
+      .then((entries) => mounted && setData(entries))
+      .catch(console.log);
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <Table
       className="mb-3"
       columns={columns}
-      dataSource={tags}
+      dataSource={data}
       pagination={{ pageSize: 5 }}
     />
   );

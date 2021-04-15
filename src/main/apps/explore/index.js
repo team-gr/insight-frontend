@@ -1,20 +1,35 @@
-import { Row, Col, Button, Select, Pagination, Input } from "antd";
+import {
+  Row,
+  Col,
+  Button,
+  Select,
+  Pagination,
+  Input,
+  notification,
+} from "antd";
 import { useState, useEffect } from "react";
 import Product from "main/apps/explore/Product";
 
 import Widget from "components/Widget";
 
+import { useSelector } from "react-redux";
 import { ItemServices } from "services";
 
 function Explore() {
+  const userid = useSelector((state) => state.auth.user.id);
   const [products, setProducts] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(1);
   const [mode, setMode] = useState("category");
   const [url, setUrl] = useState("");
+  const [submitLoading, setSubmitLoading] = useState(false);
 
   useEffect(onLoadProducts, [page]);
+
+  useEffect(() => {
+    console.log(products);
+  }, [products]);
 
   function onLoadProducts() {
     if (mode === "shop") {
@@ -23,7 +38,7 @@ function Explore() {
 
     const target = extractCatid(url);
     if (target) {
-      ItemServices.getItemsByCategory({ catid: target, page })
+      ItemServices.getItemsByCategory({ catid: targwet, page })
         .then(({ items, total_count }) => {
           setProducts(items);
           setTotalCount(total_count);
@@ -32,7 +47,27 @@ function Explore() {
     }
   }
 
-  function onExplore() {}
+  async function onSubmit() {
+    try {
+      setSubmitLoading(true);
+
+      const promises = selected
+        .map((id) => products.find((p) => p.id === id))
+        .map((item) =>
+          ItemServices.trackNewItemByUrl({ userid, itemUrl: item.origin })
+        );
+      await Promise.all(promises);
+      notification["success"]({
+        message: "Track new products success",
+        description: "operation done!",
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setSubmitLoading(false);
+      setSelected([]);
+    }
+  }
 
   return (
     <div>
@@ -60,7 +95,12 @@ function Explore() {
           </Button>
 
           {selected.length > 0 && (
-            <Button type="primary" className="gx-mb-0">
+            <Button
+              type="primary"
+              className="gx-mb-0"
+              onClick={onSubmit}
+              loading={submitLoading}
+            >
               Submit
             </Button>
           )}

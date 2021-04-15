@@ -9,7 +9,7 @@ function PricesTable({ data }) {
         className="gx-table-responsive"
         columns={columns}
         dataSource={data}
-        rowKey="key"
+        rowKey="timestamp"
       />
     </div>
   );

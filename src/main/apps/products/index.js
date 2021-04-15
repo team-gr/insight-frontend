@@ -34,16 +34,20 @@ function CompetitorProducts() {
   const [files, setFiles] = useState([]);
   const [itemUrl, setItemUrl] = useState("");
   const [trackLoading, setTrackLoading] = useState(false);
+  const [tableLoading, setTableLoading] = useState(false);
 
   useEffect(onLoadItems, []);
 
   async function onLoadItems() {
     try {
+      setTableLoading(true);
       const data = await ItemServices.getUserTrackingItems(userid);
       setItems(data);
       console.log(data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setTableLoading(false);
     }
   }
 
@@ -152,6 +156,7 @@ function CompetitorProducts() {
           )}
         </h2>
         <Table
+          loading={tableLoading}
           className="gx-table-responsive mt-4 rounded-lg"
           columns={columns}
           dataSource={items}
@@ -249,7 +254,7 @@ const ActionMenu = ({ itemid, shopid }) => {
         </AppLink>
       </Menu.Item>
       <Menu.Item icon={<LineChartOutlined />}>
-        <AppLink href="/competitor-products/analytics/1">
+        <AppLink href={`/competitor-products/analytics/${itemid}`}>
           Product Analytics
         </AppLink>
       </Menu.Item>
