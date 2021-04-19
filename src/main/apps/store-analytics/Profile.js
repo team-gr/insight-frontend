@@ -4,18 +4,18 @@ import { CaretLeftOutlined } from "@ant-design/icons";
 
 import AppLink from "components/AppLink";
 
-import { ItemServices } from "services";
+import { StoreServices } from "services";
 
-function Profile({ itemid }) {
-  const [item, setItem] = useState({});
+function Profile({ shopid }) {
+  const [shop, setShop] = useState({});
 
   useEffect(() => {
-    ItemServices.getItemById(itemid).then(setItem).catch(console.log);
+    StoreServices.getShopByID(shopid).then(setShop).catch(console.log);
   }, []);
 
   useEffect(() => {
-    console.log(item);
-  }, [item]);
+    console.log(shop);
+  }, [shop]);
 
   return (
     <>
@@ -26,27 +26,33 @@ function Profile({ itemid }) {
         </div>
       </AppLink>
       <div className="gx-profileon-thumb gx-profileon-thumb-htctrcrop rounded-lg mb-3">
-        <img src={`https://cf.shopee.vn/file/${item.image}`} alt="" />
+        <img src={`https://cf.shopee.vn/file/${shop.avatar}`} alt="" />
       </div>
-      <div className="gx-follower gx-text-center">{item.name}</div>
+      <div className="gx-follower gx-text-center">{shop.name}</div>
       <div className="gx-follower gx-text-center">
         <ul className="gx-follower-list">
           <li>
-            <span className="gx-follower-title">{item.cmt_count}</span>
+            <span className="gx-follower-title">
+              {sumInts(shop.rating_count)}
+            </span>
             <span>ratings</span>
           </li>
           <li>
-            <span className="gx-follower-title">{item.liked_count}</span>
-            <span>Liked</span>
+            <span className="gx-follower-title">{shop.product_quantity}</span>
+            <span>Products</span>
           </li>
           <li>
-            <span className="gx-follower-title">{item.view_count}</span>
-            <span>Views</span>
+            <span className="gx-follower-title">{shop.follower_count}</span>
+            <span>Followers</span>
           </li>
         </ul>
       </div>
     </>
   );
+}
+
+function sumInts(ints) {
+  return ints.reduce((acc, curr) => acc + curr, 0);
 }
 
 export default Profile;

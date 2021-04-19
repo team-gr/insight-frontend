@@ -40,7 +40,7 @@ function RatingList({ itemid = "" }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    console.log(data);
+    console.log(data, "ookllk");
   }, []);
 
   useEffect(() => {
@@ -70,7 +70,7 @@ function mapper({ category, comment, sentiment }) {
   return {
     category: makeCategory(category),
     comment,
-    sentiment: sentiment === 1 ? "positive" : "negative",
+    sentiment: sentiment == 1 ? "positive" : "negative",
   };
 }
 
