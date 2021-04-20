@@ -24,8 +24,24 @@ function getShopByID(shopid) {
   });
 }
 
+function tagCount(shopid) {
+  return call({
+    url: `${CORE_API_ENDPOINT}/shop/rating/tag-count?shopid=${shopid}`,
+    method: "GET",
+  });
+}
+
+function getRatings(shopid) {
+  return call({
+    url: `${CORE_API_ENDPOINT}/shop/rating?shopid=${shopid}`,
+    method: "GET",
+  });
+}
+
 export default Object.freeze({
   getUserTrackingStores,
   getShopByID,
   updateStore,
+  tagCount,
+  getRatings,
 });

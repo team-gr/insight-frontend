@@ -19,8 +19,8 @@ function Profile({ shopid }) {
 
   return (
     <>
-      <AppLink href="/competitor-products">
-        <div className="flex items-center cursor-pointer">
+      <AppLink href="/competitor-stores">
+        <div className="flex items-center cursor-pointer mb-4">
           <CaretLeftOutlined />
           <span className="ml-1">Go Back</span>
         </div>
@@ -28,7 +28,10 @@ function Profile({ shopid }) {
       <div className="gx-profileon-thumb gx-profileon-thumb-htctrcrop rounded-lg mb-3">
         <img src={`https://cf.shopee.vn/file/${shop.avatar}`} alt="" />
       </div>
-      <div className="gx-follower gx-text-center">{shop.name}</div>
+      <a target="_blank" href={`https://shopee.vn/${shop.name}`}>
+        <div className="gx-follower gx-text-center">{shop.username}</div>
+      </a>
+
       <div className="gx-follower gx-text-center">
         <ul className="gx-follower-list">
           <li>
@@ -52,7 +55,12 @@ function Profile({ shopid }) {
 }
 
 function sumInts(ints) {
-  return ints.reduce((acc, curr) => acc + curr, 0);
+  console.log(typeof ints);
+  if (typeof ints === "object") {
+    return ints.reduce((acc, curr) => acc + curr, 0);
+  }
+
+  return 0;
 }
 
 export default Profile;
