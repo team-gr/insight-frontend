@@ -54,6 +54,12 @@ function HorizontalNav() {
               Users
             </AppLink>
           </Menu.Item>
+          <Menu.Item key="data">
+            <AppLink href="/data">
+              <i className="icon icon-data-display" />
+              Data
+            </AppLink>
+          </Menu.Item>
         </Menu.SubMenu>
       )}
     </Menu>

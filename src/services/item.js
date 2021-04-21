@@ -14,7 +14,6 @@ function trackNewItemByUrl({ userid, itemUrl } = {}) {
 }
 
 function trackNewItemsByFile({ userid, file } = {}) {
-  console.log({ userid, file });
   return call({
     url: `${CORE_API_ENDPOINT}/user-subscibe-to-items-by-file`,
     method: "POST",

@@ -1,55 +1,22 @@
-import { Row, Col } from "antd";
-import IconWithTextCard from "components/IconWithTextCard";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import Loading from "components/CircularProgress";
 
 function Home() {
-  return (
-    <div>
-      <Row>
-        <Col xl={8} lg={8} md={8} sm={12} xs={24}>
-          <IconWithTextCard
-            cardColor="cyan"
-            icon="diamond"
-            title="1982"
-            subTitle="Shops Availiable"
-          />
-        </Col>
-        <Col xl={8} lg={8} md={8} sm={12} xs={24}>
-          <IconWithTextCard
-            cardColor="orange"
-            icon="tasks"
-            title="18632"
-            subTitle="Products Availiable"
-          />
-        </Col>
-        <Col xl={8} lg={8} md={8} sm={12} xs={24}>
-          <IconWithTextCard
-            cardColor="teal"
-            icon="user"
-            title="68"
-            subTitle="Active Users"
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col xl={8} lg={8} md={8} sm={12} xs={24}>
-          <IconWithTextCard
-            cardColor="cyan"
-            icon="diamond"
-            title="10"
-            subTitle="Shops Tracking"
-          />
-        </Col>
-        <Col xl={8} lg={8} md={8} sm={12} xs={24}>
-          <IconWithTextCard
-            cardColor="orange"
-            icon="tasks"
-            title="32"
-            subTitle="Products Tracking"
-          />
-        </Col>
-      </Row>
-    </div>
-  );
+  const router = useRouter();
+  const user = useSelector((state) => state.auth.user);
+
+  useEffect(() => {
+    if (user.role === "admin") {
+      router.push("/data");
+      return;
+    }
+
+    router.push("/competitor-products");
+  }, []);
+
+  return <Loading />;
 }
 
 export default Home;

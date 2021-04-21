@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Card, Table, Button, notification } from "antd";
+import { Card, Table, Button, notification, Avatar } from "antd";
 
 import AppLink from "components/AppLink";
 
@@ -21,7 +21,7 @@ const columns = [
     title: "Avatar",
     dataIndex: "avatar",
     render: (avatar) => (
-      <img width={50} className="rounded-lg" src={AVATAR_ROOT_URL + avatar} />
+      <Avatar className="rounded-lg" src={AVATAR_ROOT_URL + avatar} size={50} />
     ),
   },
 ];
