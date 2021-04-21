@@ -26,7 +26,6 @@ import AppLink from "components/AppLink";
 import { vndFormatter, timestampFormatter } from "helpers";
 
 import { ItemServices } from "services";
-import { done } from "nprogress";
 
 function CompetitorProducts() {
   const userid = useSelector((state) => state.auth.user.id);

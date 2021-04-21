@@ -79,7 +79,15 @@ function getItemSimilars(itemid = "") {
   });
 }
 
+function getAll({ page, limit } = {}) {
+  return call({
+    url: `${CORE_API_ENDPOINT}/item/all?limit=${limit}&page=${page}`,
+    method: "GET",
+  });
+}
+
 export default Object.freeze({
+  getAll,
   update,
   getItemById,
   trackNewItemByUrl,

@@ -1,19 +1,47 @@
 import { useState, useEffect } from "react";
-import { Card } from "antd";
+import { Card, Button, notification, message } from "antd";
 
-import { CountServices } from "services";
+import { SyncOutlined } from "@ant-design/icons";
+
+import { CountServices, ProxyServices } from "services";
 
 function NumberOfProxy() {
   const [proxyCount, setProxyCount] = useState(0);
 
   useEffect(() => {
-    CountServices.countAll()
-      .then((counts) => {
-        console.log(counts);
-        setProxyCount(counts.proxies);
-      })
-      .catch(console.log);
+    let mounted = true;
+
+    if (mounted) {
+      onLoadData();
+    }
+    return () => {
+      mounted = false;
+    };
   }, []);
+
+  async function onLoadData() {
+    try {
+      const counts = await CountServices.countAll();
+      console.log(counts);
+      setProxyCount(counts.proxies);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function onUpdate() {
+    const done = message.loading("updating proxy ...", 0);
+    try {
+      await ProxyServices.update();
+      await onLoadData();
+      message.success("update proxy success!");
+    } catch (error) {
+      console.log(error);
+      message.error("proxy error, please try again");
+    } finally {
+      done();
+    }
+  }
 
   return (
     <Card className="gx-card-widget gx-card-full gx-p-3">
@@ -30,6 +58,7 @@ function NumberOfProxy() {
           </h1>
           <p className="gx-text-grey gx-mb-0">#Proxy</p>
         </div>
+        <Button icon={<SyncOutlined />} onClick={onUpdate} />
       </div>
     </Card>
   );

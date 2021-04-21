@@ -38,10 +38,18 @@ function getRatings(shopid) {
   });
 }
 
+function getAll({ page, limit } = {}) {
+  return call({
+    url: `${CORE_API_ENDPOINT}/shop/all?limit=${limit}&page=${page}`,
+    method: "GET",
+  });
+}
+
 export default Object.freeze({
   getUserTrackingStores,
   getShopByID,
   updateStore,
   tagCount,
   getRatings,
+  getAll,
 });
