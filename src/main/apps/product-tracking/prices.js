@@ -12,7 +12,7 @@ import {
 
 import { Select } from "antd";
 
-import { vndFormatter, timestampFormatter } from "helpers";
+import { vndFormatter, timestampFormatter, randomColor } from "helpers";
 
 import { HistoryServices, ItemServices } from "services";
 
@@ -80,22 +80,21 @@ function Prices({ itemid = "" }) {
         ))}
       </Select>
 
-      <ResponsiveContainer width="100%" height={380}>
-        <LineChart data={data} margin={{ top: 25 }}>
-          <XAxis
-            dataKey="ts"
-            tickFormatter={timestampFormatter}
-            allowDuplicatedCategory={false}
-          />
-          <YAxis />
-          <CartesianGrid strokeDasharray="3 3" />
-          <Tooltip content={<CustomTooltip />} />
-          <Legend />
-          {data.map((s) => (
+      {data.map((s) => (
+        <ResponsiveContainer
+          width="100%"
+          height={data.length === 1 ? 380 : 200}
+        >
+          <LineChart data={data} margin={{ top: 25 }}>
+            <XAxis dataKey="ts" tickFormatter={timestampFormatter} />
+            <YAxis />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Tooltip content={<CustomTooltip />} />
+            <Legend />
             <Line dataKey="price" data={s.history} name={s.name} key={s.name} />
-          ))}
-        </LineChart>
-      </ResponsiveContainer>
+          </LineChart>
+        </ResponsiveContainer>
+      ))}
     </div>
   );
 }

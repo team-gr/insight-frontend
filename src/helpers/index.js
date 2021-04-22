@@ -29,3 +29,7 @@ export function numberFormatter(number) {
 
   return 0;
 }
+
+export function randomColor() {
+  return "#" + Math.floor(Math.random() * 16777215).toString(16);
+}
