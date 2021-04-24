@@ -2,33 +2,27 @@ import { useState, useEffect } from "react";
 import { Card } from "antd";
 import { PieChart, Pie, Tooltip, Cell, Legend } from "recharts";
 
-import { ItemServices } from "services";
+import { StoreServices } from "services";
 
 const RADIAN = Math.PI / 180;
 
-function Sentiment({ itemid = "" }) {
+function Sentiment({ shopid = "" }) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
 
   useEffect(() => {
     setLoading(true);
-    ItemServices.getItemRatings(itemid)
-      .then((ratings) =>
-        ratings.reduce(
-          (acc, curr) => {
-            if (curr.sentiment === 1) {
-              return { ...acc, positives: acc.positives + 1 };
-            }
-            return { ...acc, negatives: acc.negatives + 1 };
+    StoreServices.getShopByID(shopid)
+      .then((resp) => {
+        const ratings = resp.rating_count;
+        setData([
+          { name: "positives", value: ratings[4] },
+          {
+            name: "negatives",
+            value: ratings[0] + ratings[1] + ratings[2] + ratings[3],
           },
-          { positives: 0, negatives: 0 }
-        )
-      )
-      .then(({ positives, negatives }) => [
-        { name: "positive", value: positives },
-        { name: "negative", value: negatives },
-      ])
-      .then(setData)
+        ]);
+      })
       .catch(console.log)
       .finally(() => setLoading(false));
   }, []);

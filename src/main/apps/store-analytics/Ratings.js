@@ -40,7 +40,7 @@ function RatingList({ shopid = "" }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    console.log(data, "ookllk");
+    console.log(data);
   }, []);
 
   useEffect(() => {

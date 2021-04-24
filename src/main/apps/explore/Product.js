@@ -32,7 +32,7 @@ function Product({
       <div className="gx-product-image">
         <div className="gx-grid-thumb-equal">
           <span className="gx-link gx-grid-thumb-cover">
-            <img alt="Remy Sharp" src={`https://cf.shopee.vn/file/${image}`} />
+            <img alt="Remy Sharp" src={image} />
           </span>
         </div>
       </div>

@@ -24,6 +24,7 @@ function Explore() {
   const [mode, setMode] = useState("category");
   const [url, setUrl] = useState("");
   const [submitLoading, setSubmitLoading] = useState(false);
+  const [itemLoading, setItemLoading] = useState(false);
 
   useEffect(onLoadProducts, [page]);
 
@@ -32,7 +33,15 @@ function Explore() {
   }, [products]);
 
   function onLoadProducts() {
+    setItemLoading(true);
     if (mode === "shop") {
+      ItemServices.getItemsByShop({ shopUrl: url, page })
+        .then((resp) => {
+          setProducts(resp.products);
+          setTotalCount(resp.shop.item_count);
+        })
+        .catch(console.log)
+        .finally(() => setItemLoading(false));
       return;
     }
 
@@ -43,7 +52,8 @@ function Explore() {
           setProducts(items);
           setTotalCount(total_count);
         })
-        .catch(console.log);
+        .catch(console.log)
+        .finally(() => setItemLoading(false));
     }
   }
 
@@ -54,7 +64,7 @@ function Explore() {
       const promises = selected
         .map((id) => products.find((p) => p.id === id))
         .map((item) =>
-          ItemServices.trackNewItemByUrl({ userid, itemUrl: item.origin })
+          ItemServices.trackNewItemByUrl({ userid, itemUrl: item.product_url })
         );
       await Promise.all(promises);
       notification["success"]({
@@ -106,7 +116,7 @@ function Explore() {
           )}
         </div>
       </Widget>
-      <Row>
+      <Row loading={itemLoading}>
         {products.map((product, index) => (
           <Col key={index} xl={6} md={8} sm={12} xs={24}>
             <Product
@@ -135,14 +145,6 @@ function Explore() {
 
 function extractCatid(url) {
   const parts = url.split(".");
-  if (parts.length < 1) {
-    return "";
-  }
-  return parts[parts.length - 1];
-}
-
-function extractShopName(url) {
-  const parts = url.split("/");
   if (parts.length < 1) {
     return "";
   }

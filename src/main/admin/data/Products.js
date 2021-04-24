@@ -51,6 +51,7 @@ function Products() {
           current: page,
           total,
         }}
+        rowKey="id"
       />
     </div>
   );

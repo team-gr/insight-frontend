@@ -12,7 +12,7 @@ import {
 
 import { Select } from "antd";
 
-import { vndFormatter, timestampFormatter, randomColor } from "helpers";
+import { vndFormatter, timestampFormatter } from "helpers";
 
 import { HistoryServices, ItemServices } from "services";
 

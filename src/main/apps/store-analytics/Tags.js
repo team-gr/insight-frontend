@@ -10,6 +10,8 @@ const columns = [
   {
     title: "#",
     dataIndex: "count",
+    sorter: (a, b) => a.count - b.count,
+    sortDirections: ["descend"],
   },
 ];
 

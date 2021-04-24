@@ -58,6 +58,13 @@ function getItemsByCategory({ catid, page = 1 }) {
   });
 }
 
+function getItemsByShop({ shopUrl, page } = {}) {
+  return call({
+    url: `http://explorer.dr.smartecommerce.tech/shop-products?shop_url=${shopUrl}&page=1&platform=s`,
+    method: "GET",
+  });
+}
+
 function getItemRatingTagCount(itemid = "") {
   return call({
     url: `${CORE_API_ENDPOINT}/item/rating/tag-count?item_id=${itemid}`,
@@ -98,4 +105,5 @@ export default Object.freeze({
   getItemRatingTagCount,
   getItemRatings,
   getItemSimilars,
+  getItemsByShop,
 });
