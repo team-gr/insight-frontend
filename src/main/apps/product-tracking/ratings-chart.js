@@ -9,7 +9,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-
+import { Card } from "antd";
 import { HistoryServices } from "services";
 import { timestampFormatter } from "helpers";
 
@@ -24,17 +24,19 @@ function RatingsChart({ itemid }) {
   }, []);
 
   return (
-    <ResponsiveContainer width="100%" height={380}>
-      <LineChart data={histories} margin={{ top: 25 }}>
-        <XAxis dataKey="timestamp" tickFormatter={timestampFormatter} />
-        <YAxis />
-        <CartesianGrid strokeDasharray="3 3" />
-        <Tooltip labelFormatter={timestampFormatter} />
-        <Legend />
-        <Line dataKey="positives" stroke="#34A853" activeDot={{ r: 8 }} />
-        <Line dataKey="negatives" stroke="#EA4335" activeDot={{ r: 8 }} />
-      </LineChart>
-    </ResponsiveContainer>
+    <Card className="gx-card">
+      <ResponsiveContainer width="100%" height={380}>
+        <LineChart data={histories} margin={{ top: 25 }}>
+          <XAxis dataKey="timestamp" tickFormatter={timestampFormatter} />
+          <YAxis />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Tooltip labelFormatter={timestampFormatter} />
+          <Legend />
+          <Line dataKey="positives" stroke="#34A853" activeDot={{ r: 8 }} />
+          <Line dataKey="negatives" stroke="#EA4335" activeDot={{ r: 8 }} />
+        </LineChart>
+      </ResponsiveContainer>
+    </Card>
   );
 }
 

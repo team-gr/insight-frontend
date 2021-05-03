@@ -20,13 +20,12 @@ function TitlesTable({ itemid = "" }) {
   }, []);
 
   return (
-    <div className="mt-4">
-      <Table
-        className="gx-table-responsive"
-        columns={columns}
-        dataSource={histories}
-      />
-    </div>
+    <Table
+      className="gx-table-responsive"
+      columns={columns}
+      dataSource={histories}
+      bordered={true}
+    />
   );
 }
 

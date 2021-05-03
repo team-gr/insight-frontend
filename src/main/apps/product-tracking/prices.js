@@ -9,8 +9,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-
-import { Select } from "antd";
+import { Select, Card } from "antd";
 
 import { vndFormatter, timestampFormatter } from "helpers";
 
@@ -59,7 +58,7 @@ function Prices({ itemid = "" }) {
   }, []);
 
   return (
-    <div>
+    <Card className="gx-card">
       <Select
         loading={similarLoading}
         style={{ width: "100%" }}
@@ -95,7 +94,7 @@ function Prices({ itemid = "" }) {
           </LineChart>
         </ResponsiveContainer>
       ))}
-    </div>
+    </Card>
   );
 }
 

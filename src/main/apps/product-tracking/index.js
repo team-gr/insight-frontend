@@ -1,10 +1,17 @@
 import { useRouter } from "next/router";
-import { Row, Col, Card, Tabs } from "antd";
+import dynamic from "next/dynamic";
+import { Row, Col, Tabs } from "antd";
 
-import TitlesTable from "main/apps/product-tracking/titles-table";
-import RatingsChart from "main/apps/product-tracking/ratings-chart";
-import Prices from "main/apps/product-tracking/prices";
-import ProductInfo from "main/apps/product-tracking/ProductInfo";
+const Prices = dynamic(() => import("main/apps/product-tracking/prices"));
+const TitlesTable = dynamic(() =>
+  import("main/apps/product-tracking/titles-table")
+);
+const RatingsChart = dynamic(() =>
+  import("main/apps/product-tracking/ratings-chart")
+);
+const ProductInfo = dynamic(() =>
+  import("main/apps/product-tracking/product-info")
+);
 
 function ShopeeProduct() {
   const { query } = useRouter();
@@ -16,19 +23,17 @@ function ShopeeProduct() {
           <ProductInfo itemid={query.id} />
         </Col>
         <Col lg={18} sm={24}>
-          <Card className="gx-card">
-            <Tabs defaultActiveKey="1">
-              <Tabs.TabPane tab="PRICES" key="1">
-                <Prices itemid={query.id} />
-              </Tabs.TabPane>
-              <Tabs.TabPane tab="TITLES" key="2">
-                <TitlesTable itemid={query.id} />
-              </Tabs.TabPane>
-              <Tabs.TabPane tab="RATINGS" key="3">
-                <RatingsChart itemid={query.id} />
-              </Tabs.TabPane>
-            </Tabs>
-          </Card>
+          <Tabs defaultActiveKey="1">
+            <Tabs.TabPane tab="PRICES" key="1">
+              <Prices itemid={query.id} />
+            </Tabs.TabPane>
+            <Tabs.TabPane tab="TITLES" key="2">
+              <TitlesTable itemid={query.id} />
+            </Tabs.TabPane>
+            <Tabs.TabPane tab="RATINGS" key="3">
+              <RatingsChart itemid={query.id} />
+            </Tabs.TabPane>
+          </Tabs>
         </Col>
       </Row>
     </div>
