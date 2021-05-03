@@ -12,6 +12,9 @@ const RatingsChart = dynamic(() =>
 const ProductInfo = dynamic(() =>
   import("main/apps/product-tracking/product-info")
 );
+const ProductRelated = dynamic(() =>
+  import("main/apps/product-tracking/product-related")
+);
 
 function ShopeeProduct() {
   const { query } = useRouter();
@@ -32,6 +35,9 @@ function ShopeeProduct() {
             </Tabs.TabPane>
             <Tabs.TabPane tab="RATINGS" key="3">
               <RatingsChart itemid={query.id} />
+            </Tabs.TabPane>
+            <Tabs.TabPane tab="Related" key="4">
+              <ProductRelated itemid={query.id} />
             </Tabs.TabPane>
           </Tabs>
         </Col>
