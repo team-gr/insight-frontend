@@ -86,6 +86,13 @@ function getItemSimilars(itemid = "") {
   });
 }
 
+function getRelatedItems(itemid = "") {
+  return call({
+    url: `${CORE_API_ENDPOINT}/items/related?itemid=${itemid}`,
+    method: "GET",
+  });
+}
+
 function getAll({ page, limit } = {}) {
   return call({
     url: `${CORE_API_ENDPOINT}/item/all?limit=${limit}&page=${page}`,
@@ -97,6 +104,7 @@ export default Object.freeze({
   getAll,
   update,
   getItemById,
+  getRelatedItems,
   trackNewItemByUrl,
   trackNewItemsByFile,
   getUserTrackingItems,
