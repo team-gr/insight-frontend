@@ -7,14 +7,11 @@ import { useItemTitleHistory } from "hooks";
 function TitlesTable({ itemid = "" }) {
   const [data, loading, refresh] = useItemTitleHistory(itemid);
 
-  if (loading) {
-    return null;
-  }
-
   return (
     <div>
       <ProductLastUpdate itemid={itemid} onUpdateSuccess={refresh} />
       <Table
+        loading={loading}
         className="gx-table-responsive"
         columns={columns}
         dataSource={data.map(mapper)}

@@ -6,3 +6,4 @@ export { default as useItemRelated } from "hooks/use-item-related";
 export { default as useItemTitleHistory } from "hooks/use-item-title-history";
 export { default as useItemRatingsHistory } from "hooks/use-item-ratings-history";
 export { default as useItemRatings } from "hooks/use-item-ratings";
+export { default as useInterval } from "hooks/use-interval";

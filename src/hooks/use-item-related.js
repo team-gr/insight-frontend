@@ -3,6 +3,8 @@ import { ItemServices } from "services";
 
 function useItemRelated(itemid = "") {
   const [data, setData] = useState([]);
+  const [refreshKey, setRefreshKey] = useState(1);
+
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -16,9 +18,13 @@ function useItemRelated(itemid = "") {
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [itemid, refreshKey]);
 
-  return [data, loading];
+  function refresh() {
+    setRefreshKey(refreshKey + 1);
+  }
+
+  return [data, loading, refresh];
 }
 
 export default useItemRelated;

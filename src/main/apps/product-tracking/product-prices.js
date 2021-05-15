@@ -21,15 +21,11 @@ function Prices() {
   const { query } = useRouter();
   const [data, loading, refresh] = useItemPriceHistory(query.id);
 
-  if (loading) {
-    return null;
-  }
-
   return (
     <div>
       <ProductLastUpdate onUpdateSuccess={refresh} itemid={query.id} />
 
-      <Card className="gx-card">
+      <Card className="gx-card" loading={loading}>
         <ResponsiveContainer width="100%" height={380}>
           <LineChart margin={{ top: 25 }}>
             <XAxis dataKey="ts" tickFormatter={timestampFormatter} />
