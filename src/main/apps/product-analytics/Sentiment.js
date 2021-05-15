@@ -1,43 +1,23 @@
-import { useState, useEffect } from "react";
 import { Card } from "antd";
 import { PieChart, Pie, Tooltip, Cell, Legend } from "recharts";
 
-import { ItemServices } from "services";
+import { useItemRatings } from "hooks";
 
-const RADIAN = Math.PI / 180;
+import * as R from "ramda";
 
-function Sentiment({ itemid = "" }) {
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
+function Sentiment({ item = {} }) {
+  const [data, loading] = useItemRatings(item.id);
 
-  useEffect(() => {
-    setLoading(true);
-    ItemServices.getItemRatings(itemid)
-      .then((ratings) =>
-        ratings.reduce(
-          (acc, curr) => {
-            if (curr.sentiment === 1) {
-              return { ...acc, positives: acc.positives + 1 };
-            }
-            return { ...acc, negatives: acc.negatives + 1 };
-          },
-          { positives: 0, negatives: 0 }
-        )
-      )
-      .then(({ positives, negatives }) => [
-        { name: "positive", value: positives },
-        { name: "negative", value: negatives },
-      ])
-      .then(setData)
-      .catch(console.log)
-      .finally(() => setLoading(false));
-  }, []);
+  if (loading) {
+    return null;
+  }
+
   return (
     <Card className="p-auto" loading={loading}>
       <h2 className="text-center w-full">Sentiment</h2>
       <PieChart width={230} height={230}>
         <Pie
-          data={data}
+          data={makeChartData(data)}
           cx="50%"
           cy="50%"
           labelLine={false}
@@ -56,6 +36,17 @@ function Sentiment({ itemid = "" }) {
   );
 }
 
+function makeChartData(data = []) {
+  return R.pipe(
+    R.countBy((r) => (r.sentiment === 1 ? "positives" : "negatives")),
+    ({ positives, negatives }) => [
+      { name: "positives", value: positives },
+      { name: "nagatives", value: negatives },
+    ]
+  )(data);
+}
+
+const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
   cx,
   cy,

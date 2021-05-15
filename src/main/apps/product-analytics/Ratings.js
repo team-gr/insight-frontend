@@ -1,94 +1,62 @@
-import { useState, useEffect } from "react";
-import { Table } from "antd";
-import { ItemServices } from "services";
+import { Table, Tag } from "antd";
+import * as R from "ramda";
 
-const columns = [
-  {
-    title: "Comment",
-    dataIndex: "comment",
-    width: "80%",
-    render: (comment) => <div className="break-all">{comment}</div>,
-  },
-  {
-    title: "Category",
-    dataIndex: "category",
-    filters: [
-      { text: "Reliability", value: "Reliability" },
-      { text: "Usability", value: "Usability" },
-      { text: "Functionality", value: "Functionality" },
-      { text: "Pricing", value: "Pricing" },
-      { text: "Support", value: "Support" },
-      { text: "General", value: "General" },
-    ],
-    onFilter: (value, record) => record.category.indexOf(value) === 0,
-  },
-  {
-    title: "Sentiment",
-    dataIndex: "sentiment",
-    filters: [
-      { text: "Positive", value: "positive" },
-      { text: "Neutral", value: "neutral" },
-      { text: "Negative", value: "Negative" },
-    ],
-    onFilter: (value, record) => record.sentiment.indexOf(value) === 0,
-    filterMultiple: false,
-  },
-];
+function RatingList({ ratings = [] }) {
+  console.log(ratings);
 
-function RatingList({ itemid = "" }) {
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
+  const tagFilters = R.pipe(
+    R.map((r) => r.tags),
+    R.flatten(),
+    R.countBy(R.identity),
+    R.keys(),
+    R.map((text) => ({ text, value: text }))
+  )(ratings);
 
-  useEffect(() => {
-    console.log(data, "ookllk");
-  }, []);
-
-  useEffect(() => {
-    let mounted = true;
-    setLoading(true);
-    ItemServices.getItemRatings(itemid)
-      .then((ratings) => ratings.map(mapper))
-      .then((ratings) => mounted && setData(ratings))
-      .catch(console.log)
-      .finally(() => setLoading(false));
-  }, []);
+  const columns = [
+    {
+      title: "Comment",
+      dataIndex: "comment",
+      width: "80%",
+      render: (comment) => <div className="break-all">{comment}</div>,
+    },
+    {
+      title: "Star",
+      dataIndex: "star",
+      filters: [
+        { text: 1, value: 1 },
+        { text: 2, value: 2 },
+        { text: 3, value: 3 },
+        { text: 4, value: 4 },
+        { text: 5, value: 5 },
+      ],
+      onFilter: (value, record) => record.star == value,
+    },
+    {
+      title: "Tags",
+      render: (_, record) => (
+        <>
+          {record.tags.map((t) => (
+            <Tag key={t}>{t}</Tag>
+          ))}
+        </>
+      ),
+      filters: tagFilters,
+      onFilter: (value, record) => record.tags.includes(value),
+    },
+  ];
 
   return (
     <div>
       <Table
-        loading={loading}
         className="mb-3"
         columns={columns}
-        dataSource={data}
+        dataSource={ratings.filter((r) => r.comment !== "")}
         pagination={{ pageSize: 5 }}
+        bordered={true}
+        rowKey="id"
       />
     </div>
   );
-}
-
-function mapper({ category, comment, sentiment }) {
-  return {
-    category: makeCategory(category),
-    comment,
-    sentiment: sentiment == 1 ? "positive" : "negative",
-  };
-}
-
-function makeCategory(category) {
-  switch (category) {
-    case 0:
-      return "Reliability";
-    case 1:
-      return "Usability";
-    case 2:
-      return "Functionality";
-    case 3:
-      return "Pricing";
-    case 4:
-      return "Pricing";
-    default:
-      return "General";
-  }
 }
 
 export default RatingList;

@@ -1,34 +1,34 @@
 import { useRouter } from "next/router";
-import { Row, Col } from "antd";
+import { Row, Col, Tabs } from "antd";
 
 import Profile from "main/apps/product-analytics/Profile";
-import Tags from "main/apps/product-analytics/Tags";
 import Ratings from "main/apps/product-analytics/Ratings";
 import Sentiment from "main/apps/product-analytics/Sentiment";
-import Qualifiers from "main/apps/product-analytics/Qualifiers";
-import Categories from "main/apps/product-analytics/Categories";
+import Tags from "main/apps/product-analytics/Tags";
+
+import { useItem, useItemRatings } from "hooks";
 
 function ProductAnalytics() {
   const { query } = useRouter();
+  const [item, itemLoading] = useItem(query.id);
+  const [ratings, ratingloading] = useItemRatings(query.id);
+  const loading = itemLoading || ratingloading;
+
   return (
-    <Row>
-      <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-        <Profile itemid={query.id} />
+    <Row loading={loading}>
+      <Col lg={6} sm={24}>
+        <Profile item={item} />
+        <Sentiment item={item} />
       </Col>
-      <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-        <Sentiment itemid={query.id} />
-      </Col>
-      <Col xl={12} lg={24} md={24}>
-        <Ratings itemid={query.id} />
-      </Col>
-      <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-        <Tags itemid={query.id} />
-      </Col>
-      <Col xl={6} lg={12} md={12} sm={12} xs={24}>
-        <Qualifiers itemid={query.id} />
-      </Col>
-      <Col xl={12} lg={24} md={24} sm={24} xs={24}>
-        <Categories itemid={query.id} />
+      <Col lg={18} sm={24}>
+        <Tabs defaultActiveKey="1">
+          <Tabs.TabPane tab="Ratings" key="1">
+            <Ratings ratings={ratings} />
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="Tags" key="2">
+            <Tags ratings={ratings} />
+          </Tabs.TabPane>
+        </Tabs>
       </Col>
     </Row>
   );

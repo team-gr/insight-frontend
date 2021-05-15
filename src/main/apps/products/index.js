@@ -254,12 +254,16 @@ const ActionMenu = ({ itemid, shopid }) => {
   return (
     <Menu>
       <Menu.Item icon={<HistoryOutlined />}>
-        <AppLink href={`/competitor-products/tracking/${itemid}`}>
+        <AppLink
+          href={`/competitor-products/tracking/${itemid}?shopid=${shopid}`}
+        >
           Product Tracking
         </AppLink>
       </Menu.Item>
       <Menu.Item icon={<LineChartOutlined />}>
-        <AppLink href={`/competitor-products/analytics/${itemid}`}>
+        <AppLink
+          href={`/competitor-products/analytics/${itemid}?shopid=${shopid}`}
+        >
           Product Analytics
         </AppLink>
       </Menu.Item>

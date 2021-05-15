@@ -2,12 +2,14 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { Row, Col, Tabs } from "antd";
 
-const Prices = dynamic(() => import("main/apps/product-tracking/prices"));
+const Prices = dynamic(() =>
+  import("main/apps/product-tracking/product-prices")
+);
 const TitlesTable = dynamic(() =>
-  import("main/apps/product-tracking/titles-table")
+  import("main/apps/product-tracking/product-titles")
 );
 const RatingsChart = dynamic(() =>
-  import("main/apps/product-tracking/ratings-chart")
+  import("main/apps/product-tracking/product-ratings")
 );
 const ProductInfo = dynamic(() =>
   import("main/apps/product-tracking/product-info")
@@ -16,19 +18,22 @@ const ProductRelated = dynamic(() =>
   import("main/apps/product-tracking/product-related")
 );
 
+import { useItem } from "hooks";
+
 function ShopeeProduct() {
   const { query } = useRouter();
+  const [item, loading] = useItem(query.id);
 
   return (
     <div className="gx-main-content">
-      <Row>
+      <Row loading={loading}>
         <Col lg={6} sm={24}>
-          <ProductInfo itemid={query.id} />
+          <ProductInfo />
         </Col>
         <Col lg={18} sm={24}>
           <Tabs defaultActiveKey="1">
             <Tabs.TabPane tab="PRICES" key="1">
-              <Prices itemid={query.id} />
+              <Prices item={item} />
             </Tabs.TabPane>
             <Tabs.TabPane tab="TITLES" key="2">
               <TitlesTable itemid={query.id} />

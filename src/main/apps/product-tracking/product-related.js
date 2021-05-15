@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { Radio, Table, Tag } from "antd";
 
 import { ItemServices } from "services";
-
 import { vndFormatter } from "helpers";
+import ProductLastUpdate from "main/apps/product-tracking/ProductLastUpdate";
+import { useItemRelated } from "hooks";
 
 const columns = [
   {
@@ -39,24 +40,20 @@ const columns = [
 ];
 
 function ProductRelated({ itemid }) {
-  const [data, setData] = useState([]);
+  const [data, loading, refresh] = useItemRelated(itemid);
   const [mode, setMode] = useState("sameshop");
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    ItemServices.getRelatedItems(itemid)
-      .then(setData)
-      .catch(console.log)
-      .finally(() => setLoading(false));
-  }, []);
 
   return (
     <div>
-      <Radio.Group value={mode} onChange={(e) => setMode(e.target.value)}>
-        <Radio.Button value="sameshop">Same Shop</Radio.Button>
-        <Radio.Button value="similars">Similars</Radio.Button>
-      </Radio.Group>
+      <div className="flex items-center">
+        <ProductLastUpdate itemid={itemid} onUpdateSuccess={refresh} />
+        <div className="flex-grow" />
+        <Radio.Group value={mode} onChange={(e) => setMode(e.target.value)}>
+          <Radio.Button value="sameshop">Same Shop</Radio.Button>
+          <Radio.Button value="similars">Similars</Radio.Button>
+        </Radio.Group>
+      </div>
+
       <Table
         className="py-2"
         loading={loading}

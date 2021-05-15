@@ -6,17 +6,7 @@ import AppLink from "components/AppLink";
 
 import { ItemServices } from "services";
 
-function Profile({ itemid }) {
-  const [item, setItem] = useState({});
-
-  useEffect(() => {
-    ItemServices.getItemById(itemid).then(setItem).catch(console.log);
-  }, []);
-
-  useEffect(() => {
-    console.log(item);
-  }, [item]);
-
+function Profile({ item = {} }) {
   return (
     <>
       <AppLink href="/competitor-products">
