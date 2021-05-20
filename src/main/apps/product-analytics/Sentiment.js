@@ -1,23 +1,15 @@
 import { Card } from "antd";
 import { PieChart, Pie, Tooltip, Cell, Legend } from "recharts";
 
-import { useItemRatings } from "hooks";
-
 import * as R from "ramda";
 
-function Sentiment({ item = {} }) {
-  const [data, loading] = useItemRatings(item.id);
-
-  if (loading) {
-    return null;
-  }
-
+function Sentiment({ ratings = [] }) {
   return (
-    <Card className="p-auto" loading={loading}>
+    <Card className="p-auto">
       <h2 className="text-center w-full">Sentiment</h2>
       <PieChart width={230} height={230}>
         <Pie
-          data={makeChartData(data)}
+          data={makeChartData(ratings)}
           cx="50%"
           cy="50%"
           labelLine={false}
@@ -38,7 +30,7 @@ function Sentiment({ item = {} }) {
 
 function makeChartData(data = []) {
   return R.pipe(
-    R.countBy((r) => (r.sentiment === 1 ? "positives" : "negatives")),
+    R.countBy((r) => (r.sentiment == 1 ? "positives" : "negatives")),
     ({ positives, negatives }) => [
       { name: "positives", value: positives },
       { name: "nagatives", value: negatives },

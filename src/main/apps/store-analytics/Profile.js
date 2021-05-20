@@ -1,22 +1,8 @@
-import { useState, useEffect } from "react";
-
 import { CaretLeftOutlined } from "@ant-design/icons";
 
 import AppLink from "components/AppLink";
 
-import { StoreServices } from "services";
-
-function Profile({ shopid }) {
-  const [shop, setShop] = useState({});
-
-  useEffect(() => {
-    StoreServices.getShopByID(shopid).then(setShop).catch(console.log);
-  }, []);
-
-  useEffect(() => {
-    console.log(shop);
-  }, [shop]);
-
+function Profile({ shop = {} }) {
   return (
     <>
       <AppLink href="/competitor-stores">

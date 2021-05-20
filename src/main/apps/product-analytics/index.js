@@ -18,7 +18,7 @@ function ProductAnalytics() {
     <Row loading={loading}>
       <Col lg={6} sm={24}>
         <Profile item={item} />
-        <Sentiment item={item} />
+        <Sentiment ratings={ratings} />
       </Col>
       <Col lg={18} sm={24}>
         <Tabs defaultActiveKey="1">

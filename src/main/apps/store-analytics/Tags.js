@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
-import { Table } from "antd";
-import { StoreServices } from "services";
+import { Table, Tag } from "antd";
+import * as R from "ramda";
 
 const columns = [
   {
@@ -8,38 +7,67 @@ const columns = [
     dataIndex: "tag",
   },
   {
-    title: "#",
+    title: "Stars",
+    render: (_, { stars = [] }) => (
+      <div>
+        {stars.map(
+          (count, index) =>
+            count > 0 && (
+              <Tag key={index}>
+                <span className="flex items-center">
+                  <span className="mr-2">{index + 1}⭑ </span>
+                  {count}
+                </span>
+              </Tag>
+            )
+        )}
+      </div>
+    ),
+  },
+  {
+    title: "Count",
     dataIndex: "count",
-    sorter: (a, b) => a.count - b.count,
-    sortDirections: ["descend"],
+    sorter: (a, b) => a.count > b.count,
+    sortOrder: "descend",
   },
 ];
 
-function TagList({ shopid = "" }) {
-  const [data, setData] = useState([]);
+const makeDataSource = (ratings = []) => {
+  return R.pipe(
+    R.filter((r) => r.tags.length > 0),
+    R.map((r) => r.tags),
+    R.flatten(),
+    R.countBy(R.identity),
+    Object.entries,
+    R.map(([tag, count]) => ({
+      tag,
+      count,
+      stars: countStarForTag(ratings, tag),
+    })),
+    R.tap(console.log)
+  )(ratings);
+};
 
-  useEffect(() => {
-    let mounted = true;
+const countStarForTag = (ratings = [], tag = "") => {
+  const count = (star) =>
+    R.pipe(
+      R.filter((r) => r.tags.includes(tag) && r.star == star),
+      R.length
+    )(ratings);
 
-    StoreServices.tagCount(shopid)
-      .then((result) => Object.entries(result))
-      .then((entries) => entries.map((e) => ({ tag: e[0], count: e[1] })))
-      .then((entries) => mounted && setData(entries))
-      .catch(console.log);
+  return R.map(count, [1, 2, 3, 4, 5]);
+};
 
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
+function TagAnalytics({ ratings = [] }) {
   return (
     <Table
       className="mb-3"
       columns={columns}
-      dataSource={data}
+      dataSource={makeDataSource(ratings)}
       pagination={{ pageSize: 5 }}
+      rowKey="tag"
     />
   );
 }
 
-export default TagList;
+export default TagAnalytics;
