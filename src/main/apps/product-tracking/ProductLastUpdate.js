@@ -1,25 +1,31 @@
 import { useState } from "react";
 import { Button, Tag, message, Select } from "antd";
-import { useItem, useInterval } from "hooks";
+import { useInterval } from "hooks";
 import { sleep } from "helpers";
 import { SyncOutlined, LoadingOutlined } from "@ant-design/icons";
 
-function ProductLastUpdate({ onUpdateSuccess, itemid }) {
-  const [item, loading, refresh] = useItem(itemid);
-  const [updateInterval, setUpdateInterval] = useState(5000);
+import { ItemServices } from "services";
+
+function ProductLastUpdate({ onUpdateSuccess, itemid, shopid }) {
+  const [updateInterval, setUpdateInterval] = useState(15000);
   const [updating, setUpdating] = useState(false);
 
   useInterval(async () => {
     setUpdating(true);
-    await sleep(1000);
-    await onUpdateSuccess();
-    setUpdating(false);
+    try {
+      await ItemServices.update({ itemid, shopid, useProxy: true });
+      await onUpdateSuccess();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setUpdating(false);
+    }
   }, updateInterval);
 
   async function onUpdate() {
     const done = message.loading("updating product...");
     try {
-      await sleep(1000);
+      await ItemServices.update({ itemid, shopid, useProxy: true });
       message.success("Update product done!");
     } catch (error) {
       console.log(error);
@@ -27,10 +33,6 @@ function ProductLastUpdate({ onUpdateSuccess, itemid }) {
     } finally {
       done();
     }
-  }
-
-  if (loading) {
-    return null;
   }
 
   return (
@@ -51,10 +53,10 @@ function ProductLastUpdate({ onUpdateSuccess, itemid }) {
         value={updateInterval}
         onChange={setUpdateInterval}
       >
-        <Select.Option value={5000}>5 (s)</Select.Option>
-        <Select.Option value={10000}>10 (s)</Select.Option>
+        <Select.Option value={15000}>15 (s)</Select.Option>
         <Select.Option value={20000}>20 (s)</Select.Option>
         <Select.Option value={30000}>30 (s)</Select.Option>
+        <Select.Option value={60000}>60 (s)</Select.Option>
         <Select.Option value={null}>Off</Select.Option>
       </Select>
 

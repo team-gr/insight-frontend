@@ -39,14 +39,18 @@ const columns = [
   },
 ];
 
-function ProductRelated({ itemid }) {
+function ProductRelated({ itemid, shopid }) {
   const [data, loading, refresh] = useItemRelated(itemid);
   const [mode, setMode] = useState("sameshop");
 
   return (
     <div>
       <div className="flex items-center">
-        <ProductLastUpdate itemid={itemid} onUpdateSuccess={refresh} />
+        <ProductLastUpdate
+          itemid={itemid}
+          shopid={shopid}
+          onUpdateSuccess={refresh}
+        />
         <div className="flex-grow" />
         <Radio.Group value={mode} onChange={(e) => setMode(e.target.value)}>
           <Radio.Button value="sameshop">Same Shop</Radio.Button>

@@ -9,11 +9,11 @@ function getUserTrackingStores(userid) {
   });
 }
 
-function updateStore(shopid) {
+function updateStore(shopid, useProxy = false) {
   return call({
     url: `${CORE_API_ENDPOINT}/shop/update`,
     method: "POST",
-    body: { shop_id: shopid },
+    body: { shop_id: shopid, use_proxy: useProxy },
   });
 }
 

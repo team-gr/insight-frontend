@@ -24,6 +24,9 @@ function ShopeeProduct() {
   const { query } = useRouter();
   const [item, loading] = useItem(query.id);
 
+  const itemid = parseInt(query.id, 10);
+  const shopid = parseInt(query.shopid, 10);
+
   return (
     <div className="gx-main-content">
       <Row loading={loading}>
@@ -33,16 +36,16 @@ function ShopeeProduct() {
         <Col lg={18} sm={24}>
           <Tabs defaultActiveKey="1">
             <Tabs.TabPane tab="PRICES" key="1">
-              <Prices item={item} />
+              <Prices itemid={itemid} shopid={shopid} />
             </Tabs.TabPane>
             <Tabs.TabPane tab="TITLES" key="2">
-              <TitlesTable itemid={query.id} />
+              <TitlesTable itemid={itemid} shopid={shopid} />
             </Tabs.TabPane>
             <Tabs.TabPane tab="RATINGS" key="3">
-              <RatingsChart itemid={query.id} />
+              <RatingsChart itemid={itemid} shopid={shopid} />
             </Tabs.TabPane>
             <Tabs.TabPane tab="Related" key="4">
-              <ProductRelated itemid={query.id} />
+              <ProductRelated itemid={itemid} shopid={shopid} />
             </Tabs.TabPane>
           </Tabs>
         </Col>

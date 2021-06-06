@@ -14,7 +14,7 @@ import ProductLastUpdate from "main/apps/product-tracking/ProductLastUpdate";
 import { timestampFormatter } from "helpers";
 import { useItemRatingsHistory } from "hooks";
 
-function RatingsChart({ itemid }) {
+function RatingsChart({ itemid, shopid }) {
   const [data, loading, refresh] = useItemRatingsHistory(itemid);
 
   if (loading) {
@@ -23,7 +23,11 @@ function RatingsChart({ itemid }) {
 
   return (
     <div>
-      <ProductLastUpdate itemid={itemid} onUpdateSuccess={refresh} />
+      <ProductLastUpdate
+        itemid={itemid}
+        shopid={shopid}
+        onUpdateSuccess={refresh}
+      />
       <Card className="gx-card">
         <ResponsiveContainer width="100%" height={380}>
           <LineChart data={data.map(mapper)} margin={{ top: 25 }}>

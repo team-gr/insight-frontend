@@ -17,13 +17,16 @@ import ProductLastUpdate from "main/apps/product-tracking/ProductLastUpdate";
 
 import { useItemPriceHistory } from "hooks";
 
-function Prices() {
-  const { query } = useRouter();
-  const [data, loading, refresh] = useItemPriceHistory(query.id);
+function Prices({ itemid, shopid }) {
+  const [data, loading, refresh] = useItemPriceHistory(itemid);
 
   return (
     <div>
-      <ProductLastUpdate onUpdateSuccess={refresh} itemid={query.id} />
+      <ProductLastUpdate
+        onUpdateSuccess={refresh}
+        itemid={itemid}
+        shopid={shopid}
+      />
 
       <Card className="gx-card" loading={loading}>
         <ResponsiveContainer width="100%" height={380}>

@@ -36,11 +36,11 @@ function removeItemFromTrackList({ userid, itemIds = [] } = {}) {
   });
 }
 
-function update({ itemid, shopid } = {}) {
+function update({ itemid, shopid, useProxy = false } = {}) {
   return call({
     url: `${CORE_API_ENDPOINT}/item/update`,
     method: "POST",
-    body: { item_id: itemid, shop_id: shopid },
+    body: { item_id: itemid, shop_id: shopid, use_proxy: useProxy },
   });
 }
 

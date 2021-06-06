@@ -4,12 +4,16 @@ import { timestampFormatter } from "helpers";
 import ProductLastUpdate from "main/apps/product-tracking/ProductLastUpdate";
 import { useItemTitleHistory } from "hooks";
 
-function TitlesTable({ itemid = "" }) {
+function TitlesTable({ itemid, shopid }) {
   const [data, loading, refresh] = useItemTitleHistory(itemid);
 
   return (
     <div>
-      <ProductLastUpdate itemid={itemid} onUpdateSuccess={refresh} />
+      <ProductLastUpdate
+        itemid={itemid}
+        shopid={shopid}
+        onUpdateSuccess={refresh}
+      />
       <Table
         loading={loading}
         className="gx-table-responsive"
