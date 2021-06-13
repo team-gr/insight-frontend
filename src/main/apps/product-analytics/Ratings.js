@@ -1,4 +1,5 @@
 import { Table, Tag } from "antd";
+import { round } from "lodash";
 import * as R from "ramda";
 
 function RatingList({ ratings = [] }) {
@@ -18,6 +19,10 @@ function RatingList({ ratings = [] }) {
       dataIndex: "comment",
       width: "80%",
       render: (comment) => <div className="break-all">{comment}</div>,
+    },
+    {
+      title: "Sentiment",
+      render: renderSentimentCell,
     },
     {
       title: "Star",
@@ -57,6 +62,19 @@ function RatingList({ ratings = [] }) {
       />
     </div>
   );
+}
+
+function renderSentimentCell({ sentiment_probs: probs } = {}) {
+  if (probs && probs.length === 2) {
+    return (
+      <div className="flex flex-row items-center">
+        <Tag color="blue">{round(probs[0] * 100)}%</Tag>
+        <Tag color="orange">{round(probs[1] * 100)}%</Tag>
+      </div>
+    );
+  }
+
+  return null;
 }
 
 export default RatingList;

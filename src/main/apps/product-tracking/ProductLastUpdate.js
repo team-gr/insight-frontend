@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Button, Tag, message, Select } from "antd";
 import { useInterval } from "hooks";
-import { sleep } from "helpers";
 import { SyncOutlined, LoadingOutlined } from "@ant-design/icons";
 
 import { ItemServices } from "services";

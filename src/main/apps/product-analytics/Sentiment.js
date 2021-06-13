@@ -19,7 +19,7 @@ function Sentiment({ ratings = [] }) {
           dataKey="value"
         >
           <Cell key="cell-1" fill="#0088FE" />
-          <Cell key="cell-2" fill="#00C49F" />
+          <Cell key="cell-2" fill="#FF8042" />
         </Pie>
         <Tooltip />
         <Legend layout="horizontal" align="center" />
@@ -30,10 +30,10 @@ function Sentiment({ ratings = [] }) {
 
 function makeChartData(data = []) {
   return R.pipe(
-    R.countBy((r) => (r.sentiment == 1 ? "positives" : "negatives")),
+    R.countBy((r) => (r.sentiment == 0 ? "positives" : "negatives")),
     ({ positives, negatives }) => [
       { name: "positives", value: positives },
-      { name: "nagatives", value: negatives },
+      { name: "negatives", value: negatives },
     ]
   )(data);
 }
