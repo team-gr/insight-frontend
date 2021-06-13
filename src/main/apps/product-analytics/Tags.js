@@ -58,9 +58,10 @@ const countStarForTag = (ratings = [], tag = "") => {
   return R.map(count, [1, 2, 3, 4, 5]);
 };
 
-function TagAnalytics({ ratings = [] }) {
+function TagAnalytics({ ratings = [], loading = true }) {
   return (
     <Table
+      loading={loading}
       className="mb-3"
       columns={columns}
       dataSource={makeDataSource(ratings)}

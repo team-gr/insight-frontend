@@ -2,7 +2,7 @@ import { Table, Tag } from "antd";
 import { round } from "lodash";
 import * as R from "ramda";
 
-function RatingList({ ratings = [] }) {
+function RatingList({ ratings = [], loading = true }) {
   console.log(ratings);
 
   const tagFilters = R.pipe(
@@ -58,6 +58,7 @@ function RatingList({ ratings = [] }) {
         dataSource={ratings.filter((r) => r.comment !== "")}
         pagination={{ pageSize: 5 }}
         bordered={true}
+        loading={loading}
         rowKey="id"
       />
     </div>

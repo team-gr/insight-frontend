@@ -14,19 +14,21 @@ function ProductAnalytics() {
   const [ratings, ratingloading] = useItemRatings(query.id);
   const loading = itemLoading || ratingloading;
 
+  console.log(loading);
+
   return (
-    <Row loading={loading}>
+    <Row>
       <Col lg={6} sm={24}>
         <Profile item={item} />
-        <Sentiment ratings={ratings} />
+        <Sentiment ratings={ratings} loading={loading} />
       </Col>
       <Col lg={18} sm={24}>
         <Tabs defaultActiveKey="1">
           <Tabs.TabPane tab="Ratings" key="1">
-            <Ratings ratings={ratings} />
+            <Ratings ratings={ratings} loading={loading} />
           </Tabs.TabPane>
           <Tabs.TabPane tab="Tags" key="2">
-            <Tags ratings={ratings} />
+            <Tags ratings={ratings} loading={loading} />
           </Tabs.TabPane>
         </Tabs>
       </Col>

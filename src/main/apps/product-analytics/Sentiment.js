@@ -3,9 +3,9 @@ import { PieChart, Pie, Tooltip, Cell, Legend } from "recharts";
 
 import * as R from "ramda";
 
-function Sentiment({ ratings = [] }) {
+function Sentiment({ ratings = [], loading = true }) {
   return (
-    <Card className="p-auto">
+    <Card className="p-auto" loading={loading}>
       <h2 className="text-center w-full">Sentiment</h2>
       <PieChart width={230} height={230}>
         <Pie
