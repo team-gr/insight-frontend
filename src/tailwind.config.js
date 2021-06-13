@@ -1,13 +1,14 @@
 module.exports = {
-  purge: {
-    content: [
-      "./components/**/*.{js,ts,jsx,tsx}",
-      "./pages/**/*.{js,ts,jsx,tsx}",
-      "./layout/**/*.{js,ts,jsx,tsx}",
-      "./main/**/*.{js,ts,jsx,tsx}",
-    ],
+  mode: "jit",
+  purge: [
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./layout/**/*.{js,ts,jsx,tsx}",
+    "./main/**/*.{js,ts,jsx,tsx}",
+  ],
+  corePlugins: {
+    preflight: false,
   },
-  darkMode: false,
   theme: {
     extend: {},
   },

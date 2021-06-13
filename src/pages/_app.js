@@ -1,3 +1,5 @@
+import "styles/tailwind.css";
+
 import Router from "next/router";
 import NProgress from "nprogress";
 import { notification } from "antd";

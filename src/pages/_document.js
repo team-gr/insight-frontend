@@ -11,7 +11,6 @@ export default class MyDocument extends Document {
           <link rel="stylesheet" href="/vendors/loader.css" />
           <link rel="stylesheet" href="/vendors/noir-pro/styles.css" />
           <link rel="stylesheet" href="/vendors/nprogress.css" />
-          <link rel="stylesheet" href="/vendors/main.css" />
         </Head>
         <body>
           <Main />
