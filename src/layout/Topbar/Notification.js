@@ -72,7 +72,7 @@ const NotificationItem = ({ notification }) => {
       <div className="gx-media-body gx-align-self-center">
         <p className="gx-fs-sm gx-mb-0">{title}</p>
         <div className="mt-2 flex">
-          <Tag color="blue">{timestampFormatter(timestamp)}</Tag>
+          <Tag color="blue">{timestampFormatter(timestamp * 1000)}</Tag>
           <Tag color={read ? "default" : "orange"}>
             {read ? "read" : "unread"}
           </Tag>
