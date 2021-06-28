@@ -45,7 +45,28 @@ function getAll({ page, limit } = {}) {
   });
 }
 
+function trackNewStoreByUrl({ userid, shopUrl } = {}) {
+  return call({
+    url: `${CORE_API_ENDPOINT}/user-subscribe-to-shop`,
+    method: "POST",
+    body: {
+      user_id: userid,
+      shop_url: shopUrl,
+    },
+  });
+}
+
+function removeShopFromTrackList({ userid, shopIds = [] } = {}) {
+  return call({
+    url: `${CORE_API_ENDPOINT}/user-unsubcribe-shops`,
+    method: "POST",
+    body: { user_id: userid, shop_ids: shopIds },
+  });
+}
+
 export default Object.freeze({
+  removeShopFromTrackList,
+  trackNewStoreByUrl,
   getUserTrackingStores,
   getShopByID,
   updateStore,

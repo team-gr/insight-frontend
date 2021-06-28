@@ -29,8 +29,12 @@ import { timestampFormatter } from "helpers";
 function CompetitorStores() {
   const userid = useSelector((state) => state.auth.user.id);
   const [shopLoading, setShopLoading] = useState(false);
-  const [sids, setSids] = useState([]);
+  const [shopIds, setShopIds] = useState([]);
+  const [shopUrl, setShopUrl] = useState("");
+  const [files, setFiles] = useState([]);
   const [shops, setShops] = useState([]);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [addLoading, setAddLoading] = useState(false);
 
   useEffect(onLoadShops, []);
 
@@ -43,7 +47,33 @@ function CompetitorStores() {
     StoreServices.getUserTrackingStores(userid)
       .then(setShops)
       .catch(console.log)
-      .finally(() => setShopLoading(false));
+      .finally(() => {
+        setShopIds([]);
+        setShopLoading(false);
+      });
+  }
+
+  function onUploadChange({ fileList }) {
+    setFiles(fileList);
+  }
+
+  function onDelete() {
+    setDeleteLoading(true);
+    StoreServices.removeShopFromTrackList({ userid, shopIds })
+      .then(onLoadShops)
+      .catch(console.log)
+      .finally(() => setDeleteLoading(false));
+  }
+
+  function onAdd() {
+    setAddLoading(true);
+    StoreServices.trackNewStoreByUrl({ userid, shopUrl })
+      .then(onLoadShops)
+      .catch(console.log)
+      .finally(() => {
+        setShopUrl("");
+        setAddLoading(false);
+      });
   }
 
   return (
@@ -52,15 +82,29 @@ function CompetitorStores() {
         <h2>Track New Competitor Store</h2>
         <div className="w-full justify-between flex">
           <div className="flex-grow mr-4">
-            <Input placeholder="Add Store URL" />
+            <Input
+              value={shopUrl}
+              onChange={(e) => setShopUrl(e.target.value)}
+              placeholder="Add Store URL"
+            />
           </div>
           <div className="mr-4">
-            <Upload fileList={[]} maxCount={1} listType="text">
+            <Upload
+              fileList={files}
+              maxCount={1}
+              listType="text"
+              onChange={onUploadChange}
+            >
               <Button icon={<UploadOutlined />}>Upload CSV</Button>
             </Upload>
           </div>
 
-          <Button type="primary" className="gx-mb-0">
+          <Button
+            loading={addLoading}
+            type="primary"
+            className="gx-mb-0"
+            onClick={onAdd}
+          >
             Start
           </Button>
         </div>
@@ -74,9 +118,11 @@ function CompetitorStores() {
             icon={<ReloadOutlined />}
             onClick={onLoadShops}
           />
-          {sids.length > 0 && (
-            <Popconfirm title="Are you sure to delete!">
-              <Button type="danger">DELETE</Button>
+          {shopIds.length > 0 && (
+            <Popconfirm title="Are you sure to delete!" onConfirm={onDelete}>
+              <Button loading={deleteLoading} type="danger">
+                DELETE
+              </Button>
             </Popconfirm>
           )}
         </h2>
@@ -87,8 +133,9 @@ function CompetitorStores() {
           rowKey="id"
           pagination={{ pageSize: 10 }}
           rowSelection={{
+            selectedRowKeys: shopIds,
             onChange: (selectedRowKeys, selectedRows) => {
-              setSids(selectedRowKeys);
+              setShopIds(selectedRowKeys);
             },
           }}
         />
